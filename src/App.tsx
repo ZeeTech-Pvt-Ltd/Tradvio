@@ -14,6 +14,7 @@ import TrustCentrePreview from '@/components/TrustCentrePreview';
 import Testimonials from '@/components/Testimonials';
 import MarketStats from '@/components/MarketStats';
 import FAQ from '@/components/FAQ';
+import ThankYou from '@/components/ThankYou';
 
 import Glossary from '@/components/Glossary';
 import CTALeadForm from '@/components/CTALeadForm';
@@ -28,6 +29,10 @@ const structuredData = generateAllStructuredData(
 );
 
 export default function App() {
+  // Render thank-you page for /thank-you/ path
+  if (typeof window !== 'undefined' && window.location.pathname === '/thank-you/') {
+    return <ThankYou />;
+  }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (

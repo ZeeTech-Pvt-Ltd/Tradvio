@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type FormEvent } from 'react';
 import { cn, uid, getUTMParams, now } from '@/lib/utils';
-import type { LeadFormOptions, LeadFormPayload } from '@/types';
+import type { LeadFormOptions } from '@/types';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -22,6 +22,8 @@ interface IntlTelInputInstance {
 const ITI_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css';
 const ITI_JS = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js';
 const ITI_UTILS = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js';
+
+const API_URL = 'https://quantryxtech.com/homeMailAction.php';
 
 const PREFERRED_COUNTRIES = ['us', 'gb', 'ca', 'au', 'de', 'fr', 'es', 'it'];
 
@@ -46,6 +48,55 @@ function getPhoneValidationMessage(code: number): string | undefined {
     default:
       return 'Please enter a valid phone number.';
   }
+}
+
+/**
+ * Parse server-side validation errors from the API response.
+ * Maps error codes to form field names.
+ * 10001=firstName, 10002=lastName, 10003=email, 10005=phone, 10008=email
+ */
+interface ApiErrorItem {
+  code: number;
+  message: string;
+}
+
+function parseServerErrors(data: Record<string, unknown>): Record<string, string> {
+  const fieldErrors: Record<string, string> = {};
+
+  try {
+    const raw = data._debug as Record<string, unknown> | undefined;
+    if (!raw?.affilix_raw || typeof raw.affilix_raw !== 'string') return fieldErrors;
+
+    const parsed = JSON.parse(raw.affilix_raw);
+    const errors: ApiErrorItem[] = parsed?.errors || [];
+
+    for (const err of errors) {
+      switch (err.code) {
+        case 10001:
+        case 10006:
+          fieldErrors.first_name = err.message;
+          break;
+        case 10002:
+        case 10007:
+          fieldErrors.last_name = err.message;
+          break;
+        case 10003:
+        case 10008:
+          fieldErrors.email = err.message;
+          break;
+        case 10005:
+          fieldErrors.phone = err.message;
+          break;
+      }
+    }
+  } catch {
+    // If we can't parse the raw errors, use the top-level message
+    if (typeof data.message === 'string' && data.message) {
+      fieldErrors._server = data.message;
+    }
+  }
+
+  return fieldErrors;
 }
 
 let itiCssLoaded = false;
@@ -185,41 +236,56 @@ export default function LeadForm({
 
     const utm = getUTMParams();
 
-    const payload: LeadFormPayload = {
-      first_name: firstName.trim(),
-      last_name: lastName.trim(),
+    // Build payload matching API format (camelCase, with password + offerName)
+    const payload = {
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       email: email.trim(),
       phone: getPhoneNumber(),
+      password: 'Lh23s3',
+      offerName: 'TradvioAI-Site',
       source_page: sourcePage,
       form_name: formName,
       ...utm,
       submitted_at: now(),
     };
 
-    const API_ENDPOINT =
-      typeof window !== 'undefined' &&
-      (window as unknown as Record<string, unknown>).TRADVIOAI_CONFIG
-        ? ((window as unknown as Record<string, unknown>).TRADVIOAI_CONFIG as Record<string, string>)
-            .leadApiEndpoint
-        : '';
+    const endpoint =
+      (typeof window !== 'undefined' &&
+        (window as unknown as Record<string, unknown>).TRADVIOAI_CONFIG
+          ? ((window as unknown as Record<string, unknown>).TRADVIOAI_CONFIG as Record<string, string>)
+              .leadApiEndpoint
+          : '') || API_URL;
 
     try {
-      if (API_ENDPOINT) {
-        const res = await fetch(API_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`Server returned ${res.status}`);
-      } else {
-        // Simulate submission
-        await new Promise((r) => setTimeout(r, 800));
-        console.log('Lead captured (no backend configured):', payload);
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      // Check for API-level errors
+      if (data.status === 'error') {
+        const serverErrors = parseServerErrors(data);
+        // Separate field errors from general server message
+        const { _server, ...fieldErrs } = serverErrors;
+        if (Object.keys(fieldErrs).length > 0) {
+          setErrors(fieldErrs);
+        }
+        if (_server) {
+          setServerError(_server);
+        } else if (Object.keys(fieldErrs).length === 0) {
+          setServerError(data.message || 'Server error. Please try again.');
+        }
+        setFormState('idle');
+        return;
       }
 
-      setFormState('success');
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
 
-      // Track conversion
+      // Track conversion before redirect
       if (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).gtag) {
         const gtag = (window as unknown as Record<string, unknown>).gtag as (...args: unknown[]) => void;
         gtag('event', 'lead_form_submit', {
@@ -228,6 +294,9 @@ export default function LeadForm({
           value: 1,
         });
       }
+
+      // Redirect to thank-you page
+      window.location.href = '/thank-you/';
     } catch (err) {
       setServerError('Something went wrong. Please try again or contact support.');
       setFormState('error');
@@ -236,16 +305,6 @@ export default function LeadForm({
   };
 
   const fieldError = (name: string) => errors[name];
-
-  if (formState === 'success') {
-    return (
-      <div className="lead-form-success text-center p-8 bg-navy border border-border rounded-lg">
-        <div className="text-4xl text-success mb-4">&#10003;</div>
-        <h3 className="text-ink mb-2">{successTitle}</h3>
-        <p className="text-muted-dark">{successMessage}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-navy border border-border rounded-lg p-5 md:p-6 shadow-card-lg">
