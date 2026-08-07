@@ -1,4 +1,4 @@
-const LOGO_SRC = 'https://traderai.ai/wp-content/uploads/2025/12/Tradvio-AI-logo-1.webp';
+const LOGO_SRC = '/trdavio-logo.png';
 
 const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'AI Trading Assistant', href: '/ai-trading-assistant/' },
