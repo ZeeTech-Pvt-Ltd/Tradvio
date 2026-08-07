@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sI --max-time 10 https://traderai.ai)",
+      "Bash(curl -sL --max-time 15 https://traderai.ai)",
+      "Bash(unzip *)",
+      "WebSearch",
+      "Bash(curl *)",
+      "Bash(awk {print NR\": \"length\\($0\\)} *)",
+      "Bash(grep -oE 'Trader AI[^<\"]{0,80}|traderai\\\\.ai[^<\"]{0,60}' /Users/macbookpro/.claude/projects/-Users-macbookpro-Documents-traderai-main/a666f644-bad2-4375-88ec-9a7ce2e281d7/tool-results/bomts8h5y.txt)",
+      "Bash(grep -oE '<p>[^<]{15,300}</p>' /Users/macbookpro/.claude/projects/-Users-macbookpro-Documents-traderai-main/a666f644-bad2-4375-88ec-9a7ce2e281d7/tool-results/bomts8h5y.txt)",
+      "Bash(grep -oE '\\(Stocks|Indices|Crypto|Forex|Commodities\\)[^<]{0,200}' /Users/macbookpro/.claude/projects/-Users-macbookpro-Documents-traderai-main/a666f644-bad2-4375-88ec-9a7ce2e281d7/tool-results/bomts8h5y.txt)",
+      "Bash(npx vite *)",
+      "Bash(cmd.exe *)",
+      "Bash(netstat -ano)"
+    ]
+  }
+}

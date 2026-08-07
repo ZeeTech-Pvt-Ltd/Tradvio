@@ -1,0 +1,361 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-sans text-base leading-relaxed text-ink-soft bg-deep antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold leading-tight text-ink tracking-tight;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  h3 {
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  }
+
+  p {
+    @apply text-muted-dark;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    @apply text-accent no-underline;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply w-full max-w-container mx-auto px-4 md:px-6;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-header {
+    @apply text-center max-w-3xl mx-auto mb-12;
+  }
+
+  .section-header h2 {
+    @apply mb-2;
+  }
+
+  .section-header p {
+    @apply text-ink-soft text-lg;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 font-semibold text-base
+           leading-none rounded-lg border-2 border-transparent cursor-pointer
+           transition-all duration-fast whitespace-nowrap no-underline;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white border-accent;
+  }
+
+  .btn-primary:hover {
+    @apply bg-accent-hover border-accent-hover text-white;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-white border-white/30;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white/10 border-white/50 text-white;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-[1.05rem];
+  }
+
+  .btn-sm {
+    @apply px-5 py-2.5 text-sm;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-navy border border-border rounded-md p-6 transition-all duration-fast;
+  }
+
+  .card:hover {
+    @apply -translate-y-0.5 shadow-card-lg border-border-light;
+  }
+
+  .card-icon {
+    @apply w-12 h-12 flex items-center justify-center rounded-md bg-accent-light text-accent text-xl mb-4;
+  }
+
+  /* Risk callout */
+  .risk-callout {
+    @apply flex gap-3 p-4 rounded-md bg-warning-bg border border-warning-border text-sm text-muted-dark;
+  }
+
+  .risk-callout-icon {
+    @apply text-warning text-lg flex-shrink-0;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 600ms ease, transform 600ms ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sticky mobile CTA */
+  .sticky-mobile-cta {
+    @apply fixed bottom-0 left-0 right-0 z-40 bg-navy border-t border-border p-4 hidden;
+  }
+
+  @media (max-width: 768px) {
+    .sticky-mobile-cta {
+      display: block;
+    }
+    body {
+      padding-bottom: 72px;
+    }
+  }
+
+  /* Grids */
+  .grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+
+  .grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .grid-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+
+  /* Lead form specific */
+  .form-group {
+    @apply mb-3;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-ink mb-1.5;
+  }
+
+  .form-required {
+    @apply text-accent ml-0.5;
+  }
+
+  .form-input,
+  .form-select {
+    @apply w-full px-3.5 py-2.5 rounded-md bg-medium-navy border border-border
+           text-ink font-sans text-base transition-all duration-fast;
+  }
+
+  .form-input::placeholder,
+  .form-select::placeholder {
+    color: #737373;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    @apply border-accent outline-none;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .form-input.error,
+  .form-select.error {
+    @apply border-danger;
+  }
+
+  .form-error {
+    @apply hidden text-sm text-danger mt-1;
+  }
+
+  .form-error.visible {
+    @apply block;
+  }
+
+  .form-checkbox {
+    @apply flex items-start gap-3;
+  }
+
+  .form-checkbox input[type="checkbox"] {
+    accent-color: #DC2626;
+    @apply mt-0.5;
+  }
+
+  .form-checkbox label {
+    @apply text-sm text-muted-dark;
+  }
+
+  .honeypot {
+    @apply absolute opacity-0 pointer-events-none;
+    left: -9999px;
+    top: -9999px;
+    width: 0;
+    height: 0;
+  }
+
+  .btn-loading {
+    @apply opacity-60 cursor-not-allowed relative;
+  }
+}
+
+/* ================================================================
+   intl-tel-input dark theme overrides
+   ================================================================ */
+
+/* Container — looks like one cohesive form input */
+.iti {
+  display: block !important;
+  width: 100%;
+}
+
+/* The input inside ITI — make it look like a normal form-input with extra left room */
+.iti input.form-input {
+  padding-left: 90px !important;
+}
+
+/* Flag container — sits on the left of the input */
+.iti__flag-container {
+  z-index: 10;
+}
+
+/* Selected flag button */
+.iti__selected-flag {
+  background: transparent !important;
+  padding: 0 8px 0 12px !important;
+  transition: background-color 150ms ease;
+  border-radius: var(--radius) 0 0 var(--radius) !important;
+}
+
+.iti__selected-flag:hover,
+.iti__selected-flag:focus,
+.iti__selected-flag.iti__clicked {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Selected dial code text */
+.iti__selected-dial-code {
+  color: var(--ink) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  padding-left: 4px !important;
+}
+
+/* Arrow */
+.iti__arrow {
+  border-top-color: var(--ink-soft) !important;
+  margin-left: 4px !important;
+}
+
+.iti__selected-flag:hover .iti__arrow {
+  border-top-color: var(--ink) !important;
+}
+
+/* Country dropdown list */
+.iti__country-list {
+  background: #141414 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+  font-family: var(--font-sans) !important;
+  margin-top: 4px;
+  max-height: 280px;
+}
+
+/* Individual country item */
+.iti__country {
+  color: var(--ink-soft) !important;
+  padding: 8px 12px !important;
+  transition: background-color 100ms ease;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight,
+.iti__country.iti__active {
+  background: #1a1a1a !important;
+}
+
+/* Country name */
+.iti__country-name {
+  color: var(--ink) !important;
+}
+
+/* Dial code in dropdown */
+.iti__dial-code {
+  color: var(--ink-soft) !important;
+}
+
+/* Divider line in country list */
+.iti__divider {
+  border-bottom-color: var(--border) !important;
+}
+
+/* Search input if present */
+.iti__search-input {
+  background: #141414 !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  font-family: var(--font-sans) !important;
+  padding: 8px 10px !important;
+}
+
+.iti__search-input::placeholder {
+  color: var(--muted-light) !important;
+}
+
+.iti__search-input:focus {
+  outline: none !important;
+  border-color: var(--blue) !important;
+}
+
+/* Focus ring on the input — extend to whole ITI container visually */
+.iti input.form-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* Error state */
+.iti input.form-input.error {
+  border-color: var(--danger);
+}
