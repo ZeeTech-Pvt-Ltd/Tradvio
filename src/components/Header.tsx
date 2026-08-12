@@ -18,7 +18,6 @@ const NAV_LINKS: { label: string; href: string }[] = [
   { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
   { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
   { label: 'Blog', href: '/blog/' },
-  { label: 'Trust Centre', href: '/trust-centre/' },
   { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
 ];
 
@@ -80,8 +79,8 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 h-nav w-full backdrop-blur-sm transition-all duration-fast',
-        scrolled ? 'bg-navy shadow-card' : 'bg-transparent'
+        'fixed top-0 z-50 h-nav w-full backdrop-blur-sm transition-all duration-fast border-b',
+        scrolled ? 'bg-navy shadow-card border-border' : 'bg-transparent border-transparent'
       )}
     >
       <div className="mx-auto flex h-full max-w-container items-center justify-between px-4 md:px-6">

@@ -18,7 +18,6 @@ const SITE_LINKS: { label: string; href: string }[] = [
   { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
   { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
   { label: 'Blog', href: '/blog/' },
-  { label: 'Trust Centre', href: '/trust-centre/' },
   { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
 ];
 
