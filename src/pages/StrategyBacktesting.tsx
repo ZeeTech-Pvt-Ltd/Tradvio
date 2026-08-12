@@ -87,10 +87,6 @@ export default function StrategyBacktesting() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-14 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/30 text-accent bg-accent/10 text-xs font-semibold mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                  Strategy Backtesting
-                </div>
                 <h1 className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-5">
                   Test before you<br />
                   <span className="text-accent">risk a penny.</span>

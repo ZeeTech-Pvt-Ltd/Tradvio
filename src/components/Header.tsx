@@ -93,12 +93,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
         {/* Desktop navigation */}
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
           {/* Products dropdown */}
-          <div
-            ref={platformRef}
-            className="relative"
-            onMouseEnter={() => setOpenDropdown('platform')}
-            onMouseLeave={() => setOpenDropdown(null)}
-          >
+          <div ref={platformRef} className="relative">
             <button
               type="button"
               onClick={() => toggleDropdown('platform')}
