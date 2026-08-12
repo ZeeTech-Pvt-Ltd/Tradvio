@@ -46,7 +46,7 @@ const compareData = [
   { feature: 'Free to start', traderai: 'Yes', byHand: 'Yes', signals: 'Often paid' },
 ];
 
-function IdeaCard() {
+function IdeaCard({ variant = 'hero' }: { variant?: 'hero' | 'anatomy' }) {
   return (
     <div className="relative bg-gradient-to-b from-navy to-navy border border-border rounded-[20px] p-5 shadow-[0_30px_70px_-30px_rgba(0,0,0,0.7)] before:absolute before:inset-[-1px] before:rounded-[20px] before:p-[1px] before:bg-gradient-to-br before:from-accent/50 before:to-transparent before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:pointer-events-none">
       <div className="flex items-center justify-between mb-4">
@@ -72,11 +72,19 @@ function IdeaCard() {
         <div className="absolute right-2.5 text-[10.5px] font-mono px-1.5 py-0.5 rounded translate-y-[-50%] bg-success/10 text-success border border-success/30" style={{ top: '22px' }}>TARGET 72,100</div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2.5 mb-3.5">
-        <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Entry</div><div className="font-mono text-[13px] font-semibold text-ink">68,420</div></div>
-        <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Stop-loss</div><div className="font-mono text-[13px] font-semibold text-danger">65,800</div></div>
-        <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Take-profit</div><div className="font-mono text-[13px] font-semibold text-success">72,100</div></div>
-      </div>
+      {variant === 'hero' ? (
+        <div className="grid grid-cols-3 gap-2.5 mb-3.5">
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Entry</div><div className="font-mono text-[13px] font-semibold text-ink">68,420</div></div>
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Stop-loss</div><div className="font-mono text-[13px] font-semibold text-danger">65,800</div></div>
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Take-profit</div><div className="font-mono text-[13px] font-semibold text-success">72,100</div></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-2.5 mb-3.5">
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Risk : Reward</div><div className="font-mono text-[13px] font-semibold text-ink">1 : 2.4</div></div>
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Direction</div><div className="font-mono text-[13px] font-semibold text-success">Long</div></div>
+          <div className="bg-deep border border-border rounded-[9px] p-2.5"><div className="text-[10.5px] text-ink-soft mb-1">Confidence</div><div className="font-mono text-[13px] font-semibold text-ink">78%</div></div>
+        </div>
+      )}
 
       <div className="flex items-center gap-2.5">
         <span className="text-[11.5px] text-ink-soft whitespace-nowrap">Confidence</span>
@@ -224,7 +232,7 @@ export default function AITradingIdeas() {
                   </table>
                 </div>
               </div>
-              <div><IdeaCard /></div>
+              <div><IdeaCard variant="anatomy" /></div>
             </div>
           </div>
         </section>
