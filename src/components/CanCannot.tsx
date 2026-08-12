@@ -21,7 +21,7 @@ export default function CanCannot() {
     <section id="can-cannot" className="section">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>What AI Can Help With — And What It Cannot Do</h2>
+          <h2>What Tradvio Can Help With — And What It Cannot Do</h2>
           <p>Honest expectations build better traders. Here&apos;s the reality.</p>
         </div>
 

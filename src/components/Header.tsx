@@ -13,6 +13,9 @@ const PLATFORM_ITEMS: { label: string; href: string }[] = [
 ];
 
 const NAV_LINKS: { label: string; href: string }[] = [
+  { label: 'Traders', href: '/trader/' },
+  { label: 'Leaderboard', href: '/leaderboard/' },
+  { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
   { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Trust Centre', href: '/trust-centre/' },
@@ -89,7 +92,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
         {/* Desktop navigation */}
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
-          {/* Platform dropdown */}
+          {/* Products dropdown */}
           <div
             ref={platformRef}
             className="relative"
@@ -106,7 +109,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 platformOpen && 'text-white'
               )}
             >
-              Platform
+              Products
               <svg
                 className={cn(
                   'ml-1 h-4 w-4 transition-transform duration-fast',
@@ -150,7 +153,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
         {/* Right actions */}
         <div className="flex items-center gap-3">
-          <a href="#lead-form" className="btn btn-primary btn-sm hidden sm:inline-flex">
+          <a href="/get-started/" className="btn btn-primary btn-sm hidden sm:inline-flex">
             Start Free Analysis
           </a>
 

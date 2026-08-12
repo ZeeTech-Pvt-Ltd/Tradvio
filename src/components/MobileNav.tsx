@@ -13,6 +13,9 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
 ];
 
 const SITE_LINKS: { label: string; href: string }[] = [
+  { label: 'Traders', href: '/trader/' },
+  { label: 'Leaderboard', href: '/leaderboard/' },
+  { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
   { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Trust Centre', href: '/trust-centre/' },
@@ -93,9 +96,9 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           </button>
         </div>
 
-        {/* Platform links */}
-        <p className="mt-8 mb-2 text-xs uppercase tracking-wider text-ink-soft">Platform</p>
-        <nav aria-label="Platform links">
+        {/* Products links */}
+        <p className="mt-8 mb-2 text-xs uppercase tracking-wider text-ink-soft">Products</p>
+        <nav aria-label="Products links">
           {PLATFORM_LINKS.map((item, index) => (
             <a
               key={item.href}
@@ -125,7 +128,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </nav>
 
         {/* CTA */}
-        <a href="#lead-form" onClick={onClose} className="btn btn-primary mt-8 w-full">
+        <a href="/get-started/" onClick={onClose} className="btn btn-primary mt-8 w-full">
           Start Free Analysis
         </a>
       </aside>

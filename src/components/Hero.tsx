@@ -41,7 +41,7 @@ export default function Hero() {
             </p>
 
             <div className="flex gap-4 flex-wrap mb-6">
-              <a href="#lead-form" className="btn btn-primary btn-lg group">
+              <a href="/get-started/" className="btn btn-primary btn-lg group">
                 Start Free Analysis
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>

@@ -3,12 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Hero from '@/components/Hero';
+import Leaderboard from '@/components/Leaderboard';
 import TrustBar from '@/components/TrustBar';
-import WhatIsTradvioAI from '@/components/WhatIsTradvioAI';
+import TradingPerformance from '@/components/TradingPerformance';
 import PlatformTools from '@/components/PlatformTools';
 import HowItWorks from '@/components/HowItWorks';
+import PerformanceFeatures from '@/components/PerformanceFeatures';
+import WhyTradvioAI from '@/components/WhyTradvioAI';
 import CanCannot from '@/components/CanCannot';
-import ForNotFor from '@/components/ForNotFor';
 import DataTransparency from '@/components/DataTransparency';
 import TrustCentrePreview from '@/components/TrustCentrePreview';
 import Testimonials from '@/components/Testimonials';
@@ -16,8 +18,9 @@ import MarketStats from '@/components/MarketStats';
 import FAQ from '@/components/FAQ';
 import ThankYou from '@/components/ThankYou';
 
-import Glossary from '@/components/Glossary';
-import CTALeadForm from '@/components/CTALeadForm';
+import GetStarted from '@/pages/GetStarted';
+import LeaderboardPage from '@/pages/LeaderboardPage';
+import TradersPage from '@/pages/TradersPage';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -32,6 +35,21 @@ export default function App() {
   // Render thank-you page for /thank-you/ path
   if (typeof window !== 'undefined' && window.location.pathname === '/thank-you/') {
     return <ThankYou />;
+  }
+
+  // Render get-started page for /get-started/ path
+  if (typeof window !== 'undefined' && window.location.pathname === '/get-started/') {
+    return <GetStarted />;
+  }
+
+  // Render leaderboard page for /leaderboard/ path
+  if (typeof window !== 'undefined' && window.location.pathname === '/leaderboard/') {
+    return <LeaderboardPage />;
+  }
+
+  // Render traders page for /trader/ path
+  if (typeof window !== 'undefined' && window.location.pathname === '/trader/') {
+    return <TradersPage />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -106,26 +124,26 @@ export default function App() {
 
       <main id="main-content">
         <Hero />
+        <Leaderboard />
         <TrustBar />
-        <WhatIsTradvioAI />
+        <TradingPerformance />
         <PlatformTools />
         <HowItWorks />
+        <PerformanceFeatures />
+        <WhyTradvioAI />
         <CanCannot />
-        <ForNotFor />
         <DataTransparency />
         <TrustCentrePreview />
         <Testimonials />
         <MarketStats />
         <FAQ />
-        <Glossary />
-        <CTALeadForm />
       </main>
 
       <Footer />
 
       {/* Sticky mobile CTA */}
       <div className="sticky-mobile-cta">
-        <a href="#lead-form" className="btn btn-primary w-full">
+        <a href="/get-started/" className="btn btn-primary w-full">
           Start Free Analysis
         </a>
       </div>
