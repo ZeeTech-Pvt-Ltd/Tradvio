@@ -149,7 +149,7 @@ export default function LeaderboardPage() {
       <Header onMenuToggle={() => setMobileNavOpen(true)} />
       <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
 
-      <main id="main-content" className="pt-nav">
+      <main id="main-content" className="pt-nav pb-16">
         {/* ── Hero ─────────────────────────────────── */}
         <section className="relative py-12 lg:py-20 px-4 sm:px-6 lg:px-8 border-b border-border overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] to-transparent pointer-events-none" />

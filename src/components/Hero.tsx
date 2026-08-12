@@ -31,7 +31,7 @@ export default function Hero() {
             <h1 className="text-white max-w-[600px] mb-4">
               Analyse Markets. Test Strategies.
               <br />
-              <span className="text-accent">Decide With Clarity.</span>
+              <span className="text-accent">Trade with Confidence.</span>
             </h1>
 
             <p className="text-white/65 text-lg leading-relaxed mb-8 max-w-[540px]">
