@@ -4,6 +4,7 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'AI Trading Assistant', href: '/ai-trading-assistant/' },
   { label: 'AI Chart Analyser', href: '/tools/ai-chart-analyser/' },
   { label: 'AI Strategy Builder', href: '/ai-strategy-builder/' },
+  { label: 'AI Trading Ideas', href: '/ai-trading-ideas/' },
   { label: 'Backtesting', href: '/backtesting/' },
   { label: 'Paper Trading', href: '/paper-trading/' },
   { label: 'Risk Management', href: '/risk-management/' },

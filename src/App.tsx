@@ -22,6 +22,7 @@ import GetStarted from '@/pages/GetStarted';
 import LeaderboardPage from '@/pages/LeaderboardPage';
 import TradersPage from '@/pages/TradersPage';
 import AITradingPlatform from '@/pages/AITradingPlatform';
+import AITradingIdeas from '@/pages/AITradingIdeas';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -56,6 +57,11 @@ export default function App() {
   // Render AI Trading Platform page
   if (typeof window !== 'undefined' && window.location.pathname === '/ai-trading-platform/') {
     return <AITradingPlatform />;
+  }
+
+  // Render AI Trading Ideas page
+  if (typeof window !== 'undefined' && window.location.pathname === '/ai-trading-ideas/') {
+    return <AITradingIdeas />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
