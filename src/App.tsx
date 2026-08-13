@@ -25,6 +25,7 @@ import AITradingPlatform from '@/pages/AITradingPlatform';
 import AITradingIdeas from '@/pages/AITradingIdeas';
 import StrategyBacktesting from '@/pages/StrategyBacktesting';
 import RiskCalculator from '@/pages/RiskCalculator';
+import TradeJournal from '@/pages/TradeJournal';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -74,6 +75,11 @@ export default function App() {
   // Render Risk Calculator page
   if (typeof window !== 'undefined' && window.location.pathname === '/risk-calculator/') {
     return <RiskCalculator />;
+  }
+
+  // Render Trade Journal page
+  if (typeof window !== 'undefined' && window.location.pathname === '/trade-journal/') {
+    return <TradeJournal />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 

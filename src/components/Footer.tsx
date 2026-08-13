@@ -9,6 +9,7 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'Paper Trading', href: '/paper-trading/' },
   { label: 'Risk Management', href: '/risk-management/' },
   { label: 'Risk Calculator', href: '/risk-calculator/' },
+  { label: 'Trade Journal', href: '/trade-journal/' },
 ];
 
 const COMPANY_LINKS: { label: string; href: string }[] = [

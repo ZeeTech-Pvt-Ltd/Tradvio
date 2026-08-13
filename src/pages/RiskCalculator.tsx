@@ -15,18 +15,11 @@ const faqItems = [
   { q: 'Why do traders blow their accounts?', a: 'The most common reasons are risking too much per trade, averaging into losing positions, moving stop-losses wider, and revenge trading after losses. All of these increase your effective risk per trade far beyond what your plan intended.' },
 ];
 
-function riskLevel(pct: number): { label: string; color: string; barColor: string } {
-  if (pct <= 4) return { label: 'Conservative', color: 'text-success', barColor: 'bg-success' };
-  if (pct <= 8) return { label: 'Moderate', color: 'text-warning', barColor: 'bg-warning' };
-  if (pct <= 12) return { label: 'Aggressive', color: 'text-orange-400', barColor: 'bg-orange-400' };
-  return { label: 'Extreme', color: 'text-danger', barColor: 'bg-danger' };
-}
-
-function probLevel(pct: number): { label: string; color: string } {
-  if (pct < 20) return { label: 'Conservative', color: 'text-success' };
-  if (pct < 30) return { label: 'Moderate', color: 'text-warning' };
-  if (pct <= 45) return { label: 'Aggressive', color: 'text-orange-400' };
-  return { label: 'Extreme', color: 'text-danger' };
+function riskLevel(pct: number): { label: string; hex: string } {
+  if (pct <= 4) return { label: 'conservative', hex: '#2BC549' }; // hsl(142,71%,45%) bullish
+  if (pct <= 8) return { label: 'moderate', hex: '#D6A800' }; // hsl(42,100%,42%) warning
+  if (pct <= 12) return { label: 'aggressive', hex: '#FF5A00' }; // hsl(22,100%,50%) danger
+  return { label: 'extreme', hex: '#D12E1F' }; // hsl(5,74%,47%) bearish
 }
 
 export default function RiskCalculator() {
@@ -36,11 +29,18 @@ export default function RiskCalculator() {
   const [riskPercent, setRiskPercent] = useState('4');
 
   const balance = parseFloat(accountSize) || 0;
-  const riskDollars = parseFloat(riskPerTrade) || 0;
   const riskPct = parseFloat(riskPercent) || 0;
 
-  // Consecutive losses until blown account
-  const lossesUntilBlown = riskPct > 0 ? Math.ceil(100 / riskPct) : 0;
+  // Consecutive losses until blown account — banker's rounding (round half to even)
+  const rawLosses = riskPct > 0 ? 100 / riskPct : 0;
+  const lossesUntilBlown =
+    rawLosses > 0
+      ? Math.abs(rawLosses % 1 - 0.5) < 1e-9
+        ? Math.floor(rawLosses) % 2 === 0
+          ? Math.floor(rawLosses)
+          : Math.ceil(rawLosses)
+        : Math.round(rawLosses)
+      : 0;
   const level = riskLevel(riskPct);
 
   // Probability of ruin: chance of hitting N consecutive losses within 100 trades
@@ -54,7 +54,6 @@ export default function RiskCalculator() {
   };
 
   const winRates = [40, 50, 60, 70];
-  const requiredWinRate = lossesUntilBlown > 0 ? Math.max(20, Math.min(95, 100 - Math.pow(0.5, 1 / lossesUntilBlown) * 100)) : 0;
 
   return (
     <>
@@ -115,8 +114,10 @@ export default function RiskCalculator() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-sm font-semibold text-ink">risk per trade</label>
-                    <span className={cn('text-xs font-bold px-2.5 py-1 rounded-full', riskPct <= 4 ? 'bg-success/10 text-success' : riskPct <= 8 ? 'bg-warning/10 text-warning' : riskPct <= 12 ? 'bg-orange-400/10 text-orange-400' : 'bg-danger/10 text-danger')}>
-                      {level.label} | Tradvio AI
+                    <span className="text-xs font-bold">
+                      <span style={{ color: level.hex }}>{level.label}</span>
+                      <span className="text-ink-soft"> | </span>
+                      <span className="text-accent">Tradvio AI</span>
                     </span>
                   </div>
                   <div className="relative">
@@ -153,7 +154,7 @@ export default function RiskCalculator() {
                   />
                   <div className="flex justify-between text-xs text-ink-soft mt-1.5">
                     <span>0.5%</span>
-                    <span className={cn('font-bold', riskPct <= 4 ? 'text-success' : riskPct <= 8 ? 'text-warning' : riskPct <= 12 ? 'text-orange-400' : 'text-danger')}>{riskPct}% — {level.label}</span>
+                    <span className="font-bold" style={{ color: level.hex }}>{riskPct}% — {level.label}</span>
                     <span>20%</span>
                   </div>
                 </div>
@@ -162,27 +163,35 @@ export default function RiskCalculator() {
 
             {/* Outputs */}
             <div className="grid sm:grid-cols-2 gap-4">
-              <div className="bg-navy border border-border rounded-2xl p-6 text-center">
-                <div className="text-xs uppercase tracking-wider text-ink-soft font-semibold mb-2">
-                  consecutive losses until blown account
+              <div className="overflow-hidden rounded-lg border border-border bg-deep">
+                <div className="border-b border-border bg-navy px-5 py-4">
+                  <p className="text-sm font-semibold text-ink">consecutive losses until blown account</p>
+                  <p className="mt-1 text-xs">
+                    <span style={{ color: level.hex }}>{level.label}</span>
+                    <span> | </span>
+                    <span className="text-accent">Tradvio AI</span>
+                  </p>
                 </div>
-                <div className="text-5xl font-bold text-ink font-mono mb-2">{lossesUntilBlown}</div>
-                <div className="text-sm text-ink-soft">trades</div>
-                <div className={cn('mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full', riskPct <= 4 ? 'bg-success/10 text-success' : riskPct <= 8 ? 'bg-warning/10 text-warning' : riskPct <= 12 ? 'bg-orange-400/10 text-orange-400' : 'bg-danger/10 text-danger')}>
-                  {level.label} | Tradvio AI
+                <div className="p-6 text-center">
+                  <p className="text-6xl font-bold font-mono" style={{ color: level.hex }}>{lossesUntilBlown}</p>
+                  <p className="mt-4 text-ink">trades</p>
                 </div>
               </div>
 
-              <div className="bg-navy border border-border rounded-2xl p-6 text-center">
-                <div className="text-xs uppercase tracking-wider text-ink-soft font-semibold mb-2">
-                  recommended risk per trade (4%)
+              <div className="overflow-hidden rounded-lg border border-border bg-deep">
+                <div className="border-b border-border bg-navy px-5 py-4">
+                  <p className="text-sm font-semibold text-ink">recommended risk per trade (4%)</p>
+                  <p className="mt-1 text-xs">
+                    <span style={{ color: '#2BC549' }}>conservative</span>
+                    <span> | </span>
+                    <span className="text-accent">Tradvio AI</span>
+                  </p>
                 </div>
-                <div className="text-5xl font-bold text-accent font-mono mb-2">
-                  ${balance >= 1_000_000 ? `${(balance * 0.04 / 1_000_000).toFixed(1)}M` : balance >= 1000 ? `${Math.round(balance * 0.04 / 1000)}K` : Math.round(balance * 0.04).toLocaleString()}
-                </div>
-                <div className="text-sm text-ink-soft">per trade</div>
-                <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full bg-success/10 text-success">
-                  Conservative | Tradvio AI
+                <div className="p-6 text-center">
+                  <p className="text-6xl font-bold font-mono" style={{ color: '#2BC549' }}>
+                    ${balance * 0.04 >= 1_000_000 ? `${(balance * 0.04 / 1_000_000).toFixed(1)}M` : balance * 0.04 >= 1000 ? `${Math.round(balance * 0.04 / 1000)}K` : Math.round(balance * 0.04).toLocaleString()}
+                  </p>
+                  <p className="mt-4 text-ink">per trade</p>
                 </div>
               </div>
             </div>
@@ -192,12 +201,19 @@ export default function RiskCalculator() {
               <div className="text-xs uppercase tracking-wider text-ink-soft font-semibold mb-3 text-center">Risk-per-trade guide</div>
               <div className="grid grid-cols-4 gap-2">
                 {[
-                  { range: '≤4%', label: 'Conservative', clr: 'bg-success/15 text-success border-success/30' },
-                  { range: '4–8%', label: 'Moderate', clr: 'bg-warning/15 text-warning border-warning/30' },
-                  { range: '8–12%', label: 'Aggressive', clr: 'bg-orange-400/15 text-orange-400 border-orange-400/30' },
-                  { range: '>12%', label: 'Extreme', clr: 'bg-danger/15 text-danger border-danger/30' },
+                  { range: '≤4%', label: 'conservative', hex: '#2BC549' },
+                  { range: '4–8%', label: 'moderate', hex: '#D6A800' },
+                  { range: '8–12%', label: 'aggressive', hex: '#FF5A00' },
+                  { range: '>12%', label: 'extreme', hex: '#D12E1F' },
                 ].map((g) => (
-                  <div key={g.label} className={cn('border rounded-xl py-3 px-2 text-center', g.clr, riskLevel(riskPct).label === g.label && 'ring-2 ring-current')}>
+                  <div
+                    key={g.label}
+                    className={cn(
+                      'border rounded-xl py-3 px-2 text-center',
+                      riskLevel(riskPct).label === g.label && 'ring-2'
+                    )}
+                    style={{ borderColor: g.hex, color: g.hex, backgroundColor: `${g.hex}1A` }}
+                  >
                     <div className="font-mono text-lg font-bold">{g.range}</div>
                     <div className="text-[0.65rem] font-semibold uppercase tracking-wider">{g.label}</div>
                   </div>
@@ -223,7 +239,6 @@ export default function RiskCalculator() {
             <div className="space-y-4">
               {winRates.map((wr) => {
                 const prob = probOfStreak(wr);
-                const pl = probLevel(prob);
                 return (
                   <div key={wr} className="bg-deep border border-border rounded-xl p-5 flex items-center justify-between gap-4">
                     <span className="text-sm text-ink-soft">
@@ -232,21 +247,34 @@ export default function RiskCalculator() {
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <div className="w-24 h-2 bg-white/5 rounded-full overflow-hidden">
                         <div
-                          className={cn('h-full rounded-full', prob < 20 ? 'bg-success' : prob < 30 ? 'bg-warning' : prob <= 45 ? 'bg-orange-400' : 'bg-danger')}
-                          style={{ width: `${Math.max(2, prob)}%` }}
+                          className="h-full rounded-full"
+                          style={{ width: `${Math.max(2, prob)}%`, backgroundColor: prob < 20 ? '#2BC549' : prob < 30 ? '#D6A800' : prob <= 45 ? '#FF5A00' : '#D12E1F' }}
                         />
                       </div>
-                      <span className={cn('font-mono font-bold w-14 text-right', pl.color)}>{prob.toFixed(1)}%</span>
+                      <span className="font-mono font-bold w-14 text-right" style={{ color: prob < 20 ? '#2BC549' : prob < 30 ? '#D6A800' : prob <= 45 ? '#FF5A00' : '#D12E1F' }}>{Math.round(prob)}%</span>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-8 bg-deep border border-border rounded-xl p-5 text-center">
+            <div className={cn(
+              'mt-8 border rounded-xl p-5 text-center',
+              riskPct > 12 ? 'bg-danger/5 border-danger/30' : 'bg-deep border-border'
+            )}>
+              {riskPct > 12 && (
+                <p className="text-sm font-bold text-danger uppercase tracking-wider mb-2">
+                  ⚠ Warning! extremely high risk of blowing your account!
+                </p>
+              )}
               <p className="text-sm text-muted-dark leading-relaxed">
-                while risking <span className="text-accent font-bold">{riskPct}%</span> of your account per trade, you need a{' '}
-                <span className="text-ink font-bold">~{Math.round(requiredWinRate)}% win rate</span> to survive a{' '}
+                while risking <span className="text-accent font-bold">{riskPct}%</span> of your account per trade, you need{' '}
+                {riskPct * 10 > 95 ? (
+                  <span className="text-ink font-bold">an unrealistically high win rate</span>
+                ) : (
+                  <span className="text-ink font-bold">a {Math.round(riskPct * 10)}% win rate</span>
+                )}{' '}
+                to be able to survive a{' '}
                 <span className="text-ink font-bold">{lossesUntilBlown}</span> trade losing streak.
               </p>
             </div>
@@ -256,12 +284,16 @@ export default function RiskCalculator() {
               <div className="text-xs uppercase tracking-wider text-ink-soft font-semibold mb-3 text-center">Probability guide</div>
               <div className="grid grid-cols-4 gap-2">
                 {[
-                  { range: '<20%', label: 'Conservative', clr: 'bg-success/15 text-success border-success/30' },
-                  { range: '20–30%', label: 'Moderate', clr: 'bg-warning/15 text-warning border-warning/30' },
-                  { range: '30–45%', label: 'Aggressive', clr: 'bg-orange-400/15 text-orange-400 border-orange-400/30' },
-                  { range: '>45%', label: 'Extreme', clr: 'bg-danger/15 text-danger border-danger/30' },
+                  { range: '<20%', label: 'conservative', hex: '#2BC549' },
+                  { range: '20–30%', label: 'moderate', hex: '#D6A800' },
+                  { range: '30–45%', label: 'aggressive', hex: '#FF5A00' },
+                  { range: '>45%', label: 'extreme', hex: '#D12E1F' },
                 ].map((g) => (
-                  <div key={g.label} className={cn('border rounded-xl py-3 px-2 text-center', g.clr)}>
+                  <div
+                    key={g.label}
+                    className="border rounded-xl py-3 px-2 text-center"
+                    style={{ borderColor: g.hex, color: g.hex, backgroundColor: `${g.hex}1A` }}
+                  >
                     <div className="font-mono text-lg font-bold">{g.range}</div>
                     <div className="text-[0.65rem] font-semibold uppercase tracking-wider">{g.label}</div>
                   </div>
