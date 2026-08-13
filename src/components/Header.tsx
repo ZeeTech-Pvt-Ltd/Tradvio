@@ -13,12 +13,16 @@ const PLATFORM_ITEMS: { label: string; href: string }[] = [
   { label: 'Trade Journal', href: '/trade-journal/' },
 ];
 
+const RESOURCE_ITEMS: { label: string; href: string }[] = [
+  { label: 'Academy', href: '/academy/' },
+  { label: 'Performance Verification', href: '/performance-verification/' },
+  { label: 'Blog', href: '/blog/' },
+];
+
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: 'Traders', href: '/trader/' },
   { label: 'Leaderboard', href: '/leaderboard/' },
   { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
-  { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
-  { label: 'Blog', href: '/blog/' },
   { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
 ];
 
@@ -33,6 +37,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const platformRef = useRef<HTMLDivElement | null>(null);
+  const resourcesRef = useRef<HTMLDivElement | null>(null);
 
   // Track scroll position past 72px, throttled via requestAnimationFrame.
   useEffect(() => {
@@ -56,7 +61,9 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   // Close dropdowns on outside click and Escape.
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (platformRef.current && !platformRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (platformRef.current && !platformRef.current.contains(target) &&
+          resourcesRef.current && !resourcesRef.current.contains(target)) {
         setOpenDropdown(null);
       }
     };
@@ -76,6 +83,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   };
 
   const platformOpen = openDropdown === 'platform';
+  const resourcesOpen = openDropdown === 'resources';
 
   return (
     <header
@@ -125,6 +133,52 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             {platformOpen && (
               <div className="absolute left-0 top-full mt-2 min-w-[220px] rounded-md border border-border bg-navy p-2 shadow-card-lg">
                 {PLATFORM_ITEMS.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpenDropdown(null)}
+                    className="block rounded-md px-3 py-2 text-sm text-white/75 transition-colors hover:bg-medium-navy hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Resources dropdown */}
+          <div ref={resourcesRef} className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown('resources')}
+              aria-expanded={resourcesOpen}
+              aria-haspopup="true"
+              className={cn(
+                'flex items-center text-[0.925rem] font-medium text-white/75 transition-colors hover:text-white',
+                resourcesOpen && 'text-white'
+              )}
+            >
+              Resources
+              <svg
+                className={cn(
+                  'ml-1 h-4 w-4 transition-transform duration-fast',
+                  resourcesOpen && 'rotate-180'
+                )}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            {resourcesOpen && (
+              <div className="absolute left-0 top-full mt-2 min-w-[220px] rounded-md border border-border bg-navy p-2 shadow-card-lg">
+                {RESOURCE_ITEMS.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}

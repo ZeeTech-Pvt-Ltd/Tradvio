@@ -13,12 +13,16 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'Trade Journal', href: '/trade-journal/' },
 ];
 
+const RESOURCE_LINKS: { label: string; href: string }[] = [
+  { label: 'Academy', href: '/academy/' },
+  { label: 'Performance Verification', href: '/performance-verification/' },
+  { label: 'Blog', href: '/blog/' },
+];
+
 const SITE_LINKS: { label: string; href: string }[] = [
   { label: 'Traders', href: '/trader/' },
   { label: 'Leaderboard', href: '/leaderboard/' },
   { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
-  { label: 'How It Works', href: '/how-it-works-tradvio-ai/' },
-  { label: 'Blog', href: '/blog/' },
   { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
 ];
 
@@ -104,6 +108,21 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               key={item.href}
               href={item.href}
               ref={index === 0 ? firstLinkRef : undefined}
+              onClick={onClose}
+              className={MOBILE_LINK_CLASSES}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Resources links */}
+        <p className="mt-6 mb-2 text-xs uppercase tracking-wider text-ink-soft">Resources</p>
+        <nav aria-label="Resources links">
+          {RESOURCE_LINKS.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
