@@ -49,10 +49,10 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Platform column */}
+          {/* Products column */}
           <div>
             <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
-              Platform
+              Products
             </h4>
             <ul className="space-y-2.5">
               {PLATFORM_LINKS.map((item) => (
