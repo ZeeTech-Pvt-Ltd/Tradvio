@@ -8,6 +8,7 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'Strategy Backtesting', href: '/strategy-backtesting/' },
   { label: 'Paper Trading', href: '/paper-trading/' },
   { label: 'Risk Management', href: '/risk-management/' },
+  { label: 'Risk Calculator', href: '/risk-calculator/' },
 ];
 
 const COMPANY_LINKS: { label: string; href: string }[] = [
