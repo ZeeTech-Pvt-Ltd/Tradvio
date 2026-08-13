@@ -9,8 +9,6 @@ const PLATFORM_ITEMS: { label: string; href: string }[] = [
   { label: 'AI Strategy Builder', href: '/ai-strategy-builder/' },
   { label: 'AI Trading Ideas', href: '/ai-trading-ideas/' },
   { label: 'Strategy Backtesting', href: '/strategy-backtesting/' },
-  { label: 'Paper Trading', href: '/paper-trading/' },
-  { label: 'Risk Management', href: '/risk-management/' },
   { label: 'Risk Calculator', href: '/risk-calculator/' },
   { label: 'Trade Journal', href: '/trade-journal/' },
 ];
