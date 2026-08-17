@@ -11,14 +11,10 @@ const process = [
 ];
 
 const dataPoints = [
-  { dataPoint: 'Trade date', example: '2026-05-08', location: 'Bot profile → History' },
-  { dataPoint: 'Symbol', example: 'EUR/USD', location: 'Bot profile → History' },
-  { dataPoint: 'Side', example: 'Buy / Sell', location: 'Bot profile → History' },
-  { dataPoint: 'Entry level', example: '1.08421', location: 'Bot profile → History' },
-  { dataPoint: 'Exit level', example: '1.08587', location: 'Bot profile → History' },
-  { dataPoint: 'Realised P&L', example: '+2.34%', location: 'Bot profile → History' },
-  { dataPoint: 'Open positions', example: '3 positions', location: 'Bot profile → Positions' },
-  { dataPoint: 'Floating P&L', example: '-0.43%', location: 'Bot profile → Positions' },
+  { title: 'Every single execution', desc: 'The full breakdown of each closed trade — when it opened, when it closed, what it traded, and what it made or lost. Nothing is summarised away.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg> },
+  { title: 'Live positions', desc: 'Whatever a bot is holding right now, including unrealised gains and losses, is visible in real time. There is nowhere to hide a losing position.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> },
+  { title: 'Account equity over time', desc: 'The equity curve tells the honest story — including the dips. A smooth chart with no drawdowns usually means the data has been polished.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg> },
+  { title: 'Risk metrics', desc: 'Drawdowns, win rate, and per-trade exposure are all calculated from the raw records, so you can audit how the numbers were derived.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg> },
 ];
 
 const howToVerify = [
@@ -127,25 +123,16 @@ export default function PerformanceVerification() {
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto border border-border rounded-2xl overflow-hidden">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b border-border bg-navy">
-                    <th className="text-left py-4 px-5 font-mono text-[11px] tracking-[0.06em] uppercase text-ink-soft font-medium">What</th>
-                    <th className="text-left py-4 px-5 font-mono text-[11px] tracking-[0.06em] uppercase text-ink-soft font-medium">Example</th>
-                    <th className="text-left py-4 px-5 font-mono text-[11px] tracking-[0.06em] uppercase text-ink-soft font-medium">Where</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dataPoints.map((d, i) => (
-                    <tr key={d.dataPoint} className={i % 2 === 0 ? 'bg-navy' : 'bg-deep'}>
-                      <td className="p-4 text-sm text-ink font-medium">{d.dataPoint}</td>
-                      <td className="p-4 font-mono text-sm text-ink-soft">{d.example}</td>
-                      <td className="p-4 font-mono text-xs text-ink-soft">{d.location}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {dataPoints.map((d) => (
+                <div key={d.title} className="bg-navy border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4 text-accent">
+                    {d.icon}
+                  </div>
+                  <h3 className="font-semibold text-ink mb-2">{d.title}</h3>
+                  <p className="text-sm text-muted-dark leading-relaxed">{d.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
