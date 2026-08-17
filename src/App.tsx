@@ -28,6 +28,8 @@ import RiskCalculator from '@/pages/RiskCalculator';
 import TradeJournal from '@/pages/TradeJournal';
 import AITradingAssistant from '@/pages/AITradingAssistant';
 import AIStrategyBuilder from '@/pages/AIStrategyBuilder';
+import AIChartAnalyser from '@/pages/AIChartAnalyser';
+import PerformanceVerification from '@/pages/PerformanceVerification';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -92,6 +94,16 @@ export default function App() {
   // Render AI Strategy Builder page
   if (typeof window !== 'undefined' && window.location.pathname === '/ai-strategy-builder/') {
     return <AIStrategyBuilder />;
+  }
+
+  // Render AI Chart Analyser page
+  if (typeof window !== 'undefined' && window.location.pathname === '/tools/ai-chart-analyser/') {
+    return <AIChartAnalyser />;
+  }
+
+  // Render Performance Verification page
+  if (typeof window !== 'undefined' && window.location.pathname === '/performance-verification/') {
+    return <PerformanceVerification />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
