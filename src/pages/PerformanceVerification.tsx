@@ -81,7 +81,7 @@ export default function PerformanceVerification() {
         <section className="relative py-20 md:py-28 bg-deep overflow-hidden">
           <div className="absolute w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none opacity-25 bg-[radial-gradient(circle,rgba(220,38,38,0.3),transparent_70%)] -top-[150px] -right-[150px]" />
           <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="text-center max-w-3xl mx-auto">
+            <div className="text-center max-w-5xl mx-auto">
               <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-5">
                 Trust · Transparency · Verification
               </div>
