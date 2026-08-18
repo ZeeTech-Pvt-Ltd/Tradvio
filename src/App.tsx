@@ -30,6 +30,7 @@ import AITradingAssistant from '@/pages/AITradingAssistant';
 import AIStrategyBuilder from '@/pages/AIStrategyBuilder';
 import AIChartAnalyser from '@/pages/AIChartAnalyser';
 import PerformanceVerification from '@/pages/PerformanceVerification';
+import Academy from '@/pages/Academy';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -104,6 +105,11 @@ export default function App() {
   // Render Performance Verification page
   if (typeof window !== 'undefined' && window.location.pathname === '/performance-verification/') {
     return <PerformanceVerification />;
+  }
+
+  // Render Academy page
+  if (typeof window !== 'undefined' && window.location.pathname === '/academy/') {
+    return <Academy />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
