@@ -2,7 +2,7 @@ const LOGO_SRC = '/trdavio-logo.png';
 
 const PLATFORM_LINKS: { label: string; href: string }[] = [
   { label: 'AI Trading Assistant', href: '/ai-trading-assistant/' },
-  { label: 'AI Chart Analyser', href: '/tools/ai-chart-analyser/' },
+  { label: 'AI Chart Analyser', href: '/ai-chart-analyser/' },
   { label: 'AI Strategy Builder', href: '/ai-strategy-builder/' },
   { label: 'AI Trading Ideas', href: '/ai-trading-ideas/' },
   { label: 'Strategy Backtesting', href: '/strategy-backtesting/' },

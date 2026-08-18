@@ -31,6 +31,14 @@ import AIStrategyBuilder from '@/pages/AIStrategyBuilder';
 import AIChartAnalyser from '@/pages/AIChartAnalyser';
 import PerformanceVerification from '@/pages/PerformanceVerification';
 import Academy from '@/pages/Academy';
+import AboutUs from '@/pages/AboutUs';
+import ContactUs from '@/pages/ContactUs';
+import Disclaimer from '@/pages/Disclaimer';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import TermsOfService from '@/pages/TermsOfService';
+import CookiePolicy from '@/pages/CookiePolicy';
+import RiskDisclosure from '@/pages/RiskDisclosure';
+import NotFound from '@/pages/NotFound';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -98,7 +106,7 @@ export default function App() {
   }
 
   // Render AI Chart Analyser page
-  if (typeof window !== 'undefined' && window.location.pathname === '/tools/ai-chart-analyser/') {
+  if (typeof window !== 'undefined' && window.location.pathname === '/ai-chart-analyser/') {
     return <AIChartAnalyser />;
   }
 
@@ -110,6 +118,46 @@ export default function App() {
   // Render Academy page
   if (typeof window !== 'undefined' && window.location.pathname === '/academy/') {
     return <Academy />;
+  }
+
+  // Render About Us page
+  if (typeof window !== 'undefined' && window.location.pathname === '/about-us/') {
+    return <AboutUs />;
+  }
+
+  // Render Contact Us page
+  if (typeof window !== 'undefined' && window.location.pathname === '/contact-us-tradvioai-digital-trading/') {
+    return <ContactUs />;
+  }
+
+  // Render Disclaimer page
+  if (typeof window !== 'undefined' && window.location.pathname === '/disclaimer/') {
+    return <Disclaimer />;
+  }
+
+  // Render Privacy Policy page
+  if (typeof window !== 'undefined' && window.location.pathname === '/privacy-policy/') {
+    return <PrivacyPolicy />;
+  }
+
+  // Render Terms of Service page
+  if (typeof window !== 'undefined' && window.location.pathname === '/terms-of-service/') {
+    return <TermsOfService />;
+  }
+
+  // Render Cookie Policy page
+  if (typeof window !== 'undefined' && window.location.pathname === '/cookie-policy/') {
+    return <CookiePolicy />;
+  }
+
+  // Render Risk Disclosure page
+  if (typeof window !== 'undefined' && window.location.pathname === '/risk-disclosure/') {
+    return <RiskDisclosure />;
+  }
+
+  // Render 404 for unknown paths
+  if (typeof window !== 'undefined' && window.location.pathname !== '/') {
+    return <NotFound />;
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 

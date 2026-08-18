@@ -62,7 +62,7 @@ export default function AIChartAnalyser() {
         <title>AI Chart Analyser — Instant Technical Analysis | Tradvio AI</title>
         <meta name="description" content="Upload any trading chart and get instant AI analysis — trend direction, support & resistance levels, trade scenarios, and confidence ratings. Free to start." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/tools/ai-chart-analyser/" />
+        <link rel="canonical" href="https://traderai.ai/ai-chart-analyser/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />
@@ -74,7 +74,7 @@ export default function AIChartAnalyser() {
           <div className="absolute w-[600px] h-[600px] rounded-full blur-[100px] pointer-events-none opacity-30 bg-[radial-gradient(circle,rgba(220,38,38,0.3),transparent_70%)] -top-[150px] -right-[150px]" />
           <div className="absolute w-[400px] h-[400px] rounded-full blur-[80px] pointer-events-none opacity-20 bg-[radial-gradient(circle,rgba(220,38,38,0.2),transparent_70%)] bottom-0 -left-[100px]" />
 
-          <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
+          <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
             <h1 className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-5">
               AI Trading Chart Analyzer for<br />
               <span className="text-accent">Better Trading Decisions</span>
