@@ -16,6 +16,7 @@ const PLATFORM_ITEMS: { label: string; href: string }[] = [
 const RESOURCE_ITEMS: { label: string; href: string }[] = [
   { label: 'Academy', href: '/academy/' },
   { label: 'Performance Verification', href: '/performance-verification/' },
+  { label: 'Why Choose Tradvio AI', href: '/why-choose-tradvio-ai/' },
   { label: 'Blog', href: '/blog/' },
 ];
 

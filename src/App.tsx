@@ -39,6 +39,7 @@ import TermsOfService from '@/pages/TermsOfService';
 import CookiePolicy from '@/pages/CookiePolicy';
 import RiskDisclosure from '@/pages/RiskDisclosure';
 import NotFound from '@/pages/NotFound';
+import WhyChooseTradvio from '@/pages/WhyChooseTradvio';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { faqs, howToSteps, platformTools } from '@/lib/data';
@@ -153,6 +154,11 @@ export default function App() {
   // Render Risk Disclosure page
   if (typeof window !== 'undefined' && window.location.pathname === '/risk-disclosure/') {
     return <RiskDisclosure />;
+  }
+
+  // Render Why Choose Tradvio page
+  if (typeof window !== 'undefined' && window.location.pathname === '/why-choose-tradvio-ai/') {
+    return <WhyChooseTradvio />;
   }
 
   // Render 404 for unknown paths
