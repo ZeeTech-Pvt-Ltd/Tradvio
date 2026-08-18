@@ -47,12 +47,12 @@ const differentiators = [
 ];
 
 const whyChoose = [
-  'AI-assisted trading analysis',
-  'Structured trade setup evaluation',
-  'Integrated trade planning',
-  'Risk-aware decision making',
-  'A more connected trading workflow',
-  'Less reliance on multiple separate tools',
+  { text: 'AI-assisted trading analysis', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/><path d="M12 2v2M12 20v2"/></svg> },
+  { text: 'Structured trade setup evaluation', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/><path d="M8.5 11l2 2 4-4"/></svg> },
+  { text: 'Integrated trade planning', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6.75V21M15 6.75V21M3 3h18l-3 3.75H6L3 3zM6.75 3v3.75M17.25 3v3.75"/></svg> },
+  { text: 'Risk-aware decision making', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
+  { text: 'A more connected trading workflow', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 12l7-4.5M8.5 12l7 4.5"/></svg> },
+  { text: 'Less reliance on multiple separate tools', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M12 22V12M3.3 7l8.7 5 8.7-5"/></svg> },
 ];
 
 export default function WhyChooseTradvio() {
@@ -177,11 +177,11 @@ export default function WhyChooseTradvio() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {whyChoose.map((w) => (
-                <div key={w} className="bg-deep border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                    <svg className="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+                <div key={w.text} className="bg-deep border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4 text-accent">
+                    {w.icon}
                   </div>
-                  <p className="text-sm text-ink leading-relaxed">{w}</p>
+                  <p className="text-sm text-ink leading-relaxed">{w.text}</p>
                 </div>
               ))}
             </div>
@@ -191,7 +191,7 @@ export default function WhyChooseTradvio() {
         {/* ═══════════ CLOSING ═══════════ */}
         <section className="py-[100px] text-center bg-deep relative overflow-hidden">
           <div className="absolute w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(220,38,38,0.08),transparent_60%)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          <div className="max-w-[640px] mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto px-6 relative z-10">
             <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.2] mb-8">
               Traditional platforms give you the tools.<br />
               <span className="text-accent">Tradvio helps connect the process.</span>
