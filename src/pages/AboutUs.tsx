@@ -5,10 +5,10 @@ import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
 
 const visionPoints = [
-  { title: 'Partners in your journey', desc: 'We work closely with every client — collaboration is how great results happen.' },
-  { title: 'Sustainable growth', desc: 'We focus on long-term financial health rather than short-term gains.' },
-  { title: 'Control over your future', desc: 'Empowering businesses and traders with tailored, data-driven strategies.' },
-  { title: 'Always evolving', desc: 'Staying at the forefront of industry changes as the financial world continues to move.' },
+  { title: 'Partners in your journey', desc: 'We work closely with every client — collaboration is how great results happen.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> },
+  { title: 'Sustainable growth', desc: 'We focus on long-term financial health rather than short-term gains.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
+  { title: 'Control over your future', desc: 'Empowering businesses and traders with tailored, data-driven strategies.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> },
+  { title: 'Always evolving', desc: 'Staying at the forefront of industry changes as the financial world continues to move.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> },
 ];
 
 export default function AboutUs() {
@@ -84,8 +84,8 @@ export default function AboutUs() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {visionPoints.map((v) => (
                 <div key={v.title} className="bg-deep border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                    <svg className="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4 text-accent">
+                    {v.icon}
                   </div>
                   <h3 className="font-semibold text-ink mb-2">{v.title}</h3>
                   <p className="text-sm text-muted-dark leading-relaxed">{v.desc}</p>
