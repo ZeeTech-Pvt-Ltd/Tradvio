@@ -143,16 +143,8 @@ export default function App() {
         {/* Verification */}
         <meta name="google-site-verification" content="rX163GsGmt7DjLaEoPlX_DPHJ_fIbSOXlYLvvuzGbAA" />
 
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BLHY0BZWMX" />
-        <script>
-          {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-BLHY0BZWMX');`}
-        </script>
-
-        {/* Microsoft Clarity */}
-        <script>
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xy1feronjb");`}
-        </script>
+        {/* Google Analytics + Clarity are loaded via the deferred loader in index.html —
+            they start after the page load event so they never compete with first paint. */}
 
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json">

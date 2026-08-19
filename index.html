@@ -6,14 +6,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/Tradvio-Icon.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/Tradvio-Icon.png" />
   <link rel="apple-touch-icon" href="/Tradvio-Icon.png" />
-  <!-- Geist Font — async load to avoid render-blocking -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  </noscript>
+  <!-- Geist fonts are self-hosted (see src/index.css) and preloaded here -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-var.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-mono-var.woff2" crossorigin />
   <script>
     /* Lazy-load the Replain chat widget — only downloads after the visitor
        first interacts (scroll/click/touch/keys) or the page is idle for a few
@@ -48,5 +43,48 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  <script>
+    /* Deferred analytics loader — Google Analytics and Microsoft Clarity start
+       only after the page has loaded, so they never compete with the app
+       bundle or first paint on slow connections. */
+    (function () {
+      var started = false;
+      function start() {
+        if (started) return;
+        started = true;
+        cleanup();
+        // Google Analytics
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-BLHY0BZWMX';
+        document.head.appendChild(g);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-BLHY0BZWMX');
+        // Microsoft Clarity
+        (function (c, l, a, r, i, t, y) {
+          c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+          t = l.createElement(r); t.async = 1;
+          t.src = 'https://www.clarity.ms/tag/' + i;
+          y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, 'clarity', 'script', 'xy1feronjb');
+      }
+      var timer;
+      function onDone() {
+        timer = setTimeout(start, 2000);
+      }
+      function cleanup() {
+        window.removeEventListener('load', onDone);
+        window.removeEventListener('scroll', start, true);
+        window.removeEventListener('touchstart', start, true);
+        clearTimeout(timer);
+      }
+      window.addEventListener('load', onDone);
+      window.addEventListener('scroll', start, { passive: true, once: true });
+      window.addEventListener('touchstart', start, { passive: true, once: true });
+    })();
+  </script>
 </body>
 </html>
