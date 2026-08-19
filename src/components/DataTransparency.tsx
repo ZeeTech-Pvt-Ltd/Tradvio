@@ -69,7 +69,7 @@ export default function DataTransparency() {
 
         <p className="text-center text-sm text-ink-soft mt-8">
           If a result is not labelled, treat it as illustrative.{' '}
-          <a href="/performance-methodology/" className="text-accent hover:text-accent-hover">
+          <a href="/performance-methodology/" className="text-accent hover:text-accent-hover underline underline-offset-2">
             Read our full methodology →
           </a>
         </p>

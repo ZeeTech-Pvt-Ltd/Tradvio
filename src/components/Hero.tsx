@@ -55,7 +55,7 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/45">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-soft">
               <span className="flex items-center gap-1.5">
                 <span className="text-success font-bold text-sm">&#10003;</span> Free to start
               </span>
@@ -72,7 +72,7 @@ export default function Hero() {
           </div>
 
           {/* Right — Compact Platform Preview */}
-          <div className="relative mx-auto lg:mx-0 w-full pb-8 md:pb-0">
+          <div className="relative mx-auto lg:mx-0 w-full pb-8 md:pb-0" aria-hidden="true">
             <div
               className="absolute -inset-4 rounded-2xl opacity-40 blur-2xl -z-10"
               style={{ background: 'radial-gradient(ellipse, rgba(220,38,38,0.12) 0%, transparent 70%)' }}

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Hero from '@/components/Hero';
+import LazySection from '@/components/LazySection';
 import Leaderboard from '@/components/Leaderboard';
 import TrustBar from '@/components/TrustBar';
 import TradingPerformance from '@/components/TradingPerformance';
@@ -174,18 +175,19 @@ export default function App() {
         <Hero />
         <Leaderboard />
         <TrustBar />
-        <TradingPerformance />
-        <PlatformTools />
-        <HowItWorks />
-        <PerformanceFeatures />
-        <WhyTradvioAI />
-        <CanCannot />
-        <DataTransparency />
-        <TrustCentrePreview />
-        <MarketInsights />
-        <Testimonials />
-        <MarketStats />
-        <FAQ />
+        {/* Below-fold sections render lazily — keeps first paint and LCP fast */}
+        <LazySection minHeight="700px"><TradingPerformance /></LazySection>
+        <LazySection minHeight="600px"><PlatformTools /></LazySection>
+        <LazySection minHeight="900px"><HowItWorks /></LazySection>
+        <LazySection minHeight="600px"><PerformanceFeatures /></LazySection>
+        <LazySection minHeight="700px"><WhyTradvioAI /></LazySection>
+        <LazySection minHeight="600px"><CanCannot /></LazySection>
+        <LazySection minHeight="600px"><DataTransparency /></LazySection>
+        <LazySection minHeight="600px"><TrustCentrePreview /></LazySection>
+        <LazySection minHeight="400px"><MarketInsights /></LazySection>
+        <LazySection minHeight="600px"><Testimonials /></LazySection>
+        <LazySection minHeight="400px"><MarketStats /></LazySection>
+        <LazySection minHeight="500px"><FAQ /></LazySection>
       </main>
 
       <Footer />

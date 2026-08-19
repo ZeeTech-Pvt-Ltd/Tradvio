@@ -81,7 +81,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
       <aside
         className={cn(
           'fixed top-0 z-[2000] h-full w-[300px] bg-navy p-8 shadow-card-xl transition-all duration-300',
-          isOpen ? 'right-0' : 'right-[-100%]'
+          isOpen ? 'right-0 visible' : 'right-[-100%] invisible'
         )}
         aria-label="Mobile navigation"
         aria-hidden={!isOpen}

@@ -449,7 +449,7 @@ export default function LeadForm({
             />
             <label htmlFor={`${formId}-privacy`}>
               I agree to the{' '}
-              <a href="/privacy-policy/" target="_blank" rel="noopener" className="text-accent hover:text-accent-hover">
+              <a href="/privacy-policy/" target="_blank" rel="noopener" className="text-accent hover:text-accent-hover underline underline-offset-2">
                 Privacy Policy
               </a>{' '}
               and understand that AI analysis can be incorrect and trading involves risk.{' '}

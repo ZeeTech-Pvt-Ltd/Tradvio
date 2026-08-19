@@ -47,9 +47,9 @@ export default function Footer() {
 
           {/* Products column */}
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
               Products
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {PLATFORM_LINKS.map((item) => (
                 <li key={item.href}>
@@ -63,9 +63,9 @@ export default function Footer() {
 
           {/* Company column */}
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
               Company
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map((item) => (
                 <li key={item.href}>
@@ -79,9 +79,9 @@ export default function Footer() {
 
           {/* Legal column */}
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
               Legal
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {LEGAL_LINKS.map((item) => (
                 <li key={item.href}>
