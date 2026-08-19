@@ -13,6 +13,7 @@ import WhyTradvioAI from '@/components/WhyTradvioAI';
 import CanCannot from '@/components/CanCannot';
 import DataTransparency from '@/components/DataTransparency';
 import TrustCentrePreview from '@/components/TrustCentrePreview';
+import MarketInsights from '@/components/MarketInsights';
 import Testimonials from '@/components/Testimonials';
 import MarketStats from '@/components/MarketStats';
 import FAQ from '@/components/FAQ';
@@ -248,6 +249,7 @@ export default function App() {
         <CanCannot />
         <DataTransparency />
         <TrustCentrePreview />
+        <MarketInsights />
         <Testimonials />
         <MarketStats />
         <FAQ />
