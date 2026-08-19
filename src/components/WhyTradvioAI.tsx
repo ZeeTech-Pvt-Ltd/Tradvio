@@ -1,3 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
+
+const VIDEO_SRC = 'https://tradvio.com/step-4-plug-in.mp4';
+
 const checkItems = [
   'Customizable dashboard',
   'Speedy real-time alerts',
@@ -8,6 +12,31 @@ const checkItems = [
 ];
 
 export default function WhyTradvioAI() {
+  const videoWrapRef = useRef<HTMLDivElement | null>(null);
+  const [videoVisible, setVideoVisible] = useState(false);
+
+  // Only load the external video once it scrolls near the viewport —
+  // keeps several MB off the initial page load.
+  useEffect(() => {
+    const el = videoWrapRef.current;
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      setVideoVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVideoVisible(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className="section bg-deep">
       <div className="max-w-container mx-auto px-4 md:px-6">
@@ -49,16 +78,31 @@ export default function WhyTradvioAI() {
             </div>
           </div>
 
-          {/* Right — Video */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full max-w-sm mx-auto lg:max-w-none rounded-2xl min-h-[320px] md:min-h-[400px] object-cover"
+          {/* Right — Video (lazy-loaded on scroll) */}
+          <div
+            ref={videoWrapRef}
+            className="w-full max-w-sm mx-auto lg:max-w-none rounded-2xl min-h-[320px] md:min-h-[400px] bg-navy border border-border flex items-center justify-center"
           >
-            <source src="https://tradvio.com/step-4-plug-in.mp4" type="video/mp4" />
-          </video>
+            {videoVisible ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full rounded-2xl object-cover"
+              >
+                <source src={VIDEO_SRC} type="video/mp4" />
+              </video>
+            ) : (
+              <div className="text-ink-soft text-sm flex items-center gap-2">
+                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Loading preview…
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

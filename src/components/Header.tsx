@@ -96,7 +96,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
       <div className="mx-auto flex h-full max-w-container items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <a href="/" aria-label="Tradvio AI home" className="flex-shrink-0">
-          <img src={LOGO_SRC} alt="Tradvio AI" width={160} height={32} />
+          <img src={LOGO_SRC} alt="Tradvio AI" width={160} height={32} loading="eager" fetchPriority="high" />
         </a>
 
         {/* Desktop navigation */}

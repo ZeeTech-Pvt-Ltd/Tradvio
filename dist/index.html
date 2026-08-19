@@ -6,20 +6,48 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/Tradvio-Icon.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/Tradvio-Icon.png" />
   <link rel="apple-touch-icon" href="/Tradvio-Icon.png" />
-  <!-- Geist Font -->
+  <!-- Geist Font — async load to avoid render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/assets/index-DWns4ms_.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </noscript>
+  <script>
+    /* Lazy-load the Replain chat widget — only downloads after the visitor
+       first interacts (scroll/click/touch/keys) or the page is idle for a few
+       seconds. Keeps ~100KB off the critical path. */
+    window.replainSettings = { id: 'c6366b02-2531-4ee7-b3e1-7cc6f93d7e57' };
+    (function () {
+      var loaded = false;
+      function load() {
+        if (loaded) return;
+        loaded = true;
+        cleanup();
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://widget.replain.cc/dist/client.js';
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+      }
+      var evts = ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'];
+      function onEvent() { load(); }
+      function cleanup() {
+        for (var i = 0; i < evts.length; i++) window.removeEventListener(evts[i], onEvent);
+        if ('cancelIdleCallback' in window) window.cancelIdleCallback(idleId);
+        else clearTimeout(idleId);
+      }
+      for (var i = 0; i < evts.length; i++) window.addEventListener(evts[i], onEvent, { passive: true });
+      var idleId = ('requestIdleCallback' in window)
+        ? window.requestIdleCallback(load, { timeout: 8000 })
+        : setTimeout(load, 8000);
+    })();
+  </script>
+  <script type="module" crossorigin src="/assets/index-Cq4WIbFT.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-aWm-M__Q.css">
 </head>
 <body>
   <div id="root"></div>
-  <script>
-    window.replainSettings = { id: 'c6366b02-2531-4ee7-b3e1-7cc6f93d7e57' };
-    (function(u){var s=document.createElement('script');s.async=true;s.src=u;
-    var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
-    })('https://widget.replain.cc/dist/client.js');
-  </script>
 </body>
 </html>

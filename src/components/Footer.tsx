@@ -37,7 +37,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <a href="/" aria-label="Tradvio AI home">
-              <img src={LOGO_SRC} alt="Tradvio AI" width={140} height={28} />
+              <img src={LOGO_SRC} alt="Tradvio AI" width={140} height={28} loading="lazy" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
               AI-assisted market research and strategy testing for traders who make their own
