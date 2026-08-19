@@ -226,7 +226,7 @@ export default function TradersPage() {
               return (
                 <article
                   key={t.id}
-                  className="border border-border bg-navy rounded-[10px] p-4 cursor-pointer transition-all duration-[180ms] hover:-translate-y-[3px] hover:border-accent/30 hover:shadow-card-lg"
+                  className="border border-border bg-navy rounded-[10px] p-4 cursor-pointer transition-all duration-fast hover:-translate-y-[3px] hover:border-accent/30 hover:shadow-card-lg"
                   onClick={() => window.location.href = `/trader/${t.slug}/`}
                 >
                   {/* Top row: name + days */}

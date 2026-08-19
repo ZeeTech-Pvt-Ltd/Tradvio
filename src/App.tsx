@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
@@ -17,32 +17,46 @@ import MarketInsights from '@/components/MarketInsights';
 import Testimonials from '@/components/Testimonials';
 import MarketStats from '@/components/MarketStats';
 import FAQ from '@/components/FAQ';
-import ThankYou from '@/components/ThankYou';
-
-import GetStarted from '@/pages/GetStarted';
-import LeaderboardPage from '@/pages/LeaderboardPage';
-import TradersPage from '@/pages/TradersPage';
-import AITradingPlatform from '@/pages/AITradingPlatform';
-import AITradingIdeas from '@/pages/AITradingIdeas';
-import StrategyBacktesting from '@/pages/StrategyBacktesting';
-import RiskCalculator from '@/pages/RiskCalculator';
-import TradeJournal from '@/pages/TradeJournal';
-import AITradingAssistant from '@/pages/AITradingAssistant';
-import AIStrategyBuilder from '@/pages/AIStrategyBuilder';
-import AIChartAnalyser from '@/pages/AIChartAnalyser';
-import PerformanceVerification from '@/pages/PerformanceVerification';
-import Academy from '@/pages/Academy';
-import AboutUs from '@/pages/AboutUs';
-import ContactUs from '@/pages/ContactUs';
-import Disclaimer from '@/pages/Disclaimer';
-import PrivacyPolicy from '@/pages/PrivacyPolicy';
-import TermsOfService from '@/pages/TermsOfService';
-import CookiePolicy from '@/pages/CookiePolicy';
-import RiskDisclosure from '@/pages/RiskDisclosure';
-import NotFound from '@/pages/NotFound';
-import WhyChooseTradvio from '@/pages/WhyChooseTradvio';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
+
+// Lazy-loaded standalone pages — keeps the initial bundle small.
+const ThankYou = lazy(() => import('@/components/ThankYou'));
+const GetStarted = lazy(() => import('@/pages/GetStarted'));
+const LeaderboardPage = lazy(() => import('@/pages/LeaderboardPage'));
+const TradersPage = lazy(() => import('@/pages/TradersPage'));
+const AITradingPlatform = lazy(() => import('@/pages/AITradingPlatform'));
+const AITradingIdeas = lazy(() => import('@/pages/AITradingIdeas'));
+const StrategyBacktesting = lazy(() => import('@/pages/StrategyBacktesting'));
+const RiskCalculator = lazy(() => import('@/pages/RiskCalculator'));
+const TradeJournal = lazy(() => import('@/pages/TradeJournal'));
+const AITradingAssistant = lazy(() => import('@/pages/AITradingAssistant'));
+const AIStrategyBuilder = lazy(() => import('@/pages/AIStrategyBuilder'));
+const AIChartAnalyser = lazy(() => import('@/pages/AIChartAnalyser'));
+const PerformanceVerification = lazy(() => import('@/pages/PerformanceVerification'));
+const Academy = lazy(() => import('@/pages/Academy'));
+const AboutUs = lazy(() => import('@/pages/AboutUs'));
+const ContactUs = lazy(() => import('@/pages/ContactUs'));
+const Disclaimer = lazy(() => import('@/pages/Disclaimer'));
+const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('@/pages/TermsOfService'));
+const CookiePolicy = lazy(() => import('@/pages/CookiePolicy'));
+const RiskDisclosure = lazy(() => import('@/pages/RiskDisclosure'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
+const WhyChooseTradvio = lazy(() => import('@/pages/WhyChooseTradvio'));
+
+// Minimal loading fallback shown while a lazy page downloads.
+const PageLoader = () => (
+  <div className="min-h-screen bg-deep flex items-center justify-center">
+    <div className="text-accent font-semibold flex items-center gap-2">
+      <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+      </svg>
+      Loading…
+    </div>
+  </div>
+);
 import { faqs, howToSteps, platformTools } from '@/lib/data';
 
 const structuredData = generateAllStructuredData(
@@ -51,120 +65,39 @@ const structuredData = generateAllStructuredData(
   platformTools.map((t) => ({ name: t.title, description: t.description, url: t.href }))
 );
 
+const ROUTES: Record<string, React.ComponentType> = {
+  '/thank-you/': ThankYou,
+  '/get-started/': GetStarted,
+  '/leaderboard/': LeaderboardPage,
+  '/trader/': TradersPage,
+  '/ai-trading-platform/': AITradingPlatform,
+  '/ai-trading-ideas/': AITradingIdeas,
+  '/strategy-backtesting/': StrategyBacktesting,
+  '/risk-calculator/': RiskCalculator,
+  '/trade-journal/': TradeJournal,
+  '/ai-trading-assistant/': AITradingAssistant,
+  '/ai-strategy-builder/': AIStrategyBuilder,
+  '/ai-chart-analyser/': AIChartAnalyser,
+  '/performance-verification/': PerformanceVerification,
+  '/academy/': Academy,
+  '/about-us/': AboutUs,
+  '/contact-us-tradvioai-digital-trading/': ContactUs,
+  '/disclaimer/': Disclaimer,
+  '/privacy-policy/': PrivacyPolicy,
+  '/terms-of-service/': TermsOfService,
+  '/cookie-policy/': CookiePolicy,
+  '/risk-disclosure/': RiskDisclosure,
+  '/why-choose-tradvio-ai/': WhyChooseTradvio,
+};
+
 export default function App() {
-  // Render thank-you page for /thank-you/ path
-  if (typeof window !== 'undefined' && window.location.pathname === '/thank-you/') {
-    return <ThankYou />;
-  }
-
-  // Render get-started page for /get-started/ path
-  if (typeof window !== 'undefined' && window.location.pathname === '/get-started/') {
-    return <GetStarted />;
-  }
-
-  // Render leaderboard page for /leaderboard/ path
-  if (typeof window !== 'undefined' && window.location.pathname === '/leaderboard/') {
-    return <LeaderboardPage />;
-  }
-
-  // Render traders page for /trader/ path
-  if (typeof window !== 'undefined' && window.location.pathname === '/trader/') {
-    return <TradersPage />;
-  }
-
-  // Render AI Trading Platform page
-  if (typeof window !== 'undefined' && window.location.pathname === '/ai-trading-platform/') {
-    return <AITradingPlatform />;
-  }
-
-  // Render AI Trading Ideas page
-  if (typeof window !== 'undefined' && window.location.pathname === '/ai-trading-ideas/') {
-    return <AITradingIdeas />;
-  }
-
-  // Render Strategy Backtesting page
-  if (typeof window !== 'undefined' && window.location.pathname === '/strategy-backtesting/') {
-    return <StrategyBacktesting />;
-  }
-
-  // Render Risk Calculator page
-  if (typeof window !== 'undefined' && window.location.pathname === '/risk-calculator/') {
-    return <RiskCalculator />;
-  }
-
-  // Render Trade Journal page
-  if (typeof window !== 'undefined' && window.location.pathname === '/trade-journal/') {
-    return <TradeJournal />;
-  }
-
-  // Render AI Trading Assistant page
-  if (typeof window !== 'undefined' && window.location.pathname === '/ai-trading-assistant/') {
-    return <AITradingAssistant />;
-  }
-
-  // Render AI Strategy Builder page
-  if (typeof window !== 'undefined' && window.location.pathname === '/ai-strategy-builder/') {
-    return <AIStrategyBuilder />;
-  }
-
-  // Render AI Chart Analyser page
-  if (typeof window !== 'undefined' && window.location.pathname === '/ai-chart-analyser/') {
-    return <AIChartAnalyser />;
-  }
-
-  // Render Performance Verification page
-  if (typeof window !== 'undefined' && window.location.pathname === '/performance-verification/') {
-    return <PerformanceVerification />;
-  }
-
-  // Render Academy page
-  if (typeof window !== 'undefined' && window.location.pathname === '/academy/') {
-    return <Academy />;
-  }
-
-  // Render About Us page
-  if (typeof window !== 'undefined' && window.location.pathname === '/about-us/') {
-    return <AboutUs />;
-  }
-
-  // Render Contact Us page
-  if (typeof window !== 'undefined' && window.location.pathname === '/contact-us-tradvioai-digital-trading/') {
-    return <ContactUs />;
-  }
-
-  // Render Disclaimer page
-  if (typeof window !== 'undefined' && window.location.pathname === '/disclaimer/') {
-    return <Disclaimer />;
-  }
-
-  // Render Privacy Policy page
-  if (typeof window !== 'undefined' && window.location.pathname === '/privacy-policy/') {
-    return <PrivacyPolicy />;
-  }
-
-  // Render Terms of Service page
-  if (typeof window !== 'undefined' && window.location.pathname === '/terms-of-service/') {
-    return <TermsOfService />;
-  }
-
-  // Render Cookie Policy page
-  if (typeof window !== 'undefined' && window.location.pathname === '/cookie-policy/') {
-    return <CookiePolicy />;
-  }
-
-  // Render Risk Disclosure page
-  if (typeof window !== 'undefined' && window.location.pathname === '/risk-disclosure/') {
-    return <RiskDisclosure />;
-  }
-
-  // Render Why Choose Tradvio page
-  if (typeof window !== 'undefined' && window.location.pathname === '/why-choose-tradvio-ai/') {
-    return <WhyChooseTradvio />;
-  }
-
-  // Render 404 for unknown paths
   if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-    return <NotFound />;
+    const Page = ROUTES[window.location.pathname] ?? NotFound;
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Page />
+      </Suspense>
+    );
   }
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
