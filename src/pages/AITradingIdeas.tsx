@@ -249,15 +249,15 @@ export default function AITradingIdeas() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {[
-                { name: 'Crypto', desc: 'BTC, ETH, and thousands of altcoins.' },
-                { name: 'Forex', desc: 'Major, minor, and exotic pairs.' },
-                { name: 'Stocks', desc: 'AI stock picks from US and global names.' },
-                { name: 'Indices', desc: 'S&P 500, NASDAQ, and more.' },
-                { name: 'Commodities', desc: 'Gold, oil, and other staples.' },
+                { name: 'Crypto', desc: 'BTC, ETH, and thousands of altcoins.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg> },
+                { name: 'Forex', desc: 'Major, minor, and exotic pairs.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10h10l-4-4M17 14H7l4 4"/></svg> },
+                { name: 'Stocks', desc: 'AI stock picks from US and global names.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="8" width="3" height="12" rx="1"/><rect x="10" y="4" width="3" height="16" rx="1"/><rect x="17" y="10" width="3" height="10" rx="1"/></svg> },
+                { name: 'Indices', desc: 'S&P 500, NASDAQ, and more.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
+                { name: 'Commodities', desc: 'Gold, oil, and other staples.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3 6h-6l3-6z"/><path d="M9 8h6l4 6c-1.5 1-4 2-7 2s-5.5-1-7-2l4-6z"/><path d="M12 16v6"/></svg> },
               ].map((m) => (
                 <div key={m.name} className="bg-navy border border-border rounded-xl p-5">
-                  <div className="w-[42px] h-[42px] rounded-[10px] bg-deep border border-border flex items-center justify-center mb-3.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+                  <div className="w-[42px] h-[42px] rounded-[10px] bg-accent/10 border border-accent/20 flex items-center justify-center mb-3.5 text-accent">
+                    {m.icon}
                   </div>
                   <div className="font-semibold text-[15px] text-ink mb-1.5">{m.name}</div>
                   <p className="text-[13.5px] text-muted-dark">{m.desc}</p>
@@ -351,13 +351,13 @@ export default function AITradingIdeas() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
               {[
-                { title: 'Risk calculator', desc: 'Work out your position size and risk before you enter.' },
-                { title: 'Trade journal', desc: 'Log every trade and see what\'s working.' },
-                { title: 'Alerts', desc: 'Get a ping the moment a fresh setup appears.' },
+                { title: 'Risk calculator', desc: 'Work out your position size and risk before you enter.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h5M12 18h.01"/></svg> },
+                { title: 'Trade journal', desc: 'Log every trade and see what\'s working.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> },
+                { title: 'Alerts', desc: 'Get a ping the moment a fresh setup appears.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a5 5 0 00-5 5c0 4-2 5-2 6h14c0-1-2-2-2-6a5 5 0 00-5-5z"/><path d="M10 19a2 2 0 004 0"/></svg> },
               ].map((f) => (
                 <div key={f.title} className="bg-navy border border-border rounded-xl p-5">
-                  <div className="w-[42px] h-[42px] rounded-[10px] bg-deep border border-border flex items-center justify-center mb-3.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+                  <div className="w-[42px] h-[42px] rounded-[10px] bg-accent/10 border border-accent/20 flex items-center justify-center mb-3.5 text-accent">
+                    {f.icon}
                   </div>
                   <h3 className="text-base font-semibold mb-2">{f.title}</h3>
                   <p className="text-sm text-muted-dark">{f.desc}</p>

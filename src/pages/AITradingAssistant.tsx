@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
@@ -66,11 +65,7 @@ export default function AITradingAssistant() {
             <div className="grid lg:grid-cols-2 gap-14 items-center">
               {/* Left — copy */}
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/30 text-accent bg-accent/10 text-xs font-semibold mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                  AI Trading Assistant
-                </div>
-                <h1 className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-5">
+                <h1 className="text-[clamp(2rem,4vw,3.6rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-5">
                   Your AI trading assistant<br />
                   <span className="text-accent">for smarter decisions.</span>
                 </h1>

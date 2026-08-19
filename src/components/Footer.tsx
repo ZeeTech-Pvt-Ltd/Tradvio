@@ -13,8 +13,6 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
 const COMPANY_LINKS: { label: string; href: string }[] = [
   { label: 'About Us', href: '/about-us/' },
   { label: 'Blog', href: '/blog/' },
-  { label: 'Trust Centre', href: '/trust-centre/' },
-  { label: 'Performance Methodology', href: '/performance-methodology/' },
   { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
 ];
 

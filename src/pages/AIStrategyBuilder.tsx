@@ -259,13 +259,13 @@ export default function AIStrategyBuilder() {
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { title: 'No-code trading', desc: 'Go from idea to working strategy without writing a single line of code. The AI handles the technical side.' },
-                { title: 'Strategy migration', desc: 'Bring your Pine Script or MQL5 strategies. The AI converts them automatically with full backtesting support.' },
-                { title: 'Rapid prototyping', desc: 'Test dozens of variations in minutes. Tweak a parameter, rerun the backtest, compare results side by side.' },
+                { title: 'No-code trading', desc: 'Go from idea to working strategy without writing a single line of code. The AI handles the technical side.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg> },
+                { title: 'Strategy migration', desc: 'Bring your Pine Script or MQL5 strategies. The AI converts them automatically with full backtesting support.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg> },
+                { title: 'Rapid prototyping', desc: 'Test dozens of variations in minutes. Tweak a parameter, rerun the backtest, compare results side by side.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> },
               ].map((b) => (
                 <div key={b.title} className="bg-navy border border-border rounded-xl p-6 text-center">
-                  <div className="w-10 h-10 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
+                  <div className="w-11 h-11 mx-auto mb-4 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                    {b.icon}
                   </div>
                   <h3 className="font-semibold text-ink mb-2">{b.title}</h3>
                   <p className="text-sm text-muted-dark leading-relaxed">{b.desc}</p>

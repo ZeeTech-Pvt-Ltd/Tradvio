@@ -39,13 +39,13 @@ const features = [
 ];
 
 const platformSync = [
-  { name: 'MetaTrader', status: 'sync' },
-  { name: 'cTrader', status: 'sync' },
-  { name: 'TradeLocker', status: 'sync' },
-  { name: 'Tradovate', status: 'sync' },
-  { name: 'NinjaTrader', status: 'sync' },
-  { name: 'CSV Import', status: 'upload' },
-  { name: 'MT4 / MT5 files', status: 'upload' },
+  { name: 'MetaTrader', status: 'sync', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg> },
+  { name: 'cTrader', status: 'sync', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="6" width="16" height="14" rx="2"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg> },
+  { name: 'TradeLocker', status: 'sync', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> },
+  { name: 'Tradovate', status: 'sync', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> },
+  { name: 'NinjaTrader', status: 'sync', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
+  { name: 'CSV Import', status: 'upload', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> },
+  { name: 'MT4 / MT5 files', status: 'upload', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> },
 ];
 
 export default function TradeJournal() {
@@ -234,10 +234,8 @@ export default function TradeJournal() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 max-w-5xl mx-auto">
               {platformSync.map((p) => (
                 <div key={p.name} className="bg-deep border border-border rounded-xl p-4 text-center hover:border-accent/30 transition-colors">
-                  <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/>
-                    </svg>
+                  <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                    {p.icon}
                   </div>
                   <div className="text-sm font-semibold text-ink mb-1">{p.name}</div>
                   <div className={cn('text-[0.65rem] font-bold uppercase tracking-wider', p.status === 'sync' ? 'text-success' : 'text-warning')}>
