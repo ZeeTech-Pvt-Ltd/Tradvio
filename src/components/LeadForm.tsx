@@ -25,7 +25,7 @@ const ITI_UTILS = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/
 
 const API_URL = 'https://quantryxtech.com/homeMailAction.php';
 
-const PREFERRED_COUNTRIES = ['us', 'gb', 'ca', 'au', 'de', 'fr', 'es', 'it'];
+const PREFERRED_COUNTRIES = ['gb', 'us', 'ca', 'au', 'de', 'fr', 'es', 'it'];
 
 /**
  * Map intl-tel-input validation error codes to user-friendly messages.
@@ -147,16 +147,32 @@ export default function LeadForm({
   const itiRef = useRef<IntlTelInputInstance | null>(null);
   const [itiReady, setItiReady] = useState(false);
 
+  // Detect visitor country from IP — defaults to UK ('gb') when detection fails.
+  const detectCountry = async (): Promise<string> => {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 3000);
+      const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+      clearTimeout(timer);
+      if (!res.ok) return 'gb';
+      const data = (await res.json()) as { country_code?: string };
+      const code = data.country_code?.toLowerCase();
+      return code && code.length === 2 ? code : 'gb';
+    } catch {
+      return 'gb';
+    }
+  };
+
   // Load & init intl-tel-input
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
-      await loadIntlTelInput();
+      const [country] = await Promise.all([detectCountry(), loadIntlTelInput()]);
       if (cancelled || !phoneInputRef.current || !window.intlTelInput) return;
 
       itiRef.current = window.intlTelInput(phoneInputRef.current, {
-        initialCountry: 'us',
+        initialCountry: country,
         separateDialCode: true,
         preferredCountries: PREFERRED_COUNTRIES,
         utilsScript: ITI_UTILS,
