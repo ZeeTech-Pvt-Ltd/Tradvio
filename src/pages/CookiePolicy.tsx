@@ -57,7 +57,7 @@ export default function CookiePolicy() {
         <title>Cookie Policy | Tradvio AI</title>
         <meta name="description" content="Read the Tradvio AI cookie policy — what cookies are, how we use them, and how to manage your preferences." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/cookie-policy/" />
+        <link rel="canonical" href="https://tradvioai.com/cookie-policy/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

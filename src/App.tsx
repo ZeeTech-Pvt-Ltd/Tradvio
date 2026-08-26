@@ -109,7 +109,7 @@ export default function App() {
         <title>Tradvio AI | AI Market Research, Chart Analysis & Strategy Testing</title>
         <meta name="description" content="AI-assisted market research and strategy testing for traders. Analyse charts, backtest strategies and practise with paper trading. Free to start. No profit guarantees." />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://traderai.ai/" />
+        <link rel="canonical" href="https://tradvioai.com/" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -117,8 +117,8 @@ export default function App() {
         <meta property="og:locale" content="en_GB" />
         <meta property="og:title" content="Tradvio AI | AI Market Research, Chart Analysis & Strategy Testing" />
         <meta property="og:description" content="AI-assisted market research and strategy testing. Analyse charts, backtest strategies, practise with paper trading. Free to start." />
-        <meta property="og:url" content="https://traderai.ai/" />
-        <meta property="og:image" content="https://traderai.ai/wp-content/uploads/static-home/og-home.jpg" />
+        <meta property="og:url" content="https://tradvioai.com/" />
+        <meta property="og:image" content="https://tradvioai.com/wp-content/uploads/static-home/og-home.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
@@ -128,17 +128,17 @@ export default function App() {
         <meta name="twitter:description" content="AI-assisted market research and strategy testing. Free to start." />
 
         {/* hreflang */}
-        <link rel="alternate" hrefLang="en-GB" href="https://traderai.ai/" />
-        <link rel="alternate" hrefLang="en" href="https://traderai.ai/" />
-        <link rel="alternate" hrefLang="ja" href="https://traderai.ai/ja/" />
-        <link rel="alternate" hrefLang="tr-TR" href="https://traderai.ai/tr/" />
-        <link rel="alternate" hrefLang="es-ES" href="https://traderai.ai/es/" />
-        <link rel="alternate" hrefLang="de-DE" href="https://traderai.ai/de/" />
-        <link rel="alternate" hrefLang="pt-PT" href="https://traderai.ai/pt/" />
-        <link rel="alternate" hrefLang="fr-FR" href="https://traderai.ai/fr/" />
-        <link rel="alternate" hrefLang="it-IT" href="https://traderai.ai/it/" />
-        <link rel="alternate" hrefLang="pl-PL" href="https://traderai.ai/pl/" />
-        <link rel="alternate" hrefLang="x-default" href="https://traderai.ai/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://tradvioai.com/" />
+        <link rel="alternate" hrefLang="en" href="https://tradvioai.com/" />
+        <link rel="alternate" hrefLang="ja" href="https://tradvioai.com/ja/" />
+        <link rel="alternate" hrefLang="tr-TR" href="https://tradvioai.com/tr/" />
+        <link rel="alternate" hrefLang="es-ES" href="https://tradvioai.com/es/" />
+        <link rel="alternate" hrefLang="de-DE" href="https://tradvioai.com/de/" />
+        <link rel="alternate" hrefLang="pt-PT" href="https://tradvioai.com/pt/" />
+        <link rel="alternate" hrefLang="fr-FR" href="https://tradvioai.com/fr/" />
+        <link rel="alternate" hrefLang="it-IT" href="https://tradvioai.com/it/" />
+        <link rel="alternate" hrefLang="pl-PL" href="https://tradvioai.com/pl/" />
+        <link rel="alternate" hrefLang="x-default" href="https://tradvioai.com/" />
 
         {/* Verification */}
         <meta name="google-site-verification" content="rX163GsGmt7DjLaEoPlX_DPHJ_fIbSOXlYLvvuzGbAA" />

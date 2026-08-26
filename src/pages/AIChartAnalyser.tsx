@@ -62,7 +62,7 @@ export default function AIChartAnalyser() {
         <title>AI Chart Analyser — Instant Technical Analysis | Tradvio AI</title>
         <meta name="description" content="Upload any trading chart and get instant AI analysis — trend direction, support & resistance levels, trade scenarios, and confidence ratings. Free to start." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/ai-chart-analyser/" />
+        <link rel="canonical" href="https://tradvioai.com/ai-chart-analyser/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

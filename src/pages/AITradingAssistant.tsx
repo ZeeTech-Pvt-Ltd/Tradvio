@@ -49,7 +49,7 @@ export default function AITradingAssistant() {
         <title>AI Trading Assistant — Your Assistant for Smarter Decisions | Tradvio AI</title>
         <meta name="description" content="Your AI trading assistant for smarter decisions. Automatic chart analysis, AI-powered signals, risk management, and 24/7 monitoring. Free to start." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/ai-trading-assistant/" />
+        <link rel="canonical" href="https://tradvioai.com/ai-trading-assistant/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

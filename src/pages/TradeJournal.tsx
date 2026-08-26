@@ -57,7 +57,7 @@ export default function TradeJournal() {
         <title>Trade Journal — The Journal That Doesn't Just Track. It Improves. | Tradvio AI</title>
         <meta name="description" content="Track every trade with Tradvio AI's journal. Automatic imports, AI insights, tag filters, and emotion tracking. Free to start — no credit card required." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/trade-journal/" />
+        <link rel="canonical" href="https://tradvioai.com/trade-journal/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

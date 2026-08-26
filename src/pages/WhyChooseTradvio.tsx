@@ -64,7 +64,7 @@ export default function WhyChooseTradvio() {
         <title>Why Choose Tradvio AI — A Smarter Alternative | Tradvio AI</title>
         <meta name="description" content="Tradvio vs general trading platforms — AI-assisted analysis, integrated trade planning, and a connected workflow. See why traders choose Tradvio." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/why-choose-tradvio-ai/" />
+        <link rel="canonical" href="https://tradvioai.com/why-choose-tradvio-ai/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

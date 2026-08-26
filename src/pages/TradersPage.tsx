@@ -156,7 +156,7 @@ export default function TradersPage() {
         <title>AI Traders | Tradvio AI</title>
         <meta name="description" content="Browse and discover AI trader agents. Compare performance across markets, strategies, and AI models." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/traders/" />
+        <link rel="canonical" href="https://tradvioai.com/trader/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

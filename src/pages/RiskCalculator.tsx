@@ -61,7 +61,7 @@ export default function RiskCalculator() {
         <title>Risk Calculator — Risk Per Trade & Probability of Ruin | Tradvio AI</title>
         <meta name="description" content="Calculate your risk per trade, see how many consecutive losses it takes to blow your account, and understand the probability of hitting a losing streak." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/risk-calculator/" />
+        <link rel="canonical" href="https://tradvioai.com/risk-calculator/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

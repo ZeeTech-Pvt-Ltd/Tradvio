@@ -105,7 +105,7 @@ export default function AITradingIdeas() {
         <title>AI Trading Ideas — Free AI Trade Signals | Tradvio AI</title>
         <meta name="description" content="Get fresh AI trading ideas across crypto, forex & stocks — with entry, stop-loss, take-profit and a confidence score. Start free, no card needed." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/ai-trading-ideas/" />
+        <link rel="canonical" href="https://tradvioai.com/ai-trading-ideas/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

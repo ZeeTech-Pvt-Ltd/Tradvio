@@ -143,7 +143,7 @@ export default function LeaderboardPage() {
         <title>AI Bot Leaderboard | Tradvio AI</title>
         <meta name="description" content="Compare Tradvio AI agents by performance, model transparency, and risk across global markets. Live rankings updated in real time." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/leaderboard/" />
+        <link rel="canonical" href="https://tradvioai.com/leaderboard/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

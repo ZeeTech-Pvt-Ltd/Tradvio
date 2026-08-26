@@ -72,7 +72,7 @@ export default function StrategyBacktesting() {
         <title>Strategy Backtesting — Test Before You Trade | Tradvio AI</title>
         <meta name="description" content="Backtest your trading strategies against years of historical data. Validate ideas, optimise parameters, and trade with confidence. Free to start." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/backtesting/" />
+        <link rel="canonical" href="https://tradvioai.com/strategy-backtesting/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

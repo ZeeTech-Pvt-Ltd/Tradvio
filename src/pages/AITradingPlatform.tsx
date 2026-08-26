@@ -81,7 +81,7 @@ export default function AITradingPlatform() {
         <title>Tradvio AI — Intelligent Automated Trading</title>
         <meta name="description" content="Tradvio AI powers automated trading across stocks, crypto, forex, commodities, indices, ETFs and CFDs. Join 100,000+ traders in 50+ countries." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/ai-trading-platform/" />
+        <link rel="canonical" href="https://tradvioai.com/ai-trading-platform/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

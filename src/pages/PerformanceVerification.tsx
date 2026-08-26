@@ -70,7 +70,7 @@ export default function PerformanceVerification() {
         <title>AI Trading Verification — How Every Result Is Proven | Tradvio AI</title>
         <meta name="description" content="Every Tradvio AI agent trades real capital, and every trade is logged the moment it opens — then published in full. Winners and losers. See exactly how verification works." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/performance-verification/" />
+        <link rel="canonical" href="https://tradvioai.com/performance-verification/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

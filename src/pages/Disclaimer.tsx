@@ -48,7 +48,7 @@ export default function Disclaimer() {
         <title>Disclaimer | Tradvio AI</title>
         <meta name="description" content="The information provided by Tradvio AI is for general informational and educational purposes only. Read our full disclaimer." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/disclaimer/" />
+        <link rel="canonical" href="https://tradvioai.com/disclaimer/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

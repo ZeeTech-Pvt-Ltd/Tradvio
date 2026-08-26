@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
         <title>Privacy Policy | Tradvio AI</title>
         <meta name="description" content="Read the Tradvio AI privacy policy — how we collect, use, disclose, and protect your personal information." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/privacy-policy/" />
+        <link rel="canonical" href="https://tradvioai.com/privacy-policy/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

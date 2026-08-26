@@ -80,7 +80,7 @@ export default function AIStrategyBuilder() {
         <title>AI Strategy Builder — Build, Backtest & Deploy Trading Strategies | Tradvio AI</title>
         <meta name="description" content="Describe your strategy in plain English. Tradvio AI writes the code, backtests it instantly, and deploys it live. No coding required. Free to start." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/ai-strategy-builder/" />
+        <link rel="canonical" href="https://tradvioai.com/ai-strategy-builder/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

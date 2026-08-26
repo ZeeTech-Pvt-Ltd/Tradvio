@@ -75,7 +75,7 @@ export default function TermsOfService() {
         <title>Terms & Conditions | Tradvio AI</title>
         <meta name="description" content="Read the Tradvio AI terms and conditions — acceptance of terms, risk disclaimer, limitation of liability, and more." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/terms-of-service/" />
+        <link rel="canonical" href="https://tradvioai.com/terms-of-service/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

@@ -20,7 +20,7 @@ const T = window.TraderAI;
     header.innerHTML = `
       <div class="header-inner">
         <a href="/" class="header-logo" aria-label="Trader AI Home">
-          <img src="https://traderai.ai/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="160" height="32">
+          <img src="https://tradvioai.com/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="160" height="32">
         </a>
         <nav class="header-nav" aria-label="Main navigation">
           <div class="nav-dropdown">
@@ -67,7 +67,7 @@ const T = window.TraderAI;
     nav.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg);">
         <a href="/" class="header-logo">
-          <img src="https://traderai.ai/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="128" height="26">
+          <img src="https://tradvioai.com/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="128" height="26">
         </a>
         <button class="mobile-menu-close" aria-label="Close menu" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink);padding:8px;">&times;</button>
       </div>
@@ -140,7 +140,7 @@ const T = window.TraderAI;
         <div class="footer-grid">
           <div class="footer-brand">
             <a href="/" style="display:inline-block;margin-bottom:var(--space-sm);">
-              <img src="https://traderai.ai/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="140" height="28">
+              <img src="https://tradvioai.com/wp-content/uploads/2025/12/Trader-Ai-logo-1.webp" alt="Trader AI" width="140" height="28">
             </a>
             <p>AI-assisted market research and strategy testing for traders who make their own decisions.</p>
           </div>

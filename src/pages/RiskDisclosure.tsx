@@ -62,7 +62,7 @@ export default function RiskDisclosure() {
         <title>Risk Disclosure | Tradvio AI</title>
         <meta name="description" content="Trading involves substantial risk. Read the full Tradvio AI risk disclosure before using the platform." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/risk-disclosure/" />
+        <link rel="canonical" href="https://tradvioai.com/risk-disclosure/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />

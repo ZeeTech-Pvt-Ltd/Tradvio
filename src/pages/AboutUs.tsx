@@ -20,7 +20,7 @@ export default function AboutUs() {
         <title>About Us — Our Mission & Vision | Tradvio AI</title>
         <meta name="description" content="At Tradvio AI, we're on a mission to make advanced artificial intelligence practical, accessible, and transformative for traders and businesses." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://traderai.ai/about-us/" />
+        <link rel="canonical" href="https://tradvioai.com/about-us/" />
       </Helmet>
 
       <Header onMenuToggle={() => setMobileNavOpen(true)} />
