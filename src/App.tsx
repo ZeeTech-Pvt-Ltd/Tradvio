@@ -110,8 +110,8 @@ export default function App() {
     <>
       <Helmet>
         {/* Primary Meta */}
-        <title>Tradvio AI | AI Market Research, Chart Analysis & Strategy Testing</title>
-        <meta name="description" content="AI-assisted market research and strategy testing for traders. Analyse charts, backtest strategies and practise with paper trading. Free to start. No profit guarantees." />
+        <title>Tradvio AI | AI Analyzes the Market So You Trade Better</title>
+        <meta name="description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href="https://tradvioai.com/" />
 
@@ -119,8 +119,8 @@ export default function App() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Tradvio AI" />
         <meta property="og:locale" content="en_GB" />
-        <meta property="og:title" content="Tradvio AI | AI Market Research, Chart Analysis & Strategy Testing" />
-        <meta property="og:description" content="AI-assisted market research and strategy testing. Analyse charts, backtest strategies, practise with paper trading. Free to start." />
+        <meta property="og:title" content="Tradvio AI | AI Analyzes the Market So You Trade Better" />
+        <meta property="og:description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
         <meta property="og:url" content="https://tradvioai.com/" />
         <meta property="og:image" content="https://tradvioai.com/wp-content/uploads/static-home/og-home.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -128,8 +128,8 @@ export default function App() {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tradvio AI | AI Market Research, Chart Analysis & Strategy Testing" />
-        <meta name="twitter:description" content="AI-assisted market research and strategy testing. Free to start." />
+        <meta name="twitter:title" content="Tradvio AI | AI Analyzes the Market So You Trade Better" />
+        <meta name="twitter:description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds." />
 
         {/* hreflang */}
         <link rel="alternate" hrefLang="en-GB" href="https://tradvioai.com/" />
