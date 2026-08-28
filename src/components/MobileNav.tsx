@@ -24,7 +24,7 @@ const SITE_LINKS: { label: string; href: string }[] = [
   { label: 'Traders', href: '/trader/' },
   { label: 'Leaderboard', href: '/leaderboard/' },
   { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
-  { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
+  { label: 'Contact', href: '/contact-us/' },
 ];
 
 const MOBILE_LINK_CLASSES =

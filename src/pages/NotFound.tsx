@@ -33,7 +33,7 @@ export default function NotFound() {
           </div>
 
           <p className="text-xs text-ink-soft mt-8">
-            Need help? <a href="/contact-us-tradvioai-digital-trading/" className="text-accent hover:text-accent-hover">Contact us</a>
+            Need help? <a href="/contact-us/" className="text-accent hover:text-accent-hover">Contact us</a>
           </p>
         </div>
       </div>

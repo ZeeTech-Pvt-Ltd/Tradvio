@@ -131,7 +131,7 @@ export default function AboutUs() {
 
               <div className="flex gap-4 justify-center flex-wrap pt-2">
                 <a href="/get-started/" className="btn btn-primary btn-lg">Start Free</a>
-                <a href="/contact-us-tradvioai-digital-trading/" className="btn btn-secondary btn-lg">Contact Us</a>
+                <a href="/contact-us/" className="btn btn-secondary btn-lg">Contact Us</a>
               </div>
             </div>
           </div>

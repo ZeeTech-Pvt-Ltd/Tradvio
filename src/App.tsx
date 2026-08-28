@@ -82,7 +82,7 @@ const ROUTES: Record<string, React.ComponentType> = {
   '/performance-verification/': PerformanceVerification,
   '/academy/': Academy,
   '/about-us/': AboutUs,
-  '/contact-us-tradvioai-digital-trading/': ContactUs,
+  '/contact-us/': ContactUs,
   '/disclaimer/': Disclaimer,
   '/privacy-policy/': PrivacyPolicy,
   '/terms-of-service/': TermsOfService,

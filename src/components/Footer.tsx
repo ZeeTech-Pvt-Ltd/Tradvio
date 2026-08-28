@@ -13,7 +13,7 @@ const PLATFORM_LINKS: { label: string; href: string }[] = [
 const COMPANY_LINKS: { label: string; href: string }[] = [
   { label: 'About Us', href: '/about-us/' },
   { label: 'Blog', href: '/blog/' },
-  { label: 'Contact', href: '/contact-us-tradvioai-digital-trading/' },
+  { label: 'Contact', href: '/contact-us/' },
 ];
 
 const LEGAL_LINKS: { label: string; href: string }[] = [
