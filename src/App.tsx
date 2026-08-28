@@ -112,6 +112,7 @@ export default function App() {
         {/* Primary Meta */}
         <title>Tradvio AI | AI Analyzes the Market So You Trade Better</title>
         <meta name="description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
+        <meta name="keywords" content="tradvio, tradvio ai, ai trading, ai market analysis, ai chart analysis, ai trading signals, ai strategy builder, backtesting, trading journal, risk calculator" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href="https://tradvioai.com/" />
 
