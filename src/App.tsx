@@ -26,6 +26,7 @@ const ThankYou = lazy(() => import('@/components/ThankYou'));
 const GetStarted = lazy(() => import('@/pages/GetStarted'));
 const LeaderboardPage = lazy(() => import('@/pages/LeaderboardPage'));
 const TradersPage = lazy(() => import('@/pages/TradersPage'));
+const TraderDetail = lazy(() => import('@/pages/TraderDetail'));
 const AITradingPlatform = lazy(() => import('@/pages/AITradingPlatform'));
 const AITradingIdeas = lazy(() => import('@/pages/AITradingIdeas'));
 const StrategyBacktesting = lazy(() => import('@/pages/StrategyBacktesting'));
@@ -93,7 +94,10 @@ const ROUTES: Record<string, React.ComponentType> = {
 
 export default function App() {
   if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-    const Page = ROUTES[window.location.pathname] ?? NotFound;
+    const path = window.location.pathname;
+    // Dynamic trader detail pages: /trader/:slug/
+    const isTraderDetail = path.startsWith('/trader/') && path !== '/trader/';
+    const Page = isTraderDetail ? TraderDetail : ROUTES[path] ?? NotFound;
     return (
       <Suspense fallback={<PageLoader />}>
         <Page />
