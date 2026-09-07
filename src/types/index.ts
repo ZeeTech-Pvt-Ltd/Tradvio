@@ -21,8 +21,8 @@ export interface PlatformTool {
   title: string;
   description: string;
   warning: string;
-  href: string;
-  linkLabel: string;
+  href?: string;
+  linkLabel?: string;
 }
 
 export interface TrustItem {

@@ -3,6 +3,8 @@
  * Chart Analysis → AI Scanning → Signal Generation → Trade Execution
  * Pure CSS/SVG animation, no external dependencies.
  */
+import { useLanguage } from '@/lib/i18n';
+
 export default function PlatformDemo() {
   const { t } = useLanguage();
   return (
@@ -186,6 +188,7 @@ function WorkflowStep({
 
 /* ─── Step 1: Chart Analysis Panel ─── */
 function ChartAnalysisPanel() {
+  const { t } = useLanguage();
   return (
     <div className="bg-[#060606] rounded-md p-2 border border-[#1A1A1A] overflow-hidden">
       <div className="flex items-center gap-4 mb-2">
@@ -311,6 +314,7 @@ function ChartAnalysisPanel() {
 
 /* ─── Step 2: AI Scanning Panel ─── */
 function AIScanningPanel() {
+  const { t } = useLanguage();
   const indicators = [
     { label: 'Trend', value: 'Bullish', color: 'text-success' },
     { label: 'Momentum', value: 'Strong', color: 'text-success' },
@@ -386,6 +390,7 @@ function AIScanningPanel() {
 
 /* ─── Step 3: Signal Panel ─── */
 function SignalPanel() {
+  const { t } = useLanguage();
   return (
     <div className="bg-[#060606] rounded-md p-3 border border-success/20">
       <div className="flex items-center justify-between mb-2">
@@ -440,6 +445,7 @@ function SignalPanel() {
 
 /* ─── Step 4: Execution Panel ─── */
 function ExecutionPanel() {
+  const { t } = useLanguage();
   return (
     <div className="bg-[#060606] rounded-md p-3 border border-success/30">
       <div className="flex items-center justify-between">

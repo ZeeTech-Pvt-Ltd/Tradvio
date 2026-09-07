@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Hero from '@/components/Hero';
 import LazySection from '@/components/LazySection';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import Leaderboard from '@/components/Leaderboard';
 import TrustBar from '@/components/TrustBar';
 import TradingPerformance from '@/components/TradingPerformance';
@@ -64,7 +65,7 @@ import { faqs, howToSteps, platformTools } from '@/lib/data';
 const structuredData = generateAllStructuredData(
   faqs,
   howToSteps,
-  platformTools.map((t) => ({ name: t.title, description: t.description, url: t.href }))
+  platformTools.map((t) => ({ name: t.title, description: t.description, url: t.href ?? '/' }))
 );
 
 const ROUTES: Record<string, React.ComponentType> = {
@@ -173,18 +174,18 @@ export default function App() {
         <Leaderboard />
         <TrustBar />
         {/* Below-fold sections render lazily — keeps first paint and LCP fast */}
-        <LazySection minHeight="700px"><TradingPerformance /></LazySection>
-        <LazySection minHeight="600px"><PlatformTools /></LazySection>
-        <LazySection minHeight="900px"><HowItWorks /></LazySection>
-        <LazySection minHeight="600px"><PerformanceFeatures /></LazySection>
-        <LazySection minHeight="700px"><WhyTradvioAI /></LazySection>
-        <LazySection minHeight="600px"><CanCannot /></LazySection>
-        <LazySection minHeight="600px"><DataTransparency /></LazySection>
-        <LazySection minHeight="600px"><TrustCentrePreview /></LazySection>
-        <LazySection minHeight="400px"><MarketInsights /></LazySection>
-        <LazySection minHeight="600px"><Testimonials /></LazySection>
-        <LazySection minHeight="400px"><MarketStats /></LazySection>
-        <LazySection minHeight="500px"><FAQ /></LazySection>
+        <ErrorBoundary><LazySection minHeight="700px"><TradingPerformance /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><PlatformTools /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="900px"><HowItWorks /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><PerformanceFeatures /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="700px"><WhyTradvioAI /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><CanCannot /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><DataTransparency /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><TrustCentrePreview /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="400px"><MarketInsights /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="600px"><Testimonials /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="400px"><MarketStats /></LazySection></ErrorBoundary>
+        <ErrorBoundary><LazySection minHeight="500px"><FAQ /></LazySection></ErrorBoundary>
       </main>
 
       <Footer />
