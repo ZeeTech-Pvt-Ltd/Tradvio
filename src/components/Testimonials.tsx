@@ -57,8 +57,8 @@ export default function Testimonials() {
             <span className="text-sm font-bold text-ink">4.7</span>
             <span className="text-xs text-ink-soft">· Based on 200+ reviews</span>
           </div>
-          <h2>{t('test.title')}</h2>
-          <p>{t('test.sub')}</p>
+          <h2>{tLang('test.title')}</h2>
+          <p>{tLang('test.sub')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
