@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type FormEvent } from 'react';
 import { cn, uid, getUTMParams, now } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 import type { LeadFormOptions } from '@/types';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
@@ -33,7 +34,7 @@ const PREFERRED_COUNTRIES = ['gb', 'us', 'ca', 'au', 'de', 'fr', 'es', 'it'];
  *   0 = TOO_SHORT, 1 = TOO_LONG, 2 = INVALID_COUNTRY_CODE,
  *   3 = INVALID_LENGTH, 4 = NOT_A_NUMBER
  */
-function getPhoneValidationMessage(code: number): string | undefined {
+function getPhoneValidationMessage(code: number, t: (key: string) => string): string | undefined {
   switch (code) {
     case 0:
       return 'Phone number is too short for this country.';
@@ -44,9 +45,9 @@ function getPhoneValidationMessage(code: number): string | undefined {
     case 3:
       return 'Phone number length is invalid for this country.';
     case 4:
-      return 'Please enter a valid phone number.';
+      return t('lf.errPhoneShort');
     default:
-      return 'Please enter a valid phone number.';
+      return t('lf.errPhoneShort');
   }
 }
 
@@ -131,6 +132,7 @@ export default function LeadForm({
   successTitle = 'Check Your Inbox',
   successMessage = "We've sent your access details. Start with paper trading — no real money needed.",
 }: LeadFormOptions) {
+  const { t } = useLanguage();
   const formId = uid('lead');
 
   const [firstName, setFirstName] = useState('');
@@ -210,30 +212,30 @@ export default function LeadForm({
 
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
-    if (!firstName.trim()) errs.first_name = 'Please enter your first name.';
-    if (!lastName.trim()) errs.last_name = 'Please enter your last name.';
+    if (!firstName.trim()) errs.first_name = t('lf.errFirstName');
+    if (!lastName.trim()) errs.last_name = t('lf.errLastName');
     if (!email.trim()) {
-      errs.email = 'Please enter a valid email address.';
+      errs.email = t('lf.errEmail');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      errs.email = 'Please enter a valid email address.';
+      errs.email = t('lf.errEmail');
     }
-    // Validate phone — use intl-tel-input's isValidNumber when available
-    if (phone.trim()) {
-      if (itiRef.current) {
-        // Use ITI's built-in validation (checks length & format per country)
-        if (!itiRef.current.isValidNumber()) {
-          const errCode = itiRef.current.getValidationError();
-          const phoneErr = getPhoneValidationMessage(errCode);
-          if (phoneErr) errs.phone = phoneErr;
-        }
-      } else {
-        // Fallback: basic check before ITI loads
-        if (phone.length < 6) {
-          errs.phone = 'Please enter a valid phone number.';
-        }
+    // Validate phone — required field, using intl-tel-input's isValidNumber when available
+    if (!phone.trim()) {
+      errs.phone = t('lf.errPhoneShort');
+    } else if (itiRef.current) {
+      // Use ITI's built-in validation (checks length & format per country)
+      if (!itiRef.current.isValidNumber()) {
+        const errCode = itiRef.current.getValidationError();
+        const phoneErr = getPhoneValidationMessage(errCode, t);
+        if (phoneErr) errs.phone = phoneErr;
+      }
+    } else {
+      // Fallback: basic check before ITI loads
+      if (phone.length < 6) {
+        errs.phone = t('lf.errPhoneShort');
       }
     }
-    if (!privacy) errs.privacy = 'You must agree to continue.';
+    if (!privacy) errs.privacy = t('lf.errPrivacy');
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -314,7 +316,7 @@ export default function LeadForm({
       // Redirect to thank-you page
       window.location.href = '/thank-you/';
     } catch (err) {
-      setServerError('Something went wrong. Please try again or contact support.');
+      setServerError(t('lf.serverError'));
       setFormState('error');
       console.error('Lead form error:', err);
     }
@@ -337,9 +339,7 @@ export default function LeadForm({
         {/* First Name + Last Name row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="form-group">
-            <label className="form-label" htmlFor={`${formId}-first_name`}>
-              First Name <span className="form-required">*</span>
-            </label>
+            <label className="form-label" htmlFor={`${formId}-first_name`}>{t('lf.firstName')} <span className="form-required">*</span></label>
             <input
               className={cn('form-input', fieldError('first_name') && 'error')}
               type="text"
@@ -363,9 +363,7 @@ export default function LeadForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor={`${formId}-last_name`}>
-              Last Name <span className="form-required">*</span>
-            </label>
+            <label className="form-label" htmlFor={`${formId}-last_name`}>{t('lf.lastName')} <span className="form-required">*</span></label>
             <input
               className={cn('form-input', fieldError('last_name') && 'error')}
               type="text"
@@ -391,9 +389,7 @@ export default function LeadForm({
 
         {/* Email */}
         <div className="form-group">
-          <label className="form-label" htmlFor={`${formId}-email`}>
-            Email Address <span className="form-required">*</span>
-          </label>
+          <label className="form-label" htmlFor={`${formId}-email`}>{t('lf.email')} <span className="form-required">*</span></label>
           <input
             className={cn('form-input', fieldError('email') && 'error')}
             type="email"
@@ -409,7 +405,7 @@ export default function LeadForm({
             }}
             onBlur={() => {
               if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-                setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address.' }));
+                setErrors((prev) => ({ ...prev, email: t('lf.errEmail') }));
               }
             }}
           />
@@ -418,17 +414,16 @@ export default function LeadForm({
           )}
         </div>
 
-        {/* Phone (optional) */}
+        {/* Phone (required) */}
         <div className="form-group">
-          <label className="form-label" htmlFor={`${formId}-phone`}>
-            Phone Number <span className="text-ink-soft font-normal">(optional)</span>
-          </label>
+          <label className="form-label" htmlFor={`${formId}-phone`}>{t('lf.phone')} <span className="form-required">*</span></label>
           <input
             ref={phoneInputRef}
             className={cn('form-input', fieldError('phone') && 'error')}
             type="tel"
             id={`${formId}-phone`}
             name="phone"
+            required
             autoComplete="tel"
             value={phone}
             onChange={handlePhoneChange}
@@ -437,7 +432,7 @@ export default function LeadForm({
             <span className="form-error visible">{fieldError('phone')}</span>
           )}
           {!itiReady && (
-            <p className="text-xs text-ink-soft mt-1">Loading country picker…</p>
+            <p className="text-xs text-ink-soft mt-1">{t('lf.loadingCountry')}</p>
           )}
         </div>
 
@@ -464,11 +459,11 @@ export default function LeadForm({
               }}
             />
             <label htmlFor={`${formId}-privacy`}>
-              I agree to the{' '}
+              {t('lf.privacy')}{' '}
               <a href="/privacy-policy/" target="_blank" rel="noopener" className="text-accent hover:text-accent-hover underline underline-offset-2">
                 Privacy Policy
               </a>{' '}
-              and understand that AI analysis can be incorrect and trading involves risk.{' '}
+              {t('lf.privacy3')}{' '}
               <span className="form-required">*</span>
             </label>
           </div>
@@ -486,7 +481,7 @@ export default function LeadForm({
           className={cn('btn btn-primary btn-lg w-full', formState === 'submitting' && 'btn-loading')}
           aria-busy={formState === 'submitting'}
         >
-          {formState === 'submitting' ? 'Submitting...' : ctaText}
+          {formState === 'submitting' ? t('lf.submitting') : ctaText}
         </button>
       </form>
 

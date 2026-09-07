@@ -4,9 +4,11 @@ import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
+import { useLanguage } from '@/lib/i18n';
 
 export default function GetStarted() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <>
@@ -25,9 +27,9 @@ export default function GetStarted() {
           <div className="w-full max-w-md">
             <LeadForm
               formName="homepage_lead"
-              title="Start Analysing — Free"
-              subtitle="No credit card. No deposit required."
-              ctaText="Start Free Access"
+              title={t('gs.title')}
+              subtitle={t('gs.subtitle')}
+              ctaText={t('gs.cta')}
               sourcePage="/get-started/"
             />
           </div>

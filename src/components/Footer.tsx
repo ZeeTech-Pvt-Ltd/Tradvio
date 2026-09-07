@@ -53,10 +53,10 @@ export default function Footer() {
               {t('footer.products')}
             </h3>
             <ul className="space-y-2.5">
-              {PLATFORM_LINKS.map((item) => (
+              {PLATFORM_LINKS.map((item, pi) => (
                 <li key={item.href}>
                   <a href={item.href} className={FOOTER_LINK_CLASSES}>
-                    {item.label}
+                    {t('fl.t' + (pi + 1))}
                   </a>
                 </li>
               ))}
@@ -69,10 +69,10 @@ export default function Footer() {
               {t('footer.company')}
             </h3>
             <ul className="space-y-2.5">
-              {COMPANY_LINKS.map((item) => (
+              {COMPANY_LINKS.map((item, ci) => (
                 <li key={item.href}>
                   <a href={item.href} className={FOOTER_LINK_CLASSES}>
-                    {item.label}
+                    {t('fl.c' + (ci + 1))}
                   </a>
                 </li>
               ))}
@@ -85,10 +85,10 @@ export default function Footer() {
               {t('footer.legal')}
             </h3>
             <ul className="space-y-2.5">
-              {LEGAL_LINKS.map((item) => (
+              {LEGAL_LINKS.map((item, li) => (
                 <li key={item.href}>
                   <a href={item.href} className={FOOTER_LINK_CLASSES}>
-                    {item.label}
+                    {t('fl.l' + (li + 1))}
                   </a>
                 </li>
               ))}
@@ -99,27 +99,16 @@ export default function Footer() {
         {/* Risk disclosure */}
         <div className="mt-12 border-t border-border p-4 text-xs leading-relaxed text-ink-soft">
           <p className="text-ink-soft">
-            HIGH RISK WARNING: Trading foreign exchange, cryptocurrencies, contracts for
-            differences (CFDs), and other financial instruments carries a high level of risk and
-            may not be suitable for all investors. The high degree of leverage can work against you
-            as well as for you. Before deciding to trade, you should carefully consider your
-            investment objectives, level of experience, and risk appetite. You could sustain a loss
-            of some or all of your initial investment and should not invest money you cannot afford
-            to lose. You should be aware of all the risks associated with trading and seek advice
-            from an independent financial advisor if you have any doubts.
+            {t('footer.risk1')}
           </p>
           <p className="mt-3 text-ink-soft">
-            Important: Tradvio AI is a market research and analysis platform. We are not a
-            brokerage, financial advisor, or investment service. AI-generated analysis can be
-            incorrect. Past performance, backtests, and simulations do not guarantee future
-            results. All data on this platform is clearly labelled as Live, Delayed, Backtested,
-            or Illustrative. Verify before acting on any information.
+            {t('footer.risk2')}
           </p>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border py-4 text-xs">
-          <p className="text-ink-soft">&copy; {currentYear} Tradvio AI. All rights reserved.</p>
+          <p className="text-ink-soft">&copy; {currentYear} Tradvio AI. {t('footer.rights')}</p>
         </div>
       </div>
     </footer>
