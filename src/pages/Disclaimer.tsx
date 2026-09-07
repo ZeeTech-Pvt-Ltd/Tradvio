@@ -5,38 +5,42 @@ import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/lib/i18n';
 
-const sections = [
+const sections: { num: string; title: string; body: string; bullets?: string[] }[] = [
   {
-    title: '1. No Financial Advice',
-    body: 'All content on this website — including articles, videos, analysis, charts, indicators, signals, tools, and educational materials — is provided for general informational purposes only. Nothing on this site constitutes financial, investment, legal, tax, or professional advice, and nothing should be read as a recommendation or solicitation to trade any financial instrument.',
+    num: '1',
+    title: 'ds.s1t',
+    body: 'ds.s1b',
   },
   {
-    title: '2. Risk Acknowledgment',
-    body: 'Trading in foreign exchange, contracts for difference (CFDs), cryptocurrencies, stocks, indices, and derivatives involves substantial risk and may not be suitable for many people. Market conditions change rapidly, losses can exceed initial investments, and past performance does not guarantee future results. You should carefully consider your objectives, experience, and risk appetite before trading.',
+    num: '2',
+    title: 'ds.s2t',
+    body: 'ds.s2b',
   },
   {
-    title: '3. No Liability',
-    body: 'Tradvio AI makes no warranties regarding the accuracy or reliability of any content on this site.',
-    bullets: [
-      'Tradvio AI and its owners, employees, contractors, officers, and partners are not liable for any losses arising from the use of this site.',
-      'Users accept full responsibility for their own trading decisions and outcomes.',
-    ],
+    num: '3',
+    title: 'ds.s3t',
+    body: 'ds.s3b',
+    bullets: ['ds.s3b1', 'ds.s3b2'],
   },
   {
-    title: '4. Independent Verification',
-    body: 'You are responsible for verifying any information before acting on it. Where appropriate, consult a licensed financial advisor, tax professional, or legal expert before making trading or investment decisions.',
+    num: '4',
+    title: 'ds.s4t',
+    body: 'ds.s4b',
   },
   {
-    title: '5. No Guarantees',
-    body: 'We do not guarantee profits, data accuracy, completeness, or uninterrupted access to the site. Technical issues, errors, omissions, delays, or outdated information may occur.',
+    num: '5',
+    title: 'ds.s5t',
+    body: 'ds.s5b',
   },
   {
-    title: '6. External Links',
-    body: 'Links to third-party websites are provided for convenience only. Tradvio AI does not control, endorse, or take responsibility for the content, accuracy, security, or practices of any external site.',
+    num: '6',
+    title: 'ds.s6t',
+    body: 'ds.s6b',
   },
   {
-    title: '7. Your Responsibility',
-    body: 'By using this site, you acknowledge that all investment decisions are made at your own risk and you expressly release Tradvio AI from liability for any losses or damages arising from your use of the information provided.',
+    num: '7',
+    title: 'ds.s7t',
+    body: 'ds.s7b',
   },
 ];
 
@@ -61,11 +65,10 @@ export default function Disclaimer() {
         <section className="relative py-16 md:py-20 bg-deep overflow-hidden">
           <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
             <h1 className="text-[clamp(2.4rem,5vw,4.2rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-6">
-              Disclaimer
+              {t('ds.hero')}
             </h1>
             <p className="text-lg text-muted-dark leading-relaxed">
-              The information provided by Tradvio AI and its affiliates is for general
-              informational and educational purposes only.
+              {t('ds.sub')}
             </p>
           </div>
         </section>
@@ -75,18 +78,18 @@ export default function Disclaimer() {
           <div className="max-w-3xl mx-auto px-6">
             <div className="space-y-10">
               {sections.map((s) => (
-                <div key={s.title}>
+                <div key={s.num}>
                   <h2 className="text-lg font-bold text-ink mb-2">
-                    <span className="font-mono text-accent mr-3">{s.title.split('.')[0]}</span>
-                    {s.title.replace(/^\d+\.\s*/, '')}
+                    <span className="font-mono text-accent mr-3">{s.num}</span>
+                    {t(s.title)}
                   </h2>
-                  <p className="text-[15px] text-muted-dark leading-relaxed mb-2">{s.body}</p>
+                  <p className="text-[15px] text-muted-dark leading-relaxed mb-2">{t(s.body)}</p>
                   {s.bullets && (
                     <ul className="space-y-2 pl-4">
                       {s.bullets.map((b) => (
                         <li key={b} className="flex gap-2.5 items-start text-[15px] text-muted-dark leading-relaxed">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                          {b}
+                          {t(b)}
                         </li>
                       ))}
                     </ul>
@@ -95,7 +98,7 @@ export default function Disclaimer() {
               ))}
 
               <p className="text-xs text-ink-soft text-center">
-                Updated: August 2026
+                {t('ds.updated')}
               </p>
             </div>
           </div>

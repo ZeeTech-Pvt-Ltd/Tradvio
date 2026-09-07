@@ -5,65 +5,58 @@ import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/lib/i18n';
 
-const sections = [
+const sections: { num: string; title: string; body?: string; bullets?: string[] }[] = [
   {
-    title: '1. Acceptance of Terms',
-    body: 'Welcome to Tradvio AI. By accessing this site, you confirm that you have read, understood, and agreed to be bound by these terms and our Privacy Policy. These terms apply to all visitors and users. If you do not agree, please stop using the site immediately.',
+    num: '1',
+    title: 'ts.s1t',
+    body: 'ts.s1b',
   },
   {
-    title: '2. Use of the Website',
-    bullets: [
-      'You must be at least 18 years old, or the age of majority in your jurisdiction.',
-      'You agree to use the site lawfully and in compliance with all applicable laws.',
-      'You must not take any action that could damage, disable, or impair the website.',
-    ],
+    num: '2',
+    title: 'ts.s2t',
+    bullets: ['ts.s2b1', 'ts.s2b2', 'ts.s2b3'],
   },
   {
-    title: '3. Risk Disclaimer',
-    body: 'Trading in financial markets involves significant risk.',
-    bullets: [
-      'Content on this site is informational and educational only — not financial or investment advice.',
-      'We make no guarantee of profits or specific outcomes.',
-      'You are solely responsible for your own trading decisions.',
-      'We recommend consulting a licensed financial advisor before investing.',
-    ],
+    num: '3',
+    title: 'ts.s3t',
+    body: 'ts.s3b',
+    bullets: ['ts.s3b1', 'ts.s3b2', 'ts.s3b3', 'ts.s3b4'],
   },
   {
-    title: '4. Limitation of Liability',
-    body: 'To the fullest extent permitted by law:',
-    bullets: [
-      'Tradvio AI is not liable for direct, indirect, incidental, or consequential damages arising from your use of the site.',
-      'We are not responsible for errors, interruptions, or inaccuracies in content.',
-      'Your sole remedy is to stop using the website.',
-    ],
+    num: '4',
+    title: 'ts.s4t',
+    body: 'ts.s4b',
+    bullets: ['ts.s4b1', 'ts.s4b2', 'ts.s4b3'],
   },
   {
-    title: '5. Third-Party Links',
-    body: 'Our site may link to external websites. Tradvio AI does not control and is not responsible for their content or policies — please review those sites’ own terms before using them.',
+    num: '5',
+    title: 'ts.s5t',
+    body: 'ts.s5b',
   },
   {
-    title: '6. Account Responsibility',
-    bullets: [
-      'You must maintain the confidentiality of your login credentials.',
-      'You accept responsibility for all activity on your account.',
-      'We reserve the right to terminate accounts or deny access at our discretion.',
-    ],
+    num: '6',
+    title: 'ts.s6t',
+    bullets: ['ts.s6b1', 'ts.s6b2', 'ts.s6b3'],
   },
   {
-    title: '7. Termination',
-    body: 'Access may be suspended or terminated without prior notice for violating these terms or engaging in unlawful or fraudulent activity.',
+    num: '7',
+    title: 'ts.s7t',
+    body: 'ts.s7b',
   },
   {
-    title: '8. Changes to the Terms',
-    body: 'We may revise these terms at any time. Changes take effect immediately upon posting on this page. Continued use of the site constitutes acceptance of the updated terms.',
+    num: '8',
+    title: 'ts.s8t',
+    body: 'ts.s8b',
   },
   {
-    title: '9. Governing Law',
-    body: 'These terms are governed by the laws of the jurisdiction where Tradvio AI operates, and any disputes shall be submitted to the exclusive courts of that jurisdiction.',
+    num: '9',
+    title: 'ts.s9t',
+    body: 'ts.s9b',
   },
   {
-    title: '10. Contact Us',
-    body: 'Questions about these terms? Reach us at support@tradvioai.com or via tradvioai.com.',
+    num: '10',
+    title: 'ts.s10t',
+    body: 'ts.s10b',
   },
 ];
 
@@ -88,11 +81,10 @@ export default function TermsOfService() {
         <section className="relative py-16 md:py-20 bg-deep overflow-hidden">
           <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
             <h1 className="text-[clamp(2.4rem,5vw,4.2rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-6">
-              Terms &amp; <span className="text-accent">Conditions</span>
+              {t('ts.hero1')} <span className="text-accent">{t('ts.hero2')}</span>
             </h1>
             <p className="text-lg text-muted-dark leading-relaxed">
-              By accessing this site, you agree to these terms. If you do not agree,
-              please stop using the site immediately.
+              {t('ts.sub')}
             </p>
           </div>
         </section>
@@ -102,18 +94,18 @@ export default function TermsOfService() {
           <div className="max-w-3xl mx-auto px-6">
             <div className="space-y-10">
               {sections.map((s) => (
-                <div key={s.title}>
+                <div key={s.num}>
                   <h2 className="text-lg font-bold text-ink mb-2">
-                    <span className="font-mono text-accent mr-3">{s.title.split('.')[0]}</span>
-                    {s.title.replace(/^\d+\.\s*/, '')}
+                    <span className="font-mono text-accent mr-3">{s.num}</span>
+                    {t(s.title)}
                   </h2>
-                  {s.body && <p className="text-[15px] text-muted-dark leading-relaxed mb-2">{s.body}</p>}
+                  {s.body && <p className="text-[15px] text-muted-dark leading-relaxed mb-2">{t(s.body)}</p>}
                   {s.bullets && (
                     <ul className="space-y-2 pl-4">
                       {s.bullets.map((b) => (
                         <li key={b} className="flex gap-2.5 items-start text-[15px] text-muted-dark leading-relaxed">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                          {b}
+                          {t(b)}
                         </li>
                       ))}
                     </ul>
@@ -122,7 +114,7 @@ export default function TermsOfService() {
               ))}
 
               <p className="text-xs text-ink-soft text-center">
-                Last updated: August 2026
+                {t('ts.updated')}
               </p>
             </div>
           </div>
