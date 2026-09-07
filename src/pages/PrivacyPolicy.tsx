@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const sections = [
   {
@@ -68,12 +69,13 @@ const sections = [
 ];
 
 export default function PrivacyPolicy() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | Tradvio AI</title>
+        <title>{t('meta.privacy')}</title>
         <meta name="description" content="Read the Tradvio AI privacy policy — how we collect, use, disclose, and protect your personal information." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/privacy-policy/" />

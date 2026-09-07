@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const tickerData = [
   { sym: 'BTC', name: 'Bitcoin', price: '$67,420' },
@@ -97,12 +98,13 @@ function IdeaCard({ variant = 'hero' }: { variant?: 'hero' | 'anatomy' }) {
 }
 
 export default function AITradingIdeas() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>AI Trading Ideas — Free AI Trade Signals | Tradvio AI</title>
+        <title>{t('meta.ideas')}</title>
         <meta name="description" content="Get fresh AI trading ideas across crypto, forex & stocks — with entry, stop-loss, take-profit and a confidence score. Start free, no card needed." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-trading-ideas/" />

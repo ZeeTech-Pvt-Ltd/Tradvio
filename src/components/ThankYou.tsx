@@ -1,4 +1,7 @@
+import { useLanguage } from '@/lib/i18n';
+
 export default function ThankYou() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-deep flex items-center justify-center px-4">
       <div className="max-w-lg w-full text-center">

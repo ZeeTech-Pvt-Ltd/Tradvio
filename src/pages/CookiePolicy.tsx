@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const sections = [
   {
@@ -49,12 +50,13 @@ const sections = [
 ];
 
 export default function CookiePolicy() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Cookie Policy | Tradvio AI</title>
+        <title>{t('meta.cookies')}</title>
         <meta name="description" content="Read the Tradvio AI cookie policy — what cookies are, how we use them, and how to manage your preferences." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/cookie-policy/" />

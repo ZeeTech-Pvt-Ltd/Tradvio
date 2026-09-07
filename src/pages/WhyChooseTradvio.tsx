@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const comparison = [
   { feature: 'AI-assisted market analysis', tradvio: '✓', general: 'Limited / Separate' },
@@ -56,12 +57,13 @@ const whyChoose = [
 ];
 
 export default function WhyChooseTradvio() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Why Choose Tradvio AI — A Smarter Alternative | Tradvio AI</title>
+        <title>{t('meta.why')}</title>
         <meta name="description" content="Tradvio vs general trading platforms — AI-assisted analysis, integrated trade planning, and a connected workflow. See why traders choose Tradvio." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/why-choose-tradvio-ai/" />

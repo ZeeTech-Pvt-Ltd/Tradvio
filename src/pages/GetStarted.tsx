@@ -13,7 +13,7 @@ export default function GetStarted() {
   return (
     <>
       <Helmet>
-        <title>Get Started — Free | Tradvio AI</title>
+        <title>{t('meta.getstarted')}</title>
         <meta name="description" content="Create free access to Tradvio AI. Explore AI chart analysis, strategy backtesting and paper trading. No credit card required." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/get-started/" />

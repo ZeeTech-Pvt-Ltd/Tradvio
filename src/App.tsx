@@ -21,6 +21,7 @@ import MarketStats from '@/components/MarketStats';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
+import { useLanguage, resolvePath } from '@/lib/i18n';
 
 // Lazy-loaded standalone pages — keeps the initial bundle small.
 const ThankYou = lazy(() => import('@/components/ThankYou'));
@@ -94,8 +95,10 @@ const ROUTES: Record<string, React.ComponentType> = {
 };
 
 export default function App() {
+  const { lang, t } = useLanguage();
   if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-    const path = window.location.pathname;
+    // Resolve localized slugs (e.g. /chi-siamo/ → /about-us/) before routing.
+    const path = resolvePath(window.location.pathname, lang);
     // Dynamic trader detail pages: /trader/:slug/
     const isTraderDetail = path.startsWith('/trader/') && path !== '/trader/';
     const Page = isTraderDetail ? TraderDetail : ROUTES[path] ?? NotFound;
@@ -111,7 +114,7 @@ export default function App() {
     <>
       <Helmet>
         {/* Primary Meta */}
-        <title>Tradvio AI | AI Analyzes the Market So You Trade Better</title>
+        <title>{t('meta.home')}</title>
         <meta name="description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
         <meta name="keywords" content="tradvio, tradvio ai, ai trading, ai market analysis, ai chart analysis, ai trading signals, ai strategy builder, backtesting, trading journal, risk calculator" />
         <meta name="robots" content="index, follow, max-image-preview:large" />

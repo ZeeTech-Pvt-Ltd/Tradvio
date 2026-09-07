@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const faqItems = [
   { q: 'How many consecutive losses does it take to blow an account?', a: 'It depends on how much you risk per trade. Risking 1% per trade means you would need about 100 consecutive losses to completely blow the account. Risking 4% means about 25 consecutive losses. Risking 10% means just 10 straight losses. The more you risk, the fewer losses it takes to wipe you out.' },
@@ -23,6 +24,7 @@ function riskLevel(pct: number): { label: string; hex: string } {
 }
 
 export default function RiskCalculator() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [accountSize, setAccountSize] = useState('10000');
   const [riskPerTrade, setRiskPerTrade] = useState('400');
@@ -58,7 +60,7 @@ export default function RiskCalculator() {
   return (
     <>
       <Helmet>
-        <title>Risk Calculator — Risk Per Trade & Probability of Ruin | Tradvio AI</title>
+        <title>{t('meta.riskcalc')}</title>
         <meta name="description" content="Calculate your risk per trade, see how many consecutive losses it takes to blow your account, and understand the probability of hitting a losing streak." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/risk-calculator/" />

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const verificationSteps = [
   'Real capital only. Demo and backtested accounts are never ranked.',
@@ -62,12 +63,13 @@ const faqs = [
 ];
 
 export default function PerformanceVerification() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>AI Trading Verification — How Every Result Is Proven | Tradvio AI</title>
+        <title>{t('meta.verify')}</title>
         <meta name="description" content="Every Tradvio AI agent trades real capital, and every trade is logged the moment it opens — then published in full. Winners and losers. See exactly how verification works." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/performance-verification/" />

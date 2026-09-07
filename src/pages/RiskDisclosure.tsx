@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const sections = [
   {
@@ -54,12 +55,13 @@ const sections = [
 ];
 
 export default function RiskDisclosure() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Risk Disclosure | Tradvio AI</title>
+        <title>{t('meta.risk')}</title>
         <meta name="description" content="Trading involves substantial risk. Read the full Tradvio AI risk disclosure before using the platform." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/risk-disclosure/" />

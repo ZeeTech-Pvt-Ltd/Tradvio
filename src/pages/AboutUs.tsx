@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const visionPoints = [
   { title: 'Partners in your journey', desc: 'We work closely with every client — collaboration is how great results happen.', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> },
@@ -12,12 +13,13 @@ const visionPoints = [
 ];
 
 export default function AboutUs() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>About Us — Our Mission & Vision | Tradvio AI</title>
+        <title>{t('meta.about')}</title>
         <meta name="description" content="At Tradvio AI, we're on a mission to make advanced artificial intelligence practical, accessible, and transformative for traders and businesses." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/about-us/" />
@@ -33,10 +35,10 @@ export default function AboutUs() {
           <div className="max-w-3xl mx-auto px-6 relative z-10">
             <div className="text-center">
               <h1 className="text-[clamp(2.6rem,5.5vw,4.8rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-8">
-                About <span className="text-accent">Us</span>
+                {t('au.title1')} <span className="text-accent">{t('au.title2')}</span>
               </h1>
               <p className="text-lg text-muted-dark leading-relaxed max-w-2xl mx-auto mb-10">
-                At Tradvio AI, we&rsquo;re on a mission to make advanced artificial intelligence practical, accessible, and transformative. Trading is complex, data-heavy, and unforgiving of emotion — so we built a platform that gives every trader the analytical power once reserved for institutional desks.
+                {t('au.hero')}
               </p>
             </div>
 
@@ -53,9 +55,9 @@ export default function AboutUs() {
               </div>
               <div className="grid sm:grid-cols-3 gap-px bg-border">
                 {[
-                  { value: '100,000+', label: 'Traders worldwide' },
-                  { value: '50+', label: 'Countries supported' },
-                  { value: '7', label: 'Asset classes covered' },
+                  { value: '100,000+', label: t('au.stat1') },
+                  { value: '50+', label: t('au.stat2') },
+                  { value: '7', label: t('au.stat3') },
                 ].map((s) => (
                   <div key={s.label} className="bg-deep py-8 px-4 text-center">
                     <div className="text-3xl font-bold text-accent">{s.value}</div>
@@ -71,24 +73,24 @@ export default function AboutUs() {
         <section className="py-24 bg-navy border-y border-border">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-14">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Our Vision</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('au.vision')}</div>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-4">
-                A future where AI<br />
-                <span className="text-ink-soft font-light italic">empowers every decision.</span>
+                {t('au.visionH1')}<br />
+                <span className="text-ink-soft font-light italic">{t('au.visionH2')}</span>
               </h2>
               <p className="text-muted-dark max-w-2xl mx-auto leading-relaxed">
-                We imagine a world where artificial intelligence empowers individuals and businesses — not by taking control, but by making informed decisions possible for everyone.
+                {t('au.visionBody')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {visionPoints.map((v) => (
-                <div key={v.title} className="bg-deep border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
+              {visionPoints.map((v, vi) => (
+                <div key={t('au.v' + (vi + 1) + 't')} className="bg-deep border border-border rounded-xl p-6 hover:border-accent/30 transition-colors">
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4 text-accent">
                     {v.icon}
                   </div>
-                  <h3 className="font-semibold text-ink mb-2">{v.title}</h3>
-                  <p className="text-sm text-muted-dark leading-relaxed">{v.desc}</p>
+                  <h3 className="font-semibold text-ink mb-2">{t('au.v' + (vi + 1) + 't')}</h3>
+                  <p className="text-sm text-muted-dark leading-relaxed">{t('au.v' + (vi + 1) + 'd')}</p>
                 </div>
               ))}
             </div>
@@ -99,16 +101,16 @@ export default function AboutUs() {
         <section className="py-24 bg-deep">
           <div className="max-w-3xl mx-auto px-6">
             <div className="text-center mb-14">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Our Story</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('au.story')}</div>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">
-                Join us on<br />
-                <span className="text-ink-soft font-light italic">the journey.</span>
+                {t('au.storyH1')}<br />
+                <span className="text-ink-soft font-light italic">{t('au.storyH2')}</span>
               </h2>
             </div>
 
             <div className="space-y-6">
               <p className="text-muted-dark leading-relaxed text-lg">
-                Tradvio AI was founded by a team of technology innovators, data scientists, and strategic thinkers who shared a frustration: brilliant trading ideas were failing in live markets — not because the ideas were wrong, but because the tools were. Charts were fragmented, signals were slow, and risk management was an afterthought.
+                {t('au.story1')}
               </p>
 
               {/* Core belief quote */}
@@ -116,22 +118,22 @@ export default function AboutUs() {
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
                 <svg className="w-8 h-8 text-accent/40 mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                 <p className="text-xl md:text-2xl font-bold text-ink leading-relaxed">
-                  &ldquo;AI should amplify human potential — <span className="text-accent">not replace it</span>.&rdquo;
+                  &ldquo;{t('au.quote1')}<span className="text-accent">{t('au.quote2')}</span>.&rdquo;
                 </p>
-                <p className="text-sm text-ink-soft mt-4">— The core belief behind everything we build</p>
+                <p className="text-sm text-ink-soft mt-4">{t('au.quoteNote')}</p>
               </div>
 
               <p className="text-muted-dark leading-relaxed text-lg">
-                Today, our platform blends state-of-the-art machine learning with real-world trading insights. Whether you&rsquo;re exploring AI for the first time or scaling a serious initiative, Tradvio AI meets you where you are — and grows with you.
+                {t('au.story2')}
               </p>
 
               <p className="text-center text-xl font-bold text-ink pt-4">
-                Let&rsquo;s build the future together — <span className="text-accent">smarter, faster, and better.</span>
+                {t('au.closing1')}<span className="text-accent">{t('au.closing2')}</span>
               </p>
 
               <div className="flex gap-4 justify-center flex-wrap pt-2">
-                <a href="/get-started/" className="btn btn-primary btn-lg">Start Free</a>
-                <a href="/contact-us/" className="btn btn-secondary btn-lg">Contact Us</a>
+                <a href="/get-started/" className="btn btn-primary btn-lg">{t('au.cta1')}</a>
+                <a href="/contact-us/" className="btn btn-secondary btn-lg">{t('au.cta2')}</a>
               </div>
             </div>
           </div>

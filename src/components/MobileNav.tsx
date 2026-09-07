@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
+import { useLanguage, localizePath } from '@/lib/i18n';
 
 const LOGO_SRC = '/trdavio-logo.png';
 
@@ -36,6 +37,7 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
+  const { lang } = useLanguage();
   const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   // Close on Escape.
@@ -107,7 +109,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           {PLATFORM_LINKS.map((item, index) => (
             <a
               key={item.href}
-              href={item.href}
+              href={localizePath(item.href, lang)}
               ref={index === 0 ? firstLinkRef : undefined}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
@@ -123,7 +125,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           {RESOURCE_LINKS.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={localizePath(item.href, lang)}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
@@ -138,7 +140,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           {SITE_LINKS.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={localizePath(item.href, lang)}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
@@ -148,7 +150,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </nav>
 
         {/* CTA */}
-        <a href="/get-started/" onClick={onClose} className="btn btn-primary mt-8 w-full">
+        <a href={localizePath("/get-started/", lang)} onClick={onClose} className="btn btn-primary mt-8 w-full">
           Start Free Analysis
         </a>
       </aside>

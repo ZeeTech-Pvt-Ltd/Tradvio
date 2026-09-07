@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const highlights = [
   { title: 'Instant analysis', desc: 'Results in seconds', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
@@ -35,6 +36,7 @@ const features = [
 ];
 
 export default function AIChartAnalyser() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -59,7 +61,7 @@ export default function AIChartAnalyser() {
   return (
     <>
       <Helmet>
-        <title>AI Chart Analyser — Instant Technical Analysis | Tradvio AI</title>
+        <title>{t('meta.analyser')}</title>
         <meta name="description" content="Upload any trading chart and get instant AI analysis — trend direction, support & resistance levels, trade scenarios, and confidence ratings. Free to start." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-chart-analyser/" />

@@ -4,58 +4,59 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 /* ─── Data ──────────────────────────────────────────── */
 const stepData = [
   {
     num: '01',
-    title: 'Create your free account',
-    body: 'Register online in minutes. Registration is free — no platform subscription fee required.',
-    note: 'Free registration — no platform fee to sign up',
+    title: 'plat.s1t',
+    body: 'plat.s1b',
+    note: 'plat.s1n',
   },
   {
     num: '02',
-    title: 'Deposit initial capital',
-    body: 'A minimum of £250 in initial capital is required to begin live trading. This is your trading capital, not a fee.',
-    note: '£250 minimum initial capital required to trade live',
+    title: 'plat.s2t',
+    body: 'plat.s2b',
+    note: 'plat.s2n',
   },
   {
     num: '03',
-    title: 'Connect your broker',
-    body: 'Link Trader AI to your existing broker or exchange account. Your funds stay there — the platform never takes custody.',
-    note: 'Your funds stay in your own broker account',
+    title: 'plat.s3t',
+    body: 'plat.s3b',
+    note: 'plat.s3n',
   },
   {
     num: '04',
-    title: 'Let the AI trade smarter',
-    body: 'Configure your strategy, set your risk limits, and Trader AI monitors markets and executes trades automatically on your behalf.',
-    note: 'Automated execution, around the clock',
+    title: 'plat.s4t',
+    body: 'plat.s4b',
+    note: 'plat.s4n',
   },
 ];
 
 const faqItems = [
   {
-    q: 'Is there a fee to use Tradvio AI?',
+    q: 'plat.fq1',
     a: 'Registration is free and there is no ongoing platform subscription fee. A minimum initial capital of £250 is required to begin live trading. This is your trading capital placed with your connected broker or exchange — it is not a fee paid to Tradvio AI.',
   },
   {
-    q: 'Does Tradvio AI hold my funds?',
+    q: 'plat.fq2',
     a: 'No. Your funds remain at all times in your own broker or exchange account. Tradvio AI connects via API to execute trades on your behalf — it does not take custody or hold any of your capital. You retain full ownership and control.',
   },
   {
-    q: 'Are profits guaranteed?',
+    q: 'plat.fq3',
     a: 'No. Profits are never guaranteed. All trading — whether manual or automated — carries risk, including the risk of losing your invested capital. Tradvio AI is a tool to help you execute your strategy more efficiently, not a guarantee of returns. Please only trade with capital you can afford to lose.',
   },
   {
-    q: 'Is crypto trading supported? Is it risky?',
+    q: 'plat.fq4',
     a: 'Yes, Tradvio AI supports cryptocurrency trading across a wide range of digital assets. Cryptocurrency markets are highly volatile and can move rapidly. The value of your investment can decrease as well as increase. Ensure you understand the risks before allocating capital to crypto markets.',
   },
   {
-    q: 'Which markets can I trade with Tradvio AI?',
+    q: 'plat.fq5',
     a: 'Tradvio AI supports trading across stocks, cryptocurrencies, forex (currency pairs), commodities (such as gold and oil), stock market indices, ETFs (exchange-traded funds) and CFDs (contracts for difference). The platform is designed to operate across multiple asset classes simultaneously.',
   },
   {
-    q: 'How many countries is Tradvio AI available in?',
+    q: 'plat.fq6',
     a: 'Tradvio AI is currently available to traders in over 50 countries worldwide, with more than 100,000 traders using the platform. Please check the platform for the current list of supported regions, as availability may vary depending on local regulations.',
   },
 ];
@@ -71,6 +72,7 @@ const marketPills = [
 ];
 
 export default function AITradingPlatform() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -78,7 +80,7 @@ export default function AITradingPlatform() {
   return (
     <>
       <Helmet>
-        <title>Tradvio AI — Intelligent Automated Trading</title>
+        <title>{t('meta.platform')}</title>
         <meta name="description" content="Tradvio AI powers automated trading across stocks, crypto, forex, commodities, indices, ETFs and CFDs. Join 100,000+ traders in 50+ countries." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-trading-platform/" />
@@ -111,14 +113,12 @@ export default function AITradingPlatform() {
                 </div>
 
                 <h1 className="text-[clamp(2.4rem,5vw,4.4rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-6">
-                  Trade smarter<br />
-                  with <em className="italic text-accent not-italic">AI that<br />never sleeps.</em>
+                  {t('plat.heroT1')}<br />
+                  with <em className="italic text-accent not-italic">{t('plat.heroT2')}<br />{t('plat.heroT3')}</em>
                 </h1>
 
                 <p className="text-lg text-muted-dark leading-relaxed mb-9 max-w-[490px]">
-                  Tradvio AI automates your strategy across stocks, crypto, forex, commodities,
-                  indices, ETFs and CFDs — with real-time market analysis and built-in risk controls.
-                  You stay in control.
+                  {t('plat.heroSub')}
                 </p>
 
                 <div className="flex gap-3 flex-wrap mb-11">
@@ -134,12 +134,12 @@ export default function AITradingPlatform() {
                 <div className="flex items-center gap-5 flex-wrap">
                   <div>
                     <strong className="text-lg font-bold text-ink">100,000+</strong>
-                    <span className="block text-xs text-ink-soft">Traders worldwide</span>
+                    <span className="block text-xs text-ink-soft">{t('plat.trust1')}</span>
                   </div>
                   <div className="w-px h-8 bg-border" />
                   <div>
                     <strong className="text-lg font-bold text-ink">50+</strong>
-                    <span className="block text-xs text-ink-soft">Countries supported</span>
+                    <span className="block text-xs text-ink-soft">{t('plat.trust2')}</span>
                   </div>
                   <div className="w-px h-8 bg-border" />
                   <div>
@@ -150,7 +150,7 @@ export default function AITradingPlatform() {
                         </span>
                       ))}
                     </div>
-                    <p className="text-[0.7rem] text-ink-soft mt-1">Available on all platforms</p>
+                    <p className="text-[0.7rem] text-ink-soft mt-1">{t('plat.trust3')}</p>
                   </div>
                 </div>
               </div>
@@ -299,10 +299,10 @@ export default function AITradingPlatform() {
         <section className="py-[100px] bg-deep">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="text-center mb-14">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Platform capabilities</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('plat.featEyebrow')}</div>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">
-                Everything you need,<br />
-                <span className="font-light italic text-ink-soft">nothing you don&rsquo;t.</span>
+                {t('plat.featT1')}<br />
+                <span className="font-light italic text-ink-soft">{t('plat.featT2')}</span>
               </h2>
             </div>
 
@@ -310,22 +310,22 @@ export default function AITradingPlatform() {
               {[
                 {
                   num: '01', icon: '⏱', iconColor: 'text-accent', iconBg: 'bg-accent/10',
-                  title: 'Real-time market analysis',
+                  title: 'plat.ft1',
                   body: 'Tradvio AI scans live price feeds across all your connected markets simultaneously — identifying patterns, momentum shifts and entry signals the moment they emerge. No delay, no guesswork.',
                 },
                 {
                   num: '02', icon: '◆', iconColor: 'text-accent', iconBg: 'bg-accent/10',
-                  title: 'Strategy automation',
+                  title: 'plat.ft2',
                   body: 'Set your strategy parameters once. Tradvio AI executes trades automatically, around the clock across every market you trade. You define the rules — the platform works the hours.',
                 },
                 {
                   num: '03', icon: '🛡', iconColor: 'text-accent', iconBg: 'bg-accent/10',
-                  title: 'Built-in risk controls',
+                  title: 'plat.ft3',
                   body: 'Configurable stop-loss limits, per-trade risk caps and drawdown protections are native to every position. Your funds always remain in your own broker or exchange account — Tradvio AI never holds your capital.',
                 },
                 {
                   num: '04', icon: '📈', iconColor: 'text-accent', iconBg: 'bg-accent/10',
-                  title: 'Backtesting engine',
+                  title: 'plat.ft4',
                   body: 'Test any strategy against historical market data before risking a penny live. The backtesting module lets you validate, refine and compare strategies with complete transparency.',
                 },
               ].map((f) => (
@@ -334,8 +334,8 @@ export default function AITradingPlatform() {
                   <div className={cn('w-12 h-12 rounded-xl flex items-center justify-center mb-5', f.iconBg)}>
                     <span className="text-xl">{f.icon}</span>
                   </div>
-                  <h3 className="text-[1.35rem] font-bold text-ink mb-2.5">{f.title}</h3>
-                  <p className="text-sm text-muted-dark leading-relaxed">{f.body}</p>
+                  <h3 className="text-[1.35rem] font-bold text-ink mb-2.5">{t(f.title)}</h3>
+                  <p className="text-sm text-muted-dark leading-relaxed">{t(f.body)}</p>
                 </div>
               ))}
             </div>
@@ -348,9 +348,9 @@ export default function AITradingPlatform() {
         <section id="how-it-works" className="py-[100px] bg-navy border-y border-border">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="mb-14">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Getting started</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('plat.hiwEyebrow')}</div>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">
-                From signup to<br /><em className="italic text-accent not-italic">live trading</em> in four steps.
+                {t('plat.hiwT1')}<br /><em className="italic text-accent not-italic">live trading</em> in four steps.
               </h2>
             </div>
 
@@ -372,8 +372,8 @@ export default function AITradingPlatform() {
                       {step.num}
                     </div>
                     <div>
-                      <div className="font-bold text-[0.95rem] text-ink mb-1">{step.title}</div>
-                      <div className="text-[0.82rem] text-ink-soft leading-relaxed">{step.body}</div>
+                      <div className="font-bold text-[0.95rem] text-ink mb-1">{t(step.title)}</div>
+                      <div className="text-[0.82rem] text-ink-soft leading-relaxed">{t(step.body)}</div>
                     </div>
                   </div>
                 ))}
@@ -381,10 +381,10 @@ export default function AITradingPlatform() {
 
               <div className="bg-navy border border-border rounded-2xl p-10 min-h-[380px] flex flex-col justify-center lg:sticky lg:top-[90px]">
                 <div className="text-[6rem] font-bold leading-none text-accent/[0.06] mb-4 select-none">{stepData[activeStep].num}</div>
-                <h3 className="text-2xl font-bold text-ink mb-3">{stepData[activeStep].title}</h3>
-                <p className="text-[0.93rem] text-ink-soft leading-relaxed max-w-[380px]">{stepData[activeStep].body}</p>
+                <h3 className="text-2xl font-bold text-ink mb-3">{t(stepData[activeStep].title)}</h3>
+                <p className="text-[0.93rem] text-ink-soft leading-relaxed max-w-[380px]">{t(stepData[activeStep].body)}</p>
                 <div className="mt-5 pl-4 py-2.5 border-l-[3px] border-accent bg-accent/[0.04] rounded-r-md">
-                  <span className="text-sm text-accent">{stepData[activeStep].note}</span>
+                  <span className="text-sm text-accent">{t(stepData[activeStep].note)}</span>
                 </div>
               </div>
             </div>
@@ -397,24 +397,24 @@ export default function AITradingPlatform() {
         <section className="py-[100px] bg-deep">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Intelligent edge</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('plat.whyEyebrow')}</div>
               <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">
-                AI-powered<br />vs. manual trading.
+                {t('plat.whyT1')}<br />{t('plat.whyT2')}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-[1fr_1px_1fr] gap-0">
               <div className="pr-8 md:pr-12">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.1em] mb-5 bg-accent/10 text-accent border border-accent/25">Tradvio AI</span>
-                <h3 className="text-[1.6rem] font-bold text-ink mb-4 leading-tight">Always on. Always analytical.</h3>
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.1em] mb-5 bg-accent/10 text-accent border border-accent/25">{t('plat.whyAIBadge')}</span>
+                <h3 className="text-[1.6rem] font-bold text-ink mb-4 leading-tight">{t('plat.whyAIHead')}</h3>
                 <ul className="space-y-3">
                   {[
-                    'Monitors markets 24/7 without fatigue or distraction',
-                    'Executes strategy rules consistently — no emotional drift',
-                    'Processes real-time data across multiple markets simultaneously',
-                    'Backtests strategies before any live capital is deployed',
-                    'Configurable risk controls enforce discipline automatically',
-                    'Available on web, iOS and Android — monitor anytime',
+                    t('plat.ai'),
+                    t('plat.ai'),
+                    t('plat.ai'),
+                    t('plat.ai'),
+                    t('plat.ai'),
+                    t('plat.ai'),
                   ].map((item) => (
                     <li key={item} className="flex gap-3 items-start text-sm text-ink-soft leading-relaxed">
                       <svg className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 text-accent" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 10 8 14 16 6"/></svg>
@@ -427,16 +427,16 @@ export default function AITradingPlatform() {
               <div className="w-px bg-border hidden md:block" />
 
               <div className="md:pl-12 pt-8 md:pt-0 border-t md:border-t-0 border-border">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.1em] mb-5 bg-danger/10 text-danger border border-danger/20">Manual trading</span>
-                <h3 className="text-[1.6rem] font-bold text-ink mb-4 leading-tight">Human limits in a 24/7 market.</h3>
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.1em] mb-5 bg-danger/10 text-danger border border-danger/20">{t('plat.whyManualBadge')}</span>
+                <h3 className="text-[1.6rem] font-bold text-ink mb-4 leading-tight">{t('plat.whyManualHead')}</h3>
                 <ul className="space-y-3">
                   {[
-                    'Limited to market hours and personal screen time',
-                    'Emotional decisions can override a well-reasoned plan',
-                    'Difficult to track multiple assets at the same time',
-                    'Strategy testing often relies on hindsight, not data',
-                    'Risk management depends on self-discipline under pressure',
-                    'Missed signals during sleep or away from the screen',
+                    t('plat.mn'),
+                    t('plat.mn'),
+                    t('plat.mn'),
+                    t('plat.mn'),
+                    t('plat.mn'),
+                    t('plat.mn'),
                   ].map((item) => (
                     <li key={item} className="flex gap-3 items-start text-sm text-ink-soft leading-relaxed">
                       <svg className="w-[18px] h-[18px] flex-shrink-0 mt-0.5 text-danger" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><line x1="5" y1="5" x2="15" y2="15"/><line x1="15" y1="5" x2="5" y2="15"/></svg>
@@ -456,35 +456,34 @@ export default function AITradingPlatform() {
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Multi-platform</div>
+                <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('plat.mpEyebrow')}</div>
                 <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-5">
-                  Your positions.<br /><em className="italic text-ink-soft not-italic">Any device.</em>
+                  {t('plat.mpT1')}<br /><em className="italic text-ink-soft not-italic">{t('plat.mpT2')}</em>
                 </h2>
                 <p className="text-lg text-muted-dark leading-relaxed mb-7 max-w-[420px]">
-                  The Tradvio AI platform runs seamlessly across web, iOS and Android.
-                  Monitor your portfolio, review AI signals and adjust your strategy wherever you are.
+                  {t('plat.mpBody')}
                 </p>
                 <ul className="space-y-3.5 mb-8">
                   <li className="flex items-center gap-3 text-sm font-medium text-ink-soft">
                     <div className="w-11 h-11 rounded-[10px] border border-border bg-deep flex items-center justify-center">
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="text-ink-soft"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.39.08 2.32.76 3.1.78 1.19-.24 2.32-.93 3.54-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.52 4.01zM12 7.36c-.15-2.78 2.25-5.07 4.84-5.36.32 2.97-2.68 5.27-4.84 5.36z"/></svg>
                     </div>
-                    iOS App — available on the App Store
+                    {t('plat.p1')}
                   </li>
                   <li className="flex items-center gap-3 text-sm font-medium text-ink-soft">
                     <div className="w-11 h-11 rounded-[10px] border border-border bg-deep flex items-center justify-center">
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="text-ink-soft"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86z"/></svg>
                     </div>
-                    Android App — available on Google Play
+                    {t('plat.p2')}
                   </li>
                   <li className="flex items-center gap-3 text-sm font-medium text-ink-soft">
                     <div className="w-11 h-11 rounded-[10px] border border-border bg-deep flex items-center justify-center">
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink-soft"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                     </div>
-                    Web platform — full-featured browser access
+                    {t('plat.p3')}
                   </li>
                 </ul>
-                <a href="/get-started/" className="btn btn-primary">Start for free →</a>
+                <a href="/get-started/" className="btn btn-primary">{t('plat.mpCta')}</a>
               </div>
               <div className="flex gap-4 items-end justify-center" aria-hidden="true">
                 <div className="w-[110px] h-[200px] bg-medium-navy border border-border rounded-[20px] overflow-hidden p-2 flex flex-col gap-1.5">
@@ -534,10 +533,10 @@ export default function AITradingPlatform() {
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border rounded-xl overflow-hidden">
               {[
-                { num: '$2.4B+', label: 'Notional volume analysed monthly' },
-                { num: '140ms', label: 'Average signal latency' },
-                { num: '99.95%', label: 'Platform uptime' },
-                { num: '4.7M+', label: 'Backtests run to date' },
+                { num: '$2.4B+', label: t('plat.st1') },
+                { num: '140ms', label: t('plat.st2') },
+                { num: '99.95%', label: t('plat.st3') },
+                { num: '4.7M+', label: t('plat.st4') },
               ].map((s) => (
                 <div key={s.label} className="bg-deep py-8 px-6 text-center">
                   <div className="text-[clamp(1.7rem,3vw,2.4rem)] font-bold text-ink leading-none">{s.num}</div>
@@ -553,19 +552,19 @@ export default function AITradingPlatform() {
         <section className="py-[100px] bg-deep">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="text-center mb-14">
-              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">Common questions</div>
-              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">Frequently asked<br /><span className="font-light italic text-ink-soft">questions.</span></h2>
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('plat.faqEyebrow')}</div>
+              <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em]">{t('plat.faqT1')}<br /><span className="font-light italic text-ink-soft">{t('plat.faqT2')}</span></h2>
             </div>
             <div className="max-w-[760px] mx-auto">
               {faqItems.map((item, i) => (
                 <div key={i} className="border-b border-border">
                   <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full text-left py-5 flex justify-between items-center gap-4 text-ink hover:text-accent transition-colors text-[0.95rem] font-semibold bg-transparent border-none cursor-pointer">
-                    {item.q}
+                    {t(item.q)}
                     <div className={cn('w-6 h-6 rounded-full border border-border flex items-center justify-center flex-shrink-0 transition-all text-ink-soft', openFaq === i && 'bg-accent border-accent text-white rotate-45')}>
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/></svg>
                     </div>
                   </button>
-                  <div className={cn('overflow-hidden transition-all duration-300', openFaq === i ? 'max-h-[400px]' : 'max-h-0')}><div className="pb-5 text-sm text-ink-soft leading-relaxed">{item.a}</div></div>
+                  <div className={cn('overflow-hidden transition-all duration-300', openFaq === i ? 'max-h-[400px]' : 'max-h-0')}><div className="pb-5 text-sm text-ink-soft leading-relaxed">{t(item.a)}</div></div>
                 </div>
               ))}
             </div>
@@ -576,15 +575,14 @@ export default function AITradingPlatform() {
         <section className="py-[90px] bg-gradient-to-b from-navy to-deep border-t border-border text-center relative overflow-hidden">
           <div className="absolute w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(220,38,38,0.08),transparent_60%)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="max-w-[1200px] mx-auto px-6 relative z-10">
-            <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-5">Start researching markets<br /><em className="italic text-accent not-italic">like a professional.</em></h2>
-            <p className="text-lg text-muted-dark max-w-[480px] mx-auto mb-8">Free to start, no credit card required. Paper trade first, go live only when you&rsquo;re ready.</p>
+            <h2 className="text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-5">{t('plat.closeT1')}<br /><em className="italic text-accent not-italic">{t('plat.closeT2')}</em></h2>
+            <p className="text-lg text-muted-dark max-w-[480px] mx-auto mb-8">{t('plat.closeBody')}</p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <a href="/get-started/" className="btn btn-primary btn-lg">Start free analysis →</a>
-              <a href="/leaderboard/" className="btn btn-secondary btn-lg">See the leaderboard</a>
+              <a href="/get-started/" className="btn btn-primary btn-lg">{t('plat.closeCta1')}</a>
+              <a href="/leaderboard/" className="btn btn-secondary btn-lg">{t('plat.closeCta2')}</a>
             </div>
             <p className="text-xs text-ink-soft mt-7 max-w-[520px] mx-auto leading-relaxed">
-              Trading involves risk. Profits are never guaranteed and you may lose some or all of your invested capital.
-              Tradvio AI is a research and analysis platform, not a broker, and does not provide financial advice.
+              {t('plat.closeNote')}
             </p>
           </div>
         </section>

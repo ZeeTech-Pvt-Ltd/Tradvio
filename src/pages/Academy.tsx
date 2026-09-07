@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const levels = [
   { level: 'Foundations', for: 'Candles and stop-losses still feel confusing', time: '9 lessons · ~70 min', featured: true },
@@ -35,12 +36,13 @@ const whyFinish = [
 ];
 
 export default function Academy() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>AI Trading Academy — Learn the Patterns Our AI Trades | Tradvio AI</title>
+        <title>{t('meta.academy')}</title>
         <meta name="description" content="Learn to read a chart the way our AI reads it. Short lessons, live charts, zero fluff. Free to start — Foundations is open, no card." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/academy/" />

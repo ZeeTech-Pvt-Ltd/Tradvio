@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, localizePath } from '@/lib/i18n';
 
 const LOGO_SRC = '/trdavio-logo.png';
 
@@ -37,7 +37,7 @@ interface HeaderProps {
 }
 
 export default function Header({ onMenuToggle }: HeaderProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const platformRef = useRef<HTMLDivElement | null>(null);
@@ -139,7 +139,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 {PLATFORM_ITEMS.map((item) => (
                   <a
                     key={item.href}
-                    href={item.href}
+                    href={localizePath(item.href, lang)}
                     onClick={() => setOpenDropdown(null)}
                     className="block rounded-md px-3 py-2 text-sm text-white/75 transition-colors hover:bg-medium-navy hover:text-white"
                   >
@@ -185,7 +185,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 {RESOURCE_ITEMS.map((item) => (
                   <a
                     key={item.href}
-                    href={item.href}
+                    href={localizePath(item.href, lang)}
                     onClick={() => setOpenDropdown(null)}
                     className="block rounded-md px-3 py-2 text-sm text-white/75 transition-colors hover:bg-medium-navy hover:text-white"
                   >
@@ -198,7 +198,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
           {/* Plain nav links */}
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className={NAV_LINK_CLASSES}>
+            <a key={link.href} href={localizePath(link.href, lang)} className={NAV_LINK_CLASSES}>
               {t(link.key)}
             </a>
           ))}
@@ -207,7 +207,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
         {/* Right actions */}
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <a href="/get-started/" className="btn btn-primary btn-sm hidden sm:inline-flex">
+          <a href={localizePath("/get-started/", lang)} className="btn btn-primary btn-sm hidden sm:inline-flex">
             {t('nav.cta')}
           </a>
 

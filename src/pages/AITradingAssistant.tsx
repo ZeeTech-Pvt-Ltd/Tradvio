@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const faqItems = [
   { q: 'What is an AI trading assistant?', a: 'An AI trading assistant is software that watches the markets for you — analysing charts, spotting patterns, and delivering structured trade recommendations with entry points, stop-losses, and risk guidance. It does the searching; you make the final call.' },
@@ -41,12 +42,13 @@ const stats = [
 ];
 
 export default function AITradingAssistant() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>AI Trading Assistant — Your Assistant for Smarter Decisions | Tradvio AI</title>
+        <title>{t('meta.assistant')}</title>
         <meta name="description" content="Your AI trading assistant for smarter decisions. Automatic chart analysis, AI-powered signals, risk management, and 24/7 monitoring. Free to start." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-trading-assistant/" />

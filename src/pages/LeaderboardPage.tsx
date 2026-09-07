@@ -12,6 +12,26 @@ function fmtReturn(n: number): string {
   return `${n > 0 ? '+' : ''}${n.toFixed(2)}%`;
 }
 
+
+/* Translate agent market + strategy via short labels */
+const MARKET_KEYS: Record<string, string> = {
+  Stocks: 'mk.stocks', Forex: 'mk.forex', Crypto: 'mk.crypto', Indices: 'mk.indices',
+  Commodities: 'mk.commodities', ETFs: 'mk.etfs', Futures: 'mk.futures', Options: 'mk.options',
+  Gold: 'mk.gold',
+};
+const STRATEGY_KEYS: Record<string, string> = {
+  'Cup & Handle': 'st.cupHandle', 'Gap-and-Go': 'st.gapGo', 'Head & Shoulders': 'st.headShoulders',
+  'Relative Strength': 'st.relStrength', 'Liquidity Sweep': 'st.liqSweep', 'Fair Value Gap': 'st.fvg',
+  'BOS / CHoCH': 'st.bosChoch', 'Asian-London Range': 'st.asianLondon', 'Order Block': 'st.orderBlock',
+  'Falling Wedge': 'st.fallingWedge', 'Funding & OI': 'st.fundingOi', 'Wyckoff': 'st.wyckoff',
+  'Double Tops/Bottoms': 'st.doubleTop', 'Volume Spread': 'st.volumeSpread', 'Triangle Break': 'st.triangleBreak',
+  'MTF Confluence': 'st.mtfConfluence', 'Seasonality': 'st.seasonality', 'Harmonics': 'st.harmonics',
+  'Trendline Break': 'st.trendline', 'COT Divergence': 'st.cotDiv', 'Sector Rotation': 'st.sectorRot',
+  'NR7 Squeeze': 'st.nr7Squeeze', 'Hidden Divergence': 'st.hiddenDiv', 'Elliott Wave': 'st.elliott',
+};
+const marketLabel = (m: string, t: (k: string) => string) => t(MARKET_KEYS[m] ?? '');
+const strategyLabel = (st: string, t: (k: string) => string) => t(STRATEGY_KEYS[st] ?? '');
+
 const riskBadge: Record<Agent['risk'], string> = {
   Low: 'bg-success/10 text-success border-success/20',
   Medium: 'bg-warning/10 text-warning border-warning/20',
@@ -83,42 +103,42 @@ function InlineSelect({ value, onChange, options }: { value: string; onChange: (
 
 /* ─── Page ──────────────────────────────────────────── */
 export default function LeaderboardPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [market, setMarket] = useState('All Markets');
-  const [strategy, setStrategy] = useState('All Strategies');
-  const [risk, setRisk] = useState('All Risk');
-  const [model, setModel] = useState('All Models');
+  const [market, setMarket] = useState(t('lb.allMarkets'));
+  const [strategy, setStrategy] = useState(t('lb.allStrategies'));
+  const [risk, setRisk] = useState(t('lb.allRisk'));
+  const [model, setModel] = useState(t('lb.allModels'));
 
-  const markets = useMemo(() => ['All Markets', ...new Set(agents.map((a) => a.market))], []);
-  const strategies = useMemo(() => ['All Strategies', ...new Set(agents.map((a) => a.strategy))], []);
-  const models = useMemo(() => ['All Models', ...new Set(agents.map((a) => a.model))], []);
-  const risks = ['All Risk', 'Low', 'Medium', 'High'];
+  const markets = useMemo(() => [t('lb.allMarkets'), ...new Set(agents.map((a) => marketLabel(a.market, t)))], [t, lang]);
+  const strategies = useMemo(() => [t('lb.allStrategies'), ...new Set(agents.map((a) => strategyLabel(a.shortStrategy, t)))], [t, lang]);
+  const models = useMemo(() => [t('lb.allModels'), ...new Set(agents.map((a) => a.model))], []);
+  const risks = [t('lb.allRisk'), t('lb.low'), t('lb.medium'), t('lb.high')];
 
   const filtered = useMemo(() => {
     return agents.filter((a) => {
-      if (market !== 'All Markets' && a.market !== market) return false;
-      if (strategy !== 'All Strategies' && a.strategy !== strategy) return false;
-      if (risk !== 'All Risk' && a.risk !== risk) return false;
-      if (model !== 'All Models' && a.model !== model) return false;
+      if (market !== t('lb.allMarkets') && marketLabel(a.market, t) !== market) return false;
+      if (strategy !== t('lb.allStrategies') && strategyLabel(a.shortStrategy, t) !== strategy) return false;
+      if (risk !== t('lb.allRisk') && t('lb.' + a.risk.toLowerCase()) !== risk) return false;
+      if (model !== t('lb.allModels') && a.model !== model) return false;
       return true;
     });
   }, [market, strategy, risk, model]);
 
   const clearFilters = () => {
-    setMarket('All Markets');
-    setStrategy('All Strategies');
-    setRisk('All Risk');
-    setModel('All Models');
+    setMarket(t('lb.allMarkets'));
+    setStrategy(t('lb.allStrategies'));
+    setRisk(t('lb.allRisk'));
+    setModel(t('lb.allModels'));
   };
 
-  const isFiltered = market !== 'All Markets' || strategy !== 'All Strategies' || risk !== 'All Risk' || model !== 'All Models';
+  const isFiltered = market !== t('lb.allMarkets') || strategy !== t('lb.allStrategies') || risk !== t('lb.allRisk') || model !== t('lb.allModels');
 
   return (
     <>
       <Helmet>
-        <title>AI Bot Leaderboard | Tradvio AI</title>
-        <meta name="description" content="Compare Tradvio AI agents by market, strategy, AI model, and risk across global markets. Live rankings updated in real time." />
+        <title>{t('meta.leaderboard')}</title>
+        <meta name="description" content={t('leaderboard.sub')} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/leaderboard/" />
       </Helmet>
@@ -134,20 +154,20 @@ export default function LeaderboardPage() {
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="text-center max-w-2xl mx-auto">
               <h1 className="font-mono font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                Leaderboard
+                {t('lb.title')}
               </h1>
               <p className="mt-4 text-ink-soft text-sm sm:text-base leading-relaxed tracking-[0.02em]">
-                Compare Tradvio AI agents by market, strategy, AI model, and risk across global markets.
+                {t('leaderboard.sub')}
               </p>
             </div>
 
             {/* Stat cards */}
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
               {[
-                { label: 'Total Agents', value: agents.length },
-                { label: 'Asset Classes', value: new Set(agents.map((a) => a.market)).size },
-                { label: 'AI Models', value: new Set(agents.map((a) => a.model)).size },
-                { label: 'Strategies', value: new Set(agents.map((a) => a.strategy)).size },
+                { label: t('lb.totalAgents'), value: agents.length },
+                { label: t('lb.assetClasses'), value: new Set(agents.map((a) => a.market)).size },
+                { label: t('lb.aiModels'), value: new Set(agents.map((a) => a.model)).size },
+                { label: t('lb.strategies'), value: new Set(agents.map((a) => a.strategy)).size },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -182,7 +202,7 @@ export default function LeaderboardPage() {
                 <InlineSelect value={risk} onChange={setRisk} options={risks} />
               </div>
               <div className="flex items-center gap-2 bg-navy border border-border rounded-lg px-5 py-3">
-                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">Model</label>
+                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">{t('lb.model')}</label>
                 <InlineSelect value={model} onChange={setModel} options={models} />
               </div>
             </div>
@@ -193,8 +213,8 @@ export default function LeaderboardPage() {
         <div className="py-3 px-4 sm:px-6 lg:px-8 border-b border-border">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <p className="font-mono text-xs text-ink-soft tracking-[0.02em]">
-              <span className="font-bold text-ink">{filtered.length}</span> AI agents
-              {isFiltered && <span className="text-ink-soft"> (filtered)</span>}
+              <span className="font-bold text-ink">{filtered.length}</span> {t('lb.tradersWord')}
+              {isFiltered && <span className="text-ink-soft"> {t('lb.filtered')}</span>}
             </p>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
@@ -225,9 +245,9 @@ export default function LeaderboardPage() {
 
               {filtered.length === 0 ? (
                 <div className="px-5 py-12 text-center">
-                  <p className="font-mono text-sm text-ink-soft">No AI agents match your filters.</p>
+                  <p className="font-mono text-sm text-ink-soft">{t('lb.noMatch')}</p>
                   <button onClick={clearFilters} className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-accent hover:text-accent-hover transition-colors">
-                    Clear filters
+                    {t('lb.clearFilters')}
                   </button>
                 </div>
               ) : (
@@ -253,13 +273,12 @@ export default function LeaderboardPage() {
                         <Sparkline series={a.series} w={56} h={22} />
                       </div>
 
-                      <span className="font-mono text-xs text-ink-soft truncate text-center">{a.market}</span>
-                      <span className="font-mono text-xs text-ink-soft truncate text-center">{a.strategy}</span>
+                      <span className="font-mono text-xs text-ink-soft truncate text-center">{marketLabel(a.market, t)}</span>
+                      <span className="font-mono text-xs text-ink-soft truncate text-center">{strategyLabel(a.shortStrategy, t)}</span>
 
                       <div className="flex justify-center">
                         <span className={cn('inline-flex font-mono text-[10px] uppercase tracking-[0.1em] px-2.5 py-1 rounded-full border', riskBadge[a.risk])}>
-                          {a.risk}
-                        </span>
+                          {t('lb.' + a.risk.toLowerCase())}</span>
                       </div>
 
                       <span className="font-mono text-xs text-ink-soft truncate text-center">{a.model}</span>
@@ -281,9 +300,9 @@ export default function LeaderboardPage() {
             <div className="lg:hidden space-y-3">
               {filtered.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="font-mono text-sm text-ink-soft">No AI agents match your filters.</p>
+                  <p className="font-mono text-sm text-ink-soft">{t('lb.noMatch')}</p>
                   <button onClick={clearFilters} className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-accent hover:text-accent-hover transition-colors">
-                    Clear filters
+                    {t('lb.clearFilters')}
                   </button>
                 </div>
               ) : (
@@ -311,8 +330,8 @@ export default function LeaderboardPage() {
 
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-[0.1em]">
-                          <span className="inline-flex px-2 py-0.5 rounded-full border border-border bg-medium-navy/60 text-ink-soft">{a.market}</span>
-                          <span className={cn('inline-flex px-2 py-0.5 rounded-full border', riskBadge[a.risk])}>{a.risk}</span>
+                          <span className="inline-flex px-2 py-0.5 rounded-full border border-border bg-medium-navy/60 text-ink-soft">{marketLabel(a.market, t)}</span>
+                          <span className={cn('inline-flex px-2 py-0.5 rounded-full border', riskBadge[a.risk])}>{t('lb.' + a.risk.toLowerCase())}</span>
                         </div>
                         <Sparkline series={a.series} w={64} h={20} />
                       </div>
@@ -330,7 +349,7 @@ export default function LeaderboardPage() {
             {/* ── Footer note ────────────────────────── */}
             <div className="mt-6 text-center">
               <p className="font-mono text-[10px] text-ink-soft tracking-[0.02em]">
-                Showing {filtered.length} of {agents.length} AI agents • Data updates in real time
+                {t('lb.showing')} {filtered.length} {t('lb.of')} {agents.length} {t('lb.tradersWord')} • {t('lb.realtime')}
               </p>
             </div>
           </div>

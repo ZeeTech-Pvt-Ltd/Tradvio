@@ -1,4 +1,4 @@
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, localizePath } from '@/lib/i18n';
 
 const LOGO_SRC = '/trdavio-logo.png';
 
@@ -30,7 +30,7 @@ const FOOTER_LINK_CLASSES =
   'text-sm text-ink-soft transition-colors hover:text-white';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -55,7 +55,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {PLATFORM_LINKS.map((item, pi) => (
                 <li key={item.href}>
-                  <a href={item.href} className={FOOTER_LINK_CLASSES}>
+                  <a href={localizePath(item.href, lang)} className={FOOTER_LINK_CLASSES}>
                     {t('fl.t' + (pi + 1))}
                   </a>
                 </li>
@@ -71,7 +71,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map((item, ci) => (
                 <li key={item.href}>
-                  <a href={item.href} className={FOOTER_LINK_CLASSES}>
+                  <a href={localizePath(item.href, lang)} className={FOOTER_LINK_CLASSES}>
                     {t('fl.c' + (ci + 1))}
                   </a>
                 </li>
@@ -87,7 +87,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {LEGAL_LINKS.map((item, li) => (
                 <li key={item.href}>
-                  <a href={item.href} className={FOOTER_LINK_CLASSES}>
+                  <a href={localizePath(item.href, lang)} className={FOOTER_LINK_CLASSES}>
                     {t('fl.l' + (li + 1))}
                   </a>
                 </li>

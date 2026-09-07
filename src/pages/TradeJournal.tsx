@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const faqItems = [
   { q: 'What is a trading journal, and why do I need one?', a: 'A trading journal records every trade you take — entries, exits, size, results, and the reasoning behind each decision. You need one because memory is unreliable: a journal turns scattered trades into data you can analyse, so you stop repeating mistakes and start repeating what works.' },
@@ -49,12 +50,13 @@ const platformSync = [
 ];
 
 export default function TradeJournal() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Trade Journal — The Journal That Doesn't Just Track. It Improves. | Tradvio AI</title>
+        <title>{t('meta.journal')}</title>
         <meta name="description" content="Track every trade with Tradvio AI's journal. Automatic imports, AI insights, tag filters, and emotion tracking. Free to start — no credit card required." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/trade-journal/" />

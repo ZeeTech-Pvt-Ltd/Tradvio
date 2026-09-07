@@ -13,7 +13,7 @@ export default function ContactUs() {
   return (
     <>
       <Helmet>
-        <title>Contact Us — We Value Communication & Transparency | Tradvio AI</title>
+        <title>{t('meta.contact')}</title>
         <meta name="description" content="Questions about the platform, technical assistance, or collaboration opportunities? Get in touch with Tradvio AI — we promise a quick response." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/contact-us/" />

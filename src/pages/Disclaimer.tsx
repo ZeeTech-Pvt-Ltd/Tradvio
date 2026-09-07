@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const sections = [
   {
@@ -40,12 +41,13 @@ const sections = [
 ];
 
 export default function Disclaimer() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Disclaimer | Tradvio AI</title>
+        <title>{t('meta.disclaimer')}</title>
         <meta name="description" content="The information provided by Tradvio AI is for general informational and educational purposes only. Read our full disclaimer." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/disclaimer/" />

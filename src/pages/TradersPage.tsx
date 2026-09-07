@@ -5,6 +5,7 @@ import { agents, type Agent } from '@/lib/agents';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 /* ─── Helpers ───────────────────────────────────────── */
 function fmtPct(n: number): string {
@@ -88,6 +89,7 @@ function InlineSelect({ value, onChange, options }: { value: string; onChange: (
 const TABS = ['All Agents', 'Low Risk', 'Medium Risk', 'High Risk'];
 
 export default function TradersPage() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [tab, setTab] = useState('All Agents');
   const [market, setMarket] = useState('All Markets');
@@ -111,7 +113,7 @@ export default function TradersPage() {
   return (
     <>
       <Helmet>
-        <title>AI Traders | Tradvio AI</title>
+        <title>{t('meta.traders')}</title>
         <meta name="description" content="Browse and discover Tradvio AI trading agents. Compare live returns across markets, strategies, and AI models." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/trader/" />

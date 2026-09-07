@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const faqItems = [
   { q: 'What is strategy backtesting?', a: 'Backtesting is the process of testing a trading strategy against historical market data to see how it would have performed. It helps you validate your ideas before risking real capital.' },
@@ -64,12 +65,13 @@ const features = [
 ];
 
 export default function StrategyBacktesting() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>Strategy Backtesting — Test Before You Trade | Tradvio AI</title>
+        <title>{t('meta.backtesting')}</title>
         <meta name="description" content="Backtest your trading strategies against years of historical data. Validate ideas, optimise parameters, and trade with confidence. Free to start." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/strategy-backtesting/" />

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/lib/i18n';
 
 const faqItems = [
   { q: 'Do I need to know how to code?', a: 'No. Describe your strategy in plain English and the AI writes the code for you. The generated code stays visible and editable in the built-in editor — so you can learn from it or tweak it anytime.' },
@@ -72,12 +73,13 @@ function onCandle(candle, state) {
 }`;
 
 export default function AIStrategyBuilder() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       <Helmet>
-        <title>AI Strategy Builder — Build, Backtest & Deploy Trading Strategies | Tradvio AI</title>
+        <title>{t('meta.builder')}</title>
         <meta name="description" content="Describe your strategy in plain English. Tradvio AI writes the code, backtests it instantly, and deploys it live. No coding required. Free to start." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-strategy-builder/" />
