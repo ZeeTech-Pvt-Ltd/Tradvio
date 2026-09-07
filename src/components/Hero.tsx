@@ -1,4 +1,7 @@
+import { useLanguage } from '@/lib/i18n';
+
 export default function Hero() {
+  const { t } = useLanguage();
   return (
     <section className="relative pt-[calc(72px+4rem)] pb-16 md:pb-0 bg-deep text-white overflow-hidden">
       {/* Red radial glows */}
@@ -25,24 +28,22 @@ export default function Hero() {
           <div className="py-8 md:py-12">
             <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-accent uppercase mb-4 bg-accent-light px-3 py-1.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              AI-Assisted Market Research
+              {t('hero.badge')}
             </span>
 
             <h1 className="text-white max-w-[600px] mb-4">
-              Analyse Markets. Test Strategies.
+              {t('hero.title1')}
               <br />
-              <span className="text-accent">Trade with Confidence.</span>
+              <span className="text-accent">{t('hero.title2')}</span>
             </h1>
 
             <p className="text-white/65 text-lg leading-relaxed mb-8 max-w-[540px]">
-              Tradvio AI is a research and analysis platform — not a broker and not a shortcut.
-              Upload charts, ask research questions, build and backtest strategies, and practise
-              with paper trading before risking real capital.
+              {t('hero.sub')}
             </p>
 
             <div className="flex gap-4 flex-wrap mb-6">
               <a href="/get-started/" className="btn btn-primary btn-lg group">
-                Start Free Analysis
+                {t('hero.cta1')}
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
                 </svg>
@@ -51,22 +52,22 @@ export default function Hero() {
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
-                See How It Works
+                {t('hero.cta2')}
               </a>
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-soft">
               <span className="flex items-center gap-1.5">
-                <span className="text-success font-bold text-sm">&#10003;</span> Free to start
+                <span className="text-success font-bold text-sm">&#10003;</span> {t('hero.trust1')}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="text-success font-bold text-sm">&#10003;</span> No credit card
+                <span className="text-success font-bold text-sm">&#10003;</span> {t('hero.trust2')}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="text-success font-bold text-sm">&#10003;</span> Paper trading first
+                <span className="text-success font-bold text-sm">&#10003;</span> {t('hero.trust3')}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="text-success font-bold text-sm">&#10003;</span> Data labels on everything
+                <span className="text-success font-bold text-sm">&#10003;</span> {t('hero.trust4')}
               </span>
             </div>
           </div>

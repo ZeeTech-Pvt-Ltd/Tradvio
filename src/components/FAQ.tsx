@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { faqs } from '@/lib/data';
+import { useLanguage } from '@/lib/i18n';
 
 export default function FAQ() {
+  const { t } = useLanguage();
   const [openId, setOpenId] = useState<string | null>(null);
 
   const toggle = (id: string) => {
@@ -18,7 +20,7 @@ export default function FAQ() {
     <section id="faq" className="section bg-surface">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Frequently Asked Questions</h2>
+          <h2>{t('faq.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

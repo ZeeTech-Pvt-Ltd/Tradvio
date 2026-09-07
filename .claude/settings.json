@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(sed -i \"s/^export default function CanCannot\\(\\) {/import { useLanguage } from '..\\\\/lib\\\\/i18n';\\\\n\\\\nexport default function CanCannot\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/CanCannot.tsx)",
+      "Bash(sed -i \"s|^          <h2>What Tradvio Can Help With — And What It Cannot Do</h2>|          <h2>{t\\('cc.title'\\)}</h2>|; s|^          <p>Honest expectations build better traders. Here\\\\&apos;s the reality.</p>|          <p>{t\\('cc.sub'\\)}</p>|\" src/components/CanCannot.tsx)",
+      "Bash(sed -i \"s/^export default function DataTransparency\\(\\) {/import { useLanguage } from '..\\\\/lib\\\\/i18n';\\\\n\\\\nexport default function DataTransparency\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/DataTransparency.tsx)",
+      "Bash(sed -i \"s|^          <h2>Data Transparency — Every Number Tells You Its Source</h2>|          <h2>{t\\('dt.title'\\)}</h2>|\" src/components/DataTransparency.tsx)",
+      "Bash(sed -i \"s/^export default function TrustCentrePreview\\(\\) {/import { useLanguage } from '..\\\\/lib\\\\/i18n';\\\\n\\\\nexport default function TrustCentrePreview\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/TrustCentrePreview.tsx)",
+      "Bash(sed -i \"s|^          <h2>Built With Trust at the Centre</h2>|          <h2>{t\\('tc.title'\\)}</h2>|; s|^            Transparency isn|            {t\\('tc.sub'\\)}|\" src/components/TrustCentrePreview.tsx)",
+      "Bash(sed -i \"s|^              <h3 className=\\\\\"mb-2\\\\\">{card.title}</h3>|              <h3 className=\\\\\"mb-2\\\\\">{t\\('tc.t' + \\(trustCards.indexOf\\(card\\) + 1\\)\\)}</h3>|; s|^              <p className=\\\\\"text-sm text-muted-dark\\\\\">{card.description}</p>|              <p className=\\\\\"text-sm text-muted-dark\\\\\">{t\\('tc.d' + \\(trustCards.indexOf\\(card\\) + 1\\)\\)}</p>|\" src/components/TrustCentrePreview.tsx)",
+      "Bash(sed -i \"s/^export default function Testimonials\\(\\) {/import { useLanguage } from '..\\\\/lib\\\\/i18n';\\\\n\\\\nexport default function Testimonials\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/Testimonials.tsx)",
+      "Bash(sed -i \"s|^          <h2>What Traders Say</h2>|          <h2>{t\\('test.title'\\)}</h2>|; s|^          <p>Real feedback from platform users. Individual experiences — trading outcomes vary.</p>|          <p>{t\\('test.sub'\\)}</p>|\" src/components/Testimonials.tsx)",
+      "Bash(sed -i \"s/^import { marketStats } from '@\\\\/lib\\\\/data';/import { marketStats } from '@\\\\/lib\\\\/data';\\\\nimport { useLanguage } from '@\\\\/lib\\\\/i18n';/; s/^export default function MarketStats\\(\\) {/export default function MarketStats\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/; s|^          <h2>Trading by the Numbers</h2>|          <h2>{t\\('ms.title'\\)}</h2>|\" src/components/MarketStats.tsx)",
+      "Bash(sed -i \"s/^import { faqs } from '@\\\\/lib\\\\/data';/import { faqs } from '@\\\\/lib\\\\/data';\\\\nimport { useLanguage } from '@\\\\/lib\\\\/i18n';/; s/^export default function FAQ\\(\\) {/export default function FAQ\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/; s|^          <h2>Frequently Asked Questions</h2>|          <h2>{t\\('faq.title'\\)}</h2>|\" src/components/FAQ.tsx)",
+      "Bash(sed -i \"s/^const LOGO_SRC = '\\\\/trdavio-logo.png';/import { useLanguage } from '@\\\\/lib\\\\/i18n';\\\\n\\\\nconst LOGO_SRC = '\\\\/trdavio-logo.png';/\" src/components/Footer.tsx)",
+      "Bash(sed -i \"s/^export default function Footer\\(\\) {/export default function Footer\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/Footer.tsx)",
+      "Bash(sed -i \"s/^              Products$/              {t\\('footer.products'\\)}/; s/^              Company$/              {t\\('footer.company'\\)}/; s/^              Legal$/              {t\\('footer.legal'\\)}/\" src/components/Footer.tsx)"
+    ]
+  }
+}

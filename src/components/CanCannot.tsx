@@ -16,13 +16,16 @@ const doesNot = [
   'Replace your own research and judgment',
 ];
 
+import { useLanguage } from '../lib/i18n';
+
 export default function CanCannot() {
+  const { t } = useLanguage();
   return (
     <section id="can-cannot" className="section">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>What Tradvio Can Help With — And What It Cannot Do</h2>
-          <p>Honest expectations build better traders. Here&apos;s the reality.</p>
+          <h2>{t('cc.title')}</h2>
+          <p>{t('cc.sub')}</p>
         </div>
 
         <div className="grid-2">

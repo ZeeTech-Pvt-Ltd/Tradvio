@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '@/lib/i18n';
 
 const VIDEO_SRC = 'https://tradvio.com/step-4-plug-in.mp4';
 
@@ -12,6 +13,7 @@ const checkItems = [
 ];
 
 export default function WhyTradvioAI() {
+  const { t } = useLanguage();
   const videoWrapRef = useRef<HTMLDivElement | null>(null);
   const [videoVisible, setVideoVisible] = useState(false);
 
@@ -44,20 +46,18 @@ export default function WhyTradvioAI() {
           {/* Left — Text + Checklist */}
           <div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ink leading-[1.15] mb-6">
-              Why Tradvio AI <span className="text-accent">Stands Out</span>
+              {t('why.title1')} <span className="text-accent">{t('why.title2')}</span>
             </h2>
-            <p className="text-muted-dark leading-relaxed text-lg mb-6">
-              Our platform is designed for smooth performance across devices. This allows users to trade anytime with a stable internet connection.
-            </p>
+            <p className="text-muted-dark leading-relaxed text-lg mb-6">{t('why.p1')}</p>
             <p className="text-muted-dark leading-relaxed text-lg mb-8">
-              It has{' '}
-              <strong className="text-ink">no registration fees, hidden charges, or commissions</strong>
-              . Beginners can invest with smaller capital to avoid heavy risks.
+              {t('why.p2a')}{' '}
+              <strong className="text-ink">{t('why.p2b')}</strong>
+              {t('why.p2c')}
             </p>
 
             {/* Checklist */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {checkItems.map((item) => (
+              {checkItems.map((item, i) => (
                 <div key={item} className="flex items-center gap-3 text-sm text-muted-dark group">
                   <div className="w-6 h-6 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors">
                     <svg
@@ -72,7 +72,7 @@ export default function WhyTradvioAI() {
                       />
                     </svg>
                   </div>
-                  {item}
+                  {t(`why.c${i + 1}`)}
                 </div>
               ))}
             </div>

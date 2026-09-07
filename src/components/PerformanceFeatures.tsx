@@ -1,3 +1,5 @@
+import { useLanguage } from '@/lib/i18n';
+
 const features = [
   {
     color: '#DC2626',
@@ -47,16 +49,15 @@ const icons = [
 ];
 
 export default function PerformanceFeatures() {
+  const { t } = useLanguage();
   return (
     <section className="section bg-deep">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header text-center">
           <h2>
-            Enhanced Performance <span className="text-accent">Features</span>
+            {t('pf.title1')} <span className="text-accent">{t('pf.title2')}</span>
           </h2>
-          <p>
-            Automated features with modifiable settings let investors trade according to their style and preferences.
-          </p>
+          <p>{t('pf.sub')}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
@@ -75,8 +76,8 @@ export default function PerformanceFeatures() {
                 </svg>
               </div>
 
-              <h3 className="text-base font-semibold text-ink mb-2">{f.title}</h3>
-              <p className="text-sm text-muted-dark leading-relaxed">{f.desc}</p>
+              <h3 className="text-base font-semibold text-ink mb-2">{t(`pf.t${i + 1}`)}</h3>
+              <p className="text-sm text-muted-dark leading-relaxed">{t(`pf.d${i + 1}`)}</p>
             </div>
           ))}
         </div>

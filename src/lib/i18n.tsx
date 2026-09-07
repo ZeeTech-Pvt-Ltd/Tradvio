@@ -1,0 +1,428 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+
+export type Language = 'en' | 'it' | 'de' | 'fr' | 'es';
+
+export const LANGUAGES: { code: Language; flag: string; label: string }[] = [
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+  { code: 'it', flag: '🇮🇹', label: 'IT' },
+  { code: 'de', flag: '🇩🇪', label: 'DE' },
+  { code: 'fr', flag: '🇫🇷', label: 'FR' },
+  { code: 'es', flag: '🇪🇸', label: 'ES' },
+];
+
+type Dict = Record<string, string>;
+
+const en: Dict = {
+  // Nav
+  'nav.products': 'Products', 'nav.resources': 'Resources', 'nav.traders': 'Traders',
+  'nav.leaderboard': 'Leaderboard', 'nav.platform': 'AI Trading Platform', 'nav.contact': 'Contact',
+  'nav.cta': 'Start Free Analysis',
+  // Hero
+  'hero.badge': 'AI-Powered Platform', 'hero.title1': 'Analyse Markets. Test Strategies.',
+  'hero.title2': 'Trade with Confidence.',
+  'hero.sub': 'Tradvio AI analyzes charts, trends and momentum in seconds — turning raw price action into clear entry signals. You stay in control of every decision.',
+  'hero.cta1': 'Start Free Analysis', 'hero.cta2': 'See How It Works',
+  'hero.trust1': 'Free to start', 'hero.trust2': 'No credit card',
+  'hero.trust3': 'Paper trading first', 'hero.trust4': 'Data labels on everything',
+  // Leaderboard
+  'leaderboard.eyebrow': 'Live Rankings', 'leaderboard.title': 'AI Bot Leaderboard',
+  'leaderboard.sub': 'Compare Tradvio AI agents by market, strategy, AI model, and risk across global markets.',
+  'leaderboard.viewAll': 'View Full Leaderboard',
+  // TrustBar
+  'trust.t1': 'No Profit Guarantees', 'trust.d1': 'We never promise returns. Markets are unpredictable.',
+  'trust.t2': 'Verified Data Labels', 'trust.d2': 'Live, delayed, backtested or illustrative — always shown.',
+  'trust.t3': 'Paper Trading First', 'trust.d3': 'Practise with virtual funds before risking real capital.',
+  'trust.t4': 'Transparent Methodology', 'trust.d4': 'See the assumptions behind every result and analysis.',
+  // TradingPerformance
+  'tp.title': 'Real-Time Trading Performance', 'tp.live': 'Market Summary',
+  'tp.indices': 'Indices', 'tp.movers': 'Market Movers', 'tp.legend1': 'Buy', 'tp.legend2': 'Sell',
+  // PlatformTools
+  'pt.title': 'Platform Tools — Research, Test, Decide',
+  'pt.sub': 'Six interconnected tools built for traders who do their own research. Each comes with transparent data labels and clear limitations.',
+  'pt.t1': 'AI Chart Analyser', 'pt.d1': 'Upload a chart and get structured observations: trend direction, key support and resistance levels, and pattern recognition with confidence scoring.',
+  'pt.t2': 'AI Strategy Builder', 'pt.d2': 'Turn plain-English trading ideas into testable, rules-based strategies. Define entries, exits, and risk parameters.',
+  'pt.t3': 'Strategy Backtesting', 'pt.d3': 'Run your strategies against historical market data. See how they would have performed — with clear cost and slippage assumptions.',
+  'pt.t4': 'Paper Trading', 'pt.d4': 'Practise with virtual funds under real market conditions. Build confidence before risking any capital.',
+  'pt.t5': 'AI Trading Signals', 'pt.d5': 'Market scans with transparent confidence ratings. Each signal shows its data source, timeframe, and generation timestamp.',
+  'pt.t6': 'Risk Management', 'pt.d6': 'Set position size limits, daily loss caps, exposure tracking, and drawdown alerts. Controls built into every workflow.',
+  // HowItWorks
+  'hiw.title': 'How It Works — See It in Action',
+  'hiw.sub': 'Two screens. Four steps. Full transparency at every stage.',
+  // PerformanceFeatures
+  'pf.title1': 'Enhanced Performance', 'pf.title2': 'Features',
+  'pf.sub': 'Automated features with modifiable settings let investors trade according to their style and preferences.',
+  'pf.t1': 'Accessible Across Devices', 'pf.d1': 'Our platform can be accessed across different devices like tablets, laptops, and smartphones.',
+  'pf.t2': 'Uncovers Hidden Patterns', 'pf.d2': 'The advanced algorithms can easily uncover hidden patterns in huge amounts of market data.',
+  'pf.t3': 'Gathers and Processes Data', 'pf.d3': 'The system collects data from authentic sources to process it and provide accurate insights.',
+  'pf.t4': 'Limits Trading Risks', 'pf.d4': 'The risk-free tools allow Tradvio AI users to limit the dangers of unexpected market moves.',
+  'pf.t5': "Expands Users' Trading Account", 'pf.d5': 'Multiple asset or market investments help users diversify their trading account or portfolio.',
+  'pf.t6': 'Improves Strategies in Live Trades', 'pf.d6': 'The system saves trades by changing the strategies during changing market conditions.',
+  // WhyTradvioAI
+  'why.title1': 'Why Tradvio AI', 'why.title2': 'Stands Out',
+  'why.p1': 'Our platform is designed for smooth performance across devices. This allows users to trade anytime with a stable internet connection.',
+  'why.p2a': 'It has', 'why.p2b': 'no registration fees, hidden charges, or commissions', 'why.p2c': '. Beginners can invest with smaller capital to avoid heavy risks.',
+  'why.c1': 'Customizable dashboard', 'why.c2': 'Speedy real-time alerts', 'why.c3': 'Easy deposits & withdrawals',
+  'why.c4': '24/7 reliable user support', 'why.c5': 'Multi-asset diversification', 'why.c6': 'Continuous AI improvement',
+  // CanCannot
+  'cc.title': 'What Tradvio Can Help With — And What It Cannot Do',
+  'cc.sub': 'Honest expectations build better traders. Here\'s the reality.',
+  // DataTransparency
+  'dt.title': 'Data Transparency — Every Number Tells You Its Source',
+  'dt.live': 'Live Data', 'dt.realtime': 'Real-Time', 'dt.delayed': 'Delayed', 'dt.delay15': '15-Minute Delay',
+  'dt.paper': 'Paper Traded', 'dt.sim': 'Simulated', 'dt.back': 'Backtested', 'dt.hist': 'Historical',
+  // TrustCentre
+  'tc.title': 'Built With Trust at the Centre',
+  'tc.sub': 'Transparency isn\'t a marketing claim — it\'s how we build every feature.',
+  'tc.t1': 'Data Methodology', 'tc.d1': 'How we source, label, and verify every data point on the platform. Full transparency on data providers, update frequencies, and limitations.',
+  'tc.t2': 'Security', 'tc.d2': 'Encryption at rest and in transit. Access controls, regular security audits, and strict data handling policies.',
+  'tc.t3': 'Privacy', 'tc.d3': 'We don\'t sell your data. Period. Your personal information and trading activity remain private. Request deletion anytime.',
+  'tc.t4': 'Regulatory Alignment', 'tc.d4': 'Built with FCA principles in mind. Tradvio AI is a research platform — not a regulated financial services firm.',
+  // MarketInsights
+  'insights.title1': 'Trade Smarter with', 'insights.title2': 'AI-Powered Market Insights',
+  'insights.body': 'Explore a smarter way to approach the markets with our AI trading platform. Analyze market data, discover potential trading opportunities, and gain clearer insights with intelligent AI-powered tools — all from one simple platform.',
+  'insights.cta': 'Explore Our Trading Platform',
+  // Testimonials
+  'test.title': 'What Traders Say', 'test.sub': 'Real feedback from platform users. Individual experiences — trading outcomes vary.',
+  'test.q1': 'The chart analyser gives me a structured second opinion. I still make my own calls, but having AI flag levels I might have missed has made me a more thorough trader.',
+  'test.q2': 'Paper trading before going live was the best advice. I spent two months testing strategies with virtual funds. It saved me from some expensive beginner mistakes.',
+  'test.q3': 'I like that every number has a label. Live, delayed, backtested — I know what I\'m looking at. Most platforms blur these lines. Transparency matters.',
+  'test.r1': 'Retail Trader', 'test.r2': 'Part-Time Trader', 'test.r3': 'Independent Trader',
+  'test.e1': '3 years experience', 'test.e2': '1 year experience', 'test.e3': '5 years experience',
+  'test.d1': '2 weeks ago', 'test.d2': '1 month ago', 'test.d3': '3 weeks ago',
+  // MarketStats
+  'ms.title': 'Trading by the Numbers',
+  'ms.sub': 'Context matters. Here are key data points every trader should know — sourced and cited.',
+  'ms.note': 'Statistics are for context only. They describe the trading environment — not Tradvio AI\'s performance. Past data, backtests, and industry statistics do not guarantee future results.',
+  // FAQ
+  'faq.title': 'Frequently Asked Questions',
+  // Footer
+  'footer.products': 'Products', 'footer.company': 'Company', 'footer.legal': 'Legal',
+  'footer.tagline': 'AI-assisted market research and strategy testing for traders who make their own decisions.',
+};
+
+/* Translated-language dictionaries override keys above; anything missing falls back to English. */
+const it: Dict = {
+  'nav.products': 'Prodotti', 'nav.resources': 'Risorse', 'nav.traders': 'Trader', 'nav.leaderboard': 'Classifica',
+  'nav.platform': 'Piattaforma di Trading AI', 'nav.contact': 'Contatti', 'nav.cta': 'Inizia l’Analisi Gratuita',
+  'hero.badge': 'Piattaforma Potenziata dall’AI', 'hero.title1': 'Analizza i Mercati. Testa le Strategie.',
+  'hero.title2': 'Fai Trading con Fiducia.',
+  'hero.sub': 'Tradvio AI analizza grafici, trend e momentum in pochi secondi — trasformando l’azione dei prezzi in chiari segnali di ingresso. Mantieni il controllo di ogni decisione.',
+  'hero.cta1': 'Inizia l’Analisi Gratuita', 'hero.cta2': 'Come Funziona',
+  'hero.trust1': 'Gratis per iniziare', 'hero.trust2': 'Nessuna carta di credito',
+  'hero.trust3': 'Prima il paper trading', 'hero.trust4': 'Etichette dati su tutto',
+  'leaderboard.eyebrow': 'Classifiche Live', 'leaderboard.title': 'Classifica dei Bot AI',
+  'leaderboard.sub': 'Confronta gli agenti Tradvio AI per mercato, strategia, modello AI e rischio sui mercati globali.',
+  'leaderboard.viewAll': 'Vedi Classifica Completa',
+  'trust.t1': 'Nessuna Garanzia di Profitto', 'trust.d1': 'Non promettiamo mai rendimenti. I mercati sono imprevedibili.',
+  'trust.t2': 'Etichette Dati Verificate', 'trust.d2': 'Live, ritardati, backtestati o illustrativi — sempre indicati.',
+  'trust.t3': 'Prima il Paper Trading', 'trust.d3': 'Fai pratica con fondi virtuali prima di rischiare capitale reale.',
+  'trust.t4': 'Metodologia Trasparente', 'trust.d4': 'Vedi le ipotesi dietro ogni risultato e analisi.',
+  'tp.title': 'Performance di Trading in Tempo Reale', 'tp.live': 'Riepilogo di Mercato',
+  'tp.indices': 'Indici', 'tp.movers': 'Maggiori Movimenti', 'tp.legend1': 'Acquista', 'tp.legend2': 'Vendi',
+  'pt.title': 'Strumenti della Piattaforma — Ricerca, Testa, Decidi',
+  'pt.sub': 'Sei strumenti interconnessi per trader che fanno le proprie ricerche. Ognuno con etichette dati trasparenti e limiti chiari.',
+  'pt.t1': 'Analizzatore Grafici AI', 'pt.d1': 'Carica un grafico e ottieni osservazioni strutturate: direzione del trend, livelli chiave di supporto e resistenza e riconoscimento dei pattern con punteggio di affidabilità.',
+  'pt.t2': 'Costruttore di Strategie AI', 'pt.d2': 'Trasforma le tue idee di trading in strategie testabili basate su regole. Definisci ingressi, uscite e parametri di rischio.',
+  'pt.t3': 'Backtesting delle Strategie', 'pt.d3': 'Testa le tue strategie sui dati storici di mercato. Scopri come avrebbero performato — con ipotesi chiare su costi e slippage.',
+  'pt.t4': 'Paper Trading', 'pt.d4': 'Fai pratica con fondi virtuali in condizioni di mercato reali. Costruisci fiducia prima di rischiare capitale.',
+  'pt.t5': 'Segnali di Trading AI', 'pt.d5': 'Scansioni di mercato con valutazioni di affidabilità trasparenti. Ogni segnale mostra fonte dati, timeframe e timestamp.',
+  'pt.t6': 'Gestione del Rischio', 'pt.d6': 'Imposta limiti di posizione, limiti di perdita giornalieri, monitoraggio dell’esposizione e avvisi di drawdown.',
+  'hiw.title': 'Come Funziona — Guardalo in Azione',
+  'hiw.sub': 'Due schermate. Quattro passaggi. Trasparenza totale in ogni fase.',
+  'pf.title1': 'Performance Migliorate', 'pf.title2': 'Funzionalità',
+  'pf.sub': 'Funzionalità automatizzate con impostazioni modificabili permettono agli investitori di operare secondo il proprio stile e le proprie preferenze.',
+  'pf.t1': 'Accessibile su Tutti i Dispositivi', 'pf.d1': 'La nostra piattaforma è accessibile da diversi dispositivi come tablet, laptop e smartphone.',
+  'pf.t2': 'Scopre Pattern Nascosti', 'pf.d2': 'Gli algoritmi avanzati possono facilmente scoprire pattern nascosti in enormi quantità di dati di mercato.',
+  'pf.t3': 'Raccoglie ed Elabora i Dati', 'pf.d3': 'Il sistema raccoglie dati da fonti autentiche per elaborarli e fornire approfondimenti accurati.',
+  'pf.t4': 'Limita i Rischi di Trading', 'pf.d4': 'Gli strumenti senza rischio permettono agli utenti di Tradvio AI di limitare i pericoli dei movimenti di mercato inattesi.',
+  'pf.t5': 'Espande il Conto di Trading', 'pf.d5': 'Investimenti in più asset o mercati aiutano gli utenti a diversificare il proprio conto o portafoglio.',
+  'pf.t6': 'Migliora le Strategie nel Trading Live', 'pf.d6': 'Il sistema salva le operazioni cambiando le strategie al mutare delle condizioni di mercato.',
+  'why.title1': 'Perché Tradvio AI', 'why.title2': 'Si Distingue',
+  'why.p1': 'La nostra piattaforma è progettata per prestazioni fluide su tutti i dispositivi. Questo permette di fare trading in qualsiasi momento con una connessione stabile.',
+  'why.p2a': 'Non ha', 'why.p2b': 'commissioni di registrazione, costi nascosti o commissioni', 'why.p2c': '. I principianti possono investire con capitali ridotti per evitare rischi elevati.',
+  'why.c1': 'Dashboard personalizzabile', 'why.c2': 'Avvisi rapidi in tempo reale', 'why.c3': 'Depositi e prelievi semplici',
+  'why.c4': 'Supporto utenti affidabile 24/7', 'why.c5': 'Diversificazione multi-asset', 'why.c6': 'Miglioramento continuo dell’AI',
+  'cc.title': 'Cosa Tradvio Può Aiutarti a Fare — E Cosa Non Può Fare',
+  'cc.sub': 'Aspettative oneste creano trader migliori. Ecco la realtà.',
+  'dt.title': 'Trasparenza dei Dati — Ogni Numero Indica la Sua Fonte',
+  'dt.live': 'Dati Live', 'dt.realtime': 'Tempo Reale', 'dt.delayed': 'Ritardati', 'dt.delay15': 'Ritardo di 15 Minuti',
+  'dt.paper': 'Paper Trading', 'dt.sim': 'Simulati', 'dt.back': 'Backtestati', 'dt.hist': 'Storici',
+  'tc.title': 'Costruito con la Fiducia al Centro',
+  'tc.sub': 'La trasparenza non è uno slogan di marketing — è il modo in cui costruiamo ogni funzionalità.',
+  'tc.t1': 'Metodologia dei Dati', 'tc.d1': 'Come reperiamo, etichettiamo e verifichiamo ogni dato sulla piattaforma. Trasparenza totale su fornitori, frequenze di aggiornamento e limiti.',
+  'tc.t2': 'Sicurezza', 'tc.d2': 'Crittografia a riposo e in transito. Controlli di accesso, audit di sicurezza regolari e politiche rigorose sui dati.',
+  'tc.t3': 'Privacy', 'tc.d3': 'Non vendiamo i tuoi dati. Punto. Le tue informazioni personali e la tua attività di trading restano private. Richiedi la cancellazione in qualsiasi momento.',
+  'tc.t4': 'Allineamento Normativo', 'tc.d4': 'Costruito secondo i principi FCA. Tradvio AI è una piattaforma di ricerca — non una società di servizi finanziari regolamentata.',
+  'insights.title1': 'Fai Trading in Modo Intelligente con', 'insights.title2': 'Analisi di Mercato Potenziate dall’AI',
+  'insights.body': 'Esplora un modo più intelligente di affrontare i mercati con la nostra piattaforma di trading AI. Analizza i dati di mercato, scopri potenziali opportunità e ottieni intuizioni più chiare con strumenti intelligenti — tutto da un’unica piattaforma.',
+  'insights.cta': 'Esplora la Nostra Piattaforma di Trading',
+  'test.title': 'Cosa Dicono i Trader', 'test.sub': 'Feedback reali dagli utenti della piattaforma. Esperienze individuali — i risultati variano.',
+  'test.q1': 'L’analizzatore di grafici mi dà una seconda opinione strutturata. Prendo ancora le mie decisioni, ma avere l’AI che segnala livelli che potrei aver perso mi ha reso un trader più accurato.',
+  'test.q2': 'Il paper trading prima di passare al live è stato il consiglio migliore. Ho passato due mesi a testare strategie con fondi virtuali. Mi ha risparmiato costosi errori da principiante.',
+  'test.q3': 'Mi piace che ogni numero abbia un’etichetta. Live, ritardato, backtestato — so cosa sto guardando. La maggior parte delle piattaforme confonde queste linee. La trasparenza conta.',
+  'test.r1': 'Trader Retail', 'test.r2': 'Trader Part-Time', 'test.r3': 'Trader Indipendente',
+  'test.e1': '3 anni di esperienza', 'test.e2': '1 anno di esperienza', 'test.e3': '5 anni di esperienza',
+  'test.d1': '2 settimane fa', 'test.d2': '1 mese fa', 'test.d3': '3 settimane fa',
+  'ms.title': 'Il Trading in Numeri',
+  'ms.sub': 'Il contesto conta. Ecco i dati chiave che ogni trader dovrebbe conoscere — con fonti e citazioni.',
+  'ms.note': 'Le statistiche servono solo come contesto. Descrivono l’ambiente di trading — non le performance di Tradvio AI. I dati passati, i backtest e le statistiche di settore non garantiscono risultati futuri.',
+  'faq.title': 'Domande Frequenti',
+  'footer.products': 'Prodotti', 'footer.company': 'Azienda', 'footer.legal': 'Legale',
+  'footer.tagline': 'Ricerca di mercato assistita dall’AI e test delle strategie per trader che prendono le proprie decisioni.',
+};
+
+const de: Dict = {
+  'nav.products': 'Produkte', 'nav.resources': 'Ressourcen', 'nav.traders': 'Trader', 'nav.leaderboard': 'Rangliste',
+  'nav.platform': 'KI-Handelsplattform', 'nav.contact': 'Kontakt', 'nav.cta': 'Kostenlose Analyse starten',
+  'hero.badge': 'KI-gestützte Plattform', 'hero.title1': 'Märkte analysieren. Strategien testen.',
+  'hero.title2': 'Mit Vertrauen handeln.',
+  'hero.sub': 'Tradvio AI analysiert Charts, Trends und Momentum in Sekunden — und verwandelt rohe Preisbewegungen in klare Einstiegssignale. Sie behalten die Kontrolle über jede Entscheidung.',
+  'hero.cta1': 'Kostenlose Analyse starten', 'hero.cta2': 'So funktioniert es',
+  'hero.trust1': 'Kostenlos starten', 'hero.trust2': 'Keine Kreditkarte',
+  'hero.trust3': 'Zuerst Paper-Trading', 'hero.trust4': 'Datenlabels überall',
+  'leaderboard.eyebrow': 'Live-Ranglisten', 'leaderboard.title': 'KI-Bot-Rangliste',
+  'leaderboard.sub': 'Vergleichen Sie Tradvio AI-Agenten nach Markt, Strategie, KI-Modell und Risiko auf den globalen Märkten.',
+  'leaderboard.viewAll': 'Vollständige Rangliste ansehen',
+  'trust.t1': 'Keine Gewinngarantien', 'trust.d1': 'Wir versprechen niemals Renditen. Märkte sind unberechenbar.',
+  'trust.t2': 'Verifizierte Datenlabels', 'trust.d2': 'Live, verzögert, Backtest oder illustrativ — immer angezeigt.',
+  'trust.t3': 'Zuerst Paper-Trading', 'trust.d3': 'Üben Sie mit virtuellem Kapital, bevor Sie echtes Geld riskieren.',
+  'trust.t4': 'Transparente Methodik', 'trust.d4': 'Sehen Sie die Annahmen hinter jedem Ergebnis und jeder Analyse.',
+  'tp.title': 'Echtzeit-Handelsperformance', 'tp.live': 'Marktübersicht',
+  'tp.indices': 'Indizes', 'tp.movers': 'Marktbeweger', 'tp.legend1': 'Kaufen', 'tp.legend2': 'Verkaufen',
+  'pt.title': 'Plattform-Tools — Recherchieren, Testen, Entscheiden',
+  'pt.sub': 'Sechs vernetzte Tools für Trader, die ihre eigene Recherche betreiben. Jedes mit transparenten Datenlabels und klaren Grenzen.',
+  'pt.t1': 'KI-Chart-Analysator', 'pt.d1': 'Laden Sie einen Chart hoch und erhalten Sie strukturierte Beobachtungen: Trendrichtung, wichtige Unterstützungs- und Widerstandsniveaus sowie Mustererkennung mit Konfidenzbewertung.',
+  'pt.t2': 'KI-Strategie-Builder', 'pt.d2': 'Verwandeln Sie Handelsideen in testbare, regelbasierte Strategien. Definieren Sie Einstiege, Ausstiege und Risikoparameter.',
+  'pt.t3': 'Strategie-Backtesting', 'pt.d3': 'Testen Sie Ihre Strategien anhand historischer Marktdaten. Sehen Sie, wie sie abgeschnitten hätten — mit klaren Kosten- und Slippage-Annahmen.',
+  'pt.t4': 'Paper-Trading', 'pt.d4': 'Üben Sie mit virtuellem Kapital unter realen Marktbedingungen. Bauen Sie Vertrauen auf, bevor Sie Kapital riskieren.',
+  'pt.t5': 'KI-Handelssignale', 'pt.d5': 'Marktscans mit transparenten Konfidenzbewertungen. Jedes Signal zeigt Datenquelle, Zeitrahmen und Zeitstempel.',
+  'pt.t6': 'Risikomanagement', 'pt.d6': 'Legen Sie Positionslimits, Tagesverlustgrenzen, Expositionsüberwachung und Drawdown-Warnungen fest.',
+  'hiw.title': 'So funktioniert es — In Aktion erleben',
+  'hiw.sub': 'Zwei Bildschirme. Vier Schritte. Volle Transparenz in jeder Phase.',
+  'pf.title1': 'Verbesserte Performance', 'pf.title2': 'Funktionen',
+  'pf.sub': 'Automatisierte Funktionen mit anpassbaren Einstellungen lassen Anleger nach ihrem eigenen Stil und ihren Vorlieben handeln.',
+  'pf.t1': 'Auf allen Geräten zugänglich', 'pf.d1': 'Unsere Plattform ist auf verschiedenen Geräten wie Tablets, Laptops und Smartphones zugänglich.',
+  'pf.t2': 'Entdeckt verborgene Muster', 'pf.d2': 'Die fortschrittlichen Algorithmen können verborgene Muster in riesigen Mengen von Marktdaten aufdecken.',
+  'pf.t3': 'Sammelt und verarbeitet Daten', 'pf.d3': 'Das System sammelt Daten aus authentischen Quellen, um sie zu verarbeiten und präzise Erkenntnisse zu liefern.',
+  'pf.t4': 'Begrenzt Handelsrisiken', 'pf.d4': 'Die risikofreien Tools ermöglichen es Tradvio AI-Nutzern, die Gefahren unerwarteter Marktbewegungen zu begrenzen.',
+  'pf.t5': 'Erweitert das Handelskonto', 'pf.d5': 'Investitionen in mehrere Anlageklassen helfen Nutzern, ihr Konto oder Portfolio zu diversifizieren.',
+  'pf.t6': 'Verbessert Strategien im Live-Handel', 'pf.d6': 'Das System sichert Trades, indem es die Strategien bei veränderten Marktbedingungen anpasst.',
+  'why.title1': 'Warum Tradvio AI', 'why.title2': 'Herausragt',
+  'why.p1': 'Unsere Plattform ist für reibungslose Leistung auf allen Geräten ausgelegt. So können Nutzer jederzeit mit einer stabilen Internetverbindung handeln.',
+  'why.p2a': 'Es gibt', 'why.p2b': 'keine Registrierungsgebühren, versteckten Kosten oder Provisionen', 'why.p2c': '. Anfänger können mit kleinerem Kapital investieren, um hohe Risiken zu vermeiden.',
+  'why.c1': 'Anpassbares Dashboard', 'why.c2': 'Schnelle Echtzeit-Benachrichtigungen', 'why.c3': 'Einfache Ein- und Auszahlungen',
+  'why.c4': '24/7 zuverlässiger Support', 'why.c5': 'Multi-Asset-Diversifikation', 'why.c6': 'Kontinuierliche KI-Verbesserung',
+  'cc.title': 'Wobei Tradvio helfen kann — und was es nicht kann',
+  'cc.sub': 'Ehrliche Erwartungen schaffen bessere Trader. Hier ist die Realität.',
+  'dt.title': 'Datentransparenz — Jede Zahl nennt ihre Quelle',
+  'dt.live': 'Live-Daten', 'dt.realtime': 'Echtzeit', 'dt.delayed': 'Verzögert', 'dt.delay15': '15-Minuten-Verzögerung',
+  'dt.paper': 'Paper-Trading', 'dt.sim': 'Simuliert', 'dt.back': 'Backtest', 'dt.hist': 'Historisch',
+  'tc.title': 'Gebaut mit Vertrauen im Mittelpunkt',
+  'tc.sub': 'Transparenz ist kein Marketing-Versprechen — sie ist die Art, wie wir jede Funktion bauen.',
+  'tc.t1': 'Datenmethodik', 'tc.d1': 'Wie wir jeden Datenpunkt beschaffen, kennzeichnen und verifizieren. Volle Transparenz über Anbieter, Aktualisierungsfrequenzen und Grenzen.',
+  'tc.t2': 'Sicherheit', 'tc.d2': 'Verschlüsselung im Ruhezustand und bei der Übertragung. Zugriffskontrollen, regelmäßige Sicherheitsaudits und strenge Datenrichtlinien.',
+  'tc.t3': 'Datenschutz', 'tc.d3': 'Wir verkaufen Ihre Daten nicht. Punkt. Ihre persönlichen Daten und Handelsaktivitäten bleiben privat. Löschung jederzeit möglich.',
+  'tc.t4': 'Regulatorische Ausrichtung', 'tc.d4': 'Nach FCA-Prinzipien gebaut. Tradvio AI ist eine Forschungsplattform — kein reguliertes Finanzdienstleistungsunternehmen.',
+  'insights.title1': 'Handeln Sie intelligenter mit', 'insights.title2': 'KI-gestützten Markteinblicken',
+  'insights.body': 'Entdecken Sie einen intelligenteren Ansatz für die Märkte mit unserer KI-Handelsplattform. Analysieren Sie Marktdaten, entdecken Sie potenzielle Handelsmöglichkeiten und gewinnen Sie klarere Einblicke mit intelligenten KI-Tools — alles auf einer Plattform.',
+  'insights.cta': 'Entdecken Sie unsere Handelsplattform',
+  'test.title': 'Was Trader sagen', 'test.sub': 'Echtes Feedback von Plattformnutzern. Individuelle Erfahrungen — Ergebnisse variieren.',
+  'test.q1': 'Der Chart-Analysator gibt mir eine strukturierte Zweitmeinung. Ich treffe immer noch meine eigenen Entscheidungen, aber die KI markiert Niveaus, die ich vielleicht übersehen hätte — das macht mich gründlicher.',
+  'test.q2': 'Paper-Trading vor dem Live-Handel war der beste Rat. Ich habe zwei Monate lang Strategien mit virtuellem Kapital getestet. Das hat mich vor teuren Anfängerfehlern bewahrt.',
+  'test.q3': 'Mir gefällt, dass jede Zahl ein Label hat. Live, verzögert, Backtest — ich weiß, was ich sehe. Die meisten Plattformen verwischen diese Grenzen. Transparenz zählt.',
+  'test.r1': 'Privatanleger', 'test.r2': 'Teilzeit-Trader', 'test.r3': 'Unabhängiger Trader',
+  'test.e1': '3 Jahre Erfahrung', 'test.e2': '1 Jahr Erfahrung', 'test.e3': '5 Jahre Erfahrung',
+  'test.d1': 'vor 2 Wochen', 'test.d2': 'vor 1 Monat', 'test.d3': 'vor 3 Wochen',
+  'ms.title': 'Handel in Zahlen',
+  'ms.sub': 'Kontext zählt. Hier sind wichtige Datenpunkte, die jeder Trader kennen sollte — mit Quellen belegt.',
+  'ms.note': 'Statistiken dienen nur dem Kontext. Sie beschreiben das Handelsumfeld — nicht die Performance von Tradvio AI. Vergangene Daten, Backtests und Branchenstatistiken garantieren keine zukünftigen Ergebnisse.',
+  'faq.title': 'Häufig gestellte Fragen',
+  'footer.products': 'Produkte', 'footer.company': 'Unternehmen', 'footer.legal': 'Rechtliches',
+  'footer.tagline': 'KI-gestützte Marktforschung und Strategietests für Trader, die ihre eigenen Entscheidungen treffen.',
+};
+
+const fr: Dict = {
+  'nav.products': 'Produits', 'nav.resources': 'Ressources', 'nav.traders': 'Traders', 'nav.leaderboard': 'Classement',
+  'nav.platform': 'Plateforme de Trading IA', 'nav.contact': 'Contact', 'nav.cta': 'Commencer l’Analyse Gratuite',
+  'hero.badge': 'Plateforme propulsée par l’IA', 'hero.title1': 'Analysez les marchés. Testez vos stratégies.',
+  'hero.title2': 'Tradez en toute confiance.',
+  'hero.sub': 'Tradvio AI analyse les graphiques, les tendances et le momentum en quelques secondes — transformant l’action des prix en signaux d’entrée clairs. Vous gardez le contrôle de chaque décision.',
+  'hero.cta1': 'Commencer l’Analyse Gratuite', 'hero.cta2': 'Comment ça marche',
+  'hero.trust1': 'Gratuit pour commencer', 'hero.trust2': 'Aucune carte bancaire',
+  'hero.trust3': 'Paper trading d’abord', 'hero.trust4': 'Étiquettes de données partout',
+  'leaderboard.eyebrow': 'Classements en direct', 'leaderboard.title': 'Classement des Bots IA',
+  'leaderboard.sub': 'Comparez les agents Tradvio AI par marché, stratégie, modèle IA et risque sur les marchés mondiaux.',
+  'leaderboard.viewAll': 'Voir le Classement Complet',
+  'trust.t1': 'Aucune Garantie de Profit', 'trust.d1': 'Nous ne promettons jamais de rendements. Les marchés sont imprévisibles.',
+  'trust.t2': 'Étiquettes de Données Vérifiées', 'trust.d2': 'Direct, différé, backtesté ou illustratif — toujours affiché.',
+  'trust.t3': 'Paper Trading d’Abord', 'trust.d3': 'Entraînez-vous avec des fonds virtuels avant de risquer du capital réel.',
+  'trust.t4': 'Méthodologie Transparente', 'trust.d4': 'Voyez les hypothèses derrière chaque résultat et analyse.',
+  'tp.title': 'Performance de Trading en Temps Réel', 'tp.live': 'Résumé du Marché',
+  'tp.indices': 'Indices', 'tp.movers': 'Grandes Variations', 'tp.legend1': 'Acheter', 'tp.legend2': 'Vendre',
+  'pt.title': 'Outils de la Plateforme — Recherchez, Testez, Décidez',
+  'pt.sub': 'Six outils interconnectés pour les traders qui font leurs propres recherches. Chacun avec des étiquettes de données transparentes et des limites claires.',
+  'pt.t1': 'Analyseur de Graphiques IA', 'pt.d1': 'Téléchargez un graphique et obtenez des observations structurées : direction de tendance, niveaux clés de support et résistance, et reconnaissance de motifs avec score de confiance.',
+  'pt.t2': 'Constructeur de Stratégies IA', 'pt.d2': 'Transformez vos idées en stratégies testables basées sur des règles. Définissez entrées, sorties et paramètres de risque.',
+  'pt.t3': 'Backtesting de Stratégies', 'pt.d3': 'Testez vos stratégies sur des données historiques. Voyez comment elles auraient performé — avec des hypothèses claires de coûts et de slippage.',
+  'pt.t4': 'Paper Trading', 'pt.d4': 'Entraînez-vous avec des fonds virtuels en conditions réelles. Gagnez en confiance avant de risquer du capital.',
+  'pt.t5': 'Signaux de Trading IA', 'pt.d5': 'Analyses de marché avec scores de confiance transparents. Chaque signal montre sa source, son timeframe et son horodatage.',
+  'pt.t6': 'Gestion des Risques', 'pt.d6': 'Définissez des limites de position, des plafonds de perte quotidiens, le suivi de l’exposition et des alertes de drawdown.',
+  'hiw.title': 'Comment ça marche — Voyez-le en action',
+  'hiw.sub': 'Deux écrans. Quatre étapes. Transparence totale à chaque étape.',
+  'pf.title1': 'Performance Améliorée', 'pf.title2': 'Fonctionnalités',
+  'pf.sub': 'Des fonctionnalités automatisées avec paramètres modifiables permettent aux investisseurs de trader selon leur style et leurs préférences.',
+  'pf.t1': 'Accessible sur Tous les Appareils', 'pf.d1': 'Notre plateforme est accessible sur différents appareils comme les tablettes, ordinateurs portables et smartphones.',
+  'pf.t2': 'Révèle les Motifs Cachés', 'pf.d2': 'Les algorithmes avancés peuvent facilement révéler des motifs cachés dans d’énormes volumes de données de marché.',
+  'pf.t3': 'Collecte et Traite les Données', 'pf.d3': 'Le système collecte des données de sources authentiques pour les traiter et fournir des perspectives précises.',
+  'pf.t4': 'Limite les Risques de Trading', 'pf.d4': 'Les outils sans risque permettent aux utilisateurs de Tradvio AI de limiter les dangers des mouvements inattendus du marché.',
+  'pf.t5': 'Développe le Compte de Trading', 'pf.d5': 'Les investissements multi-actifs aident les utilisateurs à diversifier leur compte ou portefeuille.',
+  'pf.t6': 'Améliore les Stratégies en Direct', 'pf.d6': 'Le système sécurise les trades en adaptant les stratégies aux conditions changeantes du marché.',
+  'why.title1': 'Pourquoi Tradvio AI', 'why.title2': 'Se Distingue',
+  'why.p1': 'Notre plateforme est conçue pour des performances fluides sur tous les appareils. Les utilisateurs peuvent trader à tout moment avec une connexion stable.',
+  'why.p2a': 'Il n’y a', 'why.p2b': 'aucun frais d’inscription, frais cachés ni commissions', 'why.p2c': '. Les débutants peuvent investir avec un capital réduit pour éviter les risques élevés.',
+  'why.c1': 'Tableau de bord personnalisable', 'why.c2': 'Alertes rapides en temps réel', 'why.c3': 'Dépôts et retraits faciles',
+  'why.c4': 'Support fiable 24/7', 'why.c5': 'Diversification multi-actifs', 'why.c6': 'Amélioration continue de l’IA',
+  'cc.title': 'Ce que Tradvio peut vous aider à faire — et ce qu’il ne peut pas',
+  'cc.sub': 'Des attentes honnêtes forment de meilleurs traders. Voici la réalité.',
+  'dt.title': 'Transparence des Données — Chaque Chiffre Indique sa Source',
+  'dt.live': 'Données en Direct', 'dt.realtime': 'Temps Réel', 'dt.delayed': 'Différé', 'dt.delay15': 'Délai de 15 Minutes',
+  'dt.paper': 'Paper Trading', 'dt.sim': 'Simulé', 'dt.back': 'Backtesté', 'dt.hist': 'Historique',
+  'tc.title': 'Construit avec la Confiance au Centre',
+  'tc.sub': 'La transparence n’est pas un argument marketing — c’est ainsi que nous construisons chaque fonctionnalité.',
+  'tc.t1': 'Méthodologie des Données', 'tc.d1': 'Comment nous sourçons, étiquetons et vérifions chaque donnée de la plateforme. Transparence totale sur les fournisseurs, fréquences de mise à jour et limites.',
+  'tc.t2': 'Sécurité', 'tc.d2': 'Chiffrement au repos et en transit. Contrôles d’accès, audits de sécurité réguliers et politiques strictes de traitement des données.',
+  'tc.t3': 'Confidentialité', 'tc.d3': 'Nous ne vendons pas vos données. Point. Vos informations personnelles et votre activité de trading restent privées. Suppression à tout moment.',
+  'tc.t4': 'Alignement Réglementaire', 'tc.d4': 'Construit selon les principes de la FCA. Tradvio AI est une plateforme de recherche — pas une société de services financiers réglementée.',
+  'insights.title1': 'Tradez plus intelligemment grâce aux', 'insights.title2': 'Analyses de marché propulsées par l’IA',
+  'insights.body': 'Découvrez une approche plus intelligente des marchés avec notre plateforme de trading IA. Analysez les données, découvrez des opportunités et obtenez des perspectives plus claires grâce à des outils intelligents propulsés par l’IA — le tout depuis une seule plateforme.',
+  'insights.cta': 'Découvrez notre plateforme de trading',
+  'test.title': 'Ce que disent les traders', 'test.sub': 'Retours réels des utilisateurs de la plateforme. Expériences individuelles — les résultats varient.',
+  'test.q1': 'L’analyseur de graphiques me donne un second avis structuré. Je prends toujours mes propres décisions, mais l’IA signale des niveaux que j’aurais pu manquer — cela m’a rendu plus rigoureux.',
+  'test.q2': 'Le paper trading avant de passer en réel était le meilleur conseil. J’ai passé deux mois à tester des stratégies avec des fonds virtuels. Cela m’a épargné des erreurs coûteuses de débutant.',
+  'test.q3': 'J’aime que chaque chiffre ait une étiquette. Direct, différé, backtesté — je sais ce que je regarde. La plupart des plateformes brouillent ces lignes. La transparence compte.',
+  'test.r1': 'Trader Particulier', 'test.r2': 'Trader à Temps Partiel', 'test.r3': 'Trader Indépendant',
+  'test.e1': '3 ans d’expérience', 'test.e2': '1 an d’expérience', 'test.e3': '5 ans d’expérience',
+  'test.d1': 'il y a 2 semaines', 'test.d2': 'il y a 1 mois', 'test.d3': 'il y a 3 semaines',
+  'ms.title': 'Le Trading en Chiffres',
+  'ms.sub': 'Le contexte compte. Voici les données clés que chaque trader devrait connaître — sourcées et citées.',
+  'ms.note': 'Les statistiques servent uniquement de contexte. Elles décrivent l’environnement de trading — pas les performances de Tradvio AI. Les données passées, backtests et statistiques sectorielles ne garantissent pas les résultats futurs.',
+  'faq.title': 'Questions Fréquemment Posées',
+  'footer.products': 'Produits', 'footer.company': 'Entreprise', 'footer.legal': 'Légal',
+  'footer.tagline': 'Recherche de marché assistée par l’IA et tests de stratégies pour les traders qui prennent leurs propres décisions.',
+};
+
+const es: Dict = {
+  'nav.products': 'Productos', 'nav.resources': 'Recursos', 'nav.traders': 'Traders', 'nav.leaderboard': 'Clasificación',
+  'nav.platform': 'Plataforma de Trading con IA', 'nav.contact': 'Contacto', 'nav.cta': 'Comenzar Análisis Gratuito',
+  'hero.badge': 'Plataforma impulsada por IA', 'hero.title1': 'Analiza los mercados. Prueba tus estrategias.',
+  'hero.title2': 'Opera con confianza.',
+  'hero.sub': 'Tradvio AI analiza gráficos, tendencias y momentum en segundos — convirtiendo la acción del precio en señales de entrada claras. Tú mantienes el control de cada decisión.',
+  'hero.cta1': 'Comenzar Análisis Gratuito', 'hero.cta2': 'Cómo funciona',
+  'hero.trust1': 'Gratis para empezar', 'hero.trust2': 'Sin tarjeta de crédito',
+  'hero.trust3': 'Paper trading primero', 'hero.trust4': 'Etiquetas de datos en todo',
+  'leaderboard.eyebrow': 'Clasificaciones en vivo', 'leaderboard.title': 'Clasificación de Bots de IA',
+  'leaderboard.sub': 'Compara los agentes de Tradvio AI por mercado, estrategia, modelo de IA y riesgo en los mercados globales.',
+  'leaderboard.viewAll': 'Ver Clasificación Completa',
+  'trust.t1': 'Sin Garantías de Ganancias', 'trust.d1': 'Nunca prometemos rendimientos. Los mercados son impredecibles.',
+  'trust.t2': 'Etiquetas de Datos Verificadas', 'trust.d2': 'En vivo, retrasado, backtest o ilustrativo — siempre mostrado.',
+  'trust.t3': 'Paper Trading Primero', 'trust.d3': 'Practica con fondos virtuales antes de arriesgar capital real.',
+  'trust.t4': 'Metodología Transparente', 'trust.d4': 'Ve los supuestos detrás de cada resultado y análisis.',
+  'tp.title': 'Rendimiento de Trading en Tiempo Real', 'tp.live': 'Resumen del Mercado',
+  'tp.indices': 'Índices', 'tp.movers': 'Grandes Movimientos', 'tp.legend1': 'Comprar', 'tp.legend2': 'Vender',
+  'pt.title': 'Herramientas de la Plataforma — Investiga, Prueba, Decide',
+  'pt.sub': 'Seis herramientas interconectadas para traders que hacen su propia investigación. Cada una con etiquetas de datos transparentes y límites claros.',
+  'pt.t1': 'Analizador de Gráficos IA', 'pt.d1': 'Sube un gráfico y obtén observaciones estructuradas: dirección de tendencia, niveles clave de soporte y resistencia, y reconocimiento de patrones con puntuación de confianza.',
+  'pt.t2': 'Constructor de Estrategias IA', 'pt.d2': 'Convierte tus ideas en estrategias comprobables basadas en reglas. Define entradas, salidas y parámetros de riesgo.',
+  'pt.t3': 'Backtesting de Estrategias', 'pt.d3': 'Prueba tus estrategias con datos históricos del mercado. Ve cómo habrían funcionado — con suposiciones claras de costes y deslizamiento.',
+  'pt.t4': 'Paper Trading', 'pt.d4': 'Practica con fondos virtuales en condiciones reales de mercado. Gana confianza antes de arriesgar capital.',
+  'pt.t5': 'Señales de Trading IA', 'pt.d5': 'Escaneos de mercado con calificaciones de confianza transparentes. Cada señal muestra su fuente de datos, timeframe y marca de tiempo.',
+  'pt.t6': 'Gestión de Riesgos', 'pt.d6': 'Establece límites de posición, topes de pérdida diarios, seguimiento de exposición y alertas de drawdown.',
+  'hiw.title': 'Cómo Funciona — Véalo en Acción',
+  'hiw.sub': 'Dos pantallas. Cuatro pasos. Transparencia total en cada etapa.',
+  'pf.title1': 'Rendimiento Mejorado', 'pf.title2': 'Funciones',
+  'pf.sub': 'Funciones automatizadas con ajustes modificables permiten a los inversores operar según su estilo y preferencias.',
+  'pf.t1': 'Accesible en Todos los Dispositivos', 'pf.d1': 'Nuestra plataforma es accesible desde distintos dispositivos como tabletas, portátiles y smartphones.',
+  'pf.t2': 'Descubre Patrones Ocultos', 'pf.d2': 'Los algoritmos avanzados pueden descubrir fácilmente patrones ocultos en enormes cantidades de datos de mercado.',
+  'pf.t3': 'Recopila y Procesa Datos', 'pf.d3': 'El sistema recopila datos de fuentes auténticas para procesarlos y ofrecer perspectivas precisas.',
+  'pf.t4': 'Limita los Riesgos de Trading', 'pf.d4': 'Las herramientas sin riesgo permiten a los usuarios de Tradvio AI limitar los peligros de movimientos inesperados del mercado.',
+  'pf.t5': 'Amplía la Cuenta de Trading', 'pf.d5': 'Las inversiones en múltiples activos o mercados ayudan a los usuarios a diversificar su cuenta o cartera.',
+  'pf.t6': 'Mejora las Estrategias en Vivo', 'pf.d6': 'El sistema asegura las operaciones cambiando las estrategias según las condiciones cambiantes del mercado.',
+  'why.title1': 'Por qué Tradvio AI', 'why.title2': 'Se Destaca',
+  'why.p1': 'Nuestra plataforma está diseñada para un rendimiento fluido en todos los dispositivos. Esto permite a los usuarios operar en cualquier momento con una conexión estable.',
+  'why.p2a': 'No tiene', 'why.p2b': 'cuotas de registro, cargos ocultos ni comisiones', 'why.p2c': '. Los principiantes pueden invertir con capital reducido para evitar riesgos elevados.',
+  'why.c1': 'Panel personalizable', 'why.c2': 'Alertas rápidas en tiempo real', 'why.c3': 'Depósitos y retiros sencillos',
+  'why.c4': 'Soporte fiable 24/7', 'why.c5': 'Diversificación multi-activo', 'why.c6': 'Mejora continua de la IA',
+  'cc.title': 'Con qué puede ayudarte Tradvio — y qué no puede hacer',
+  'cc.sub': 'Expectativas honestas crean mejores traders. Esta es la realidad.',
+  'dt.title': 'Transparencia de Datos — Cada Número Indica su Fuente',
+  'dt.live': 'Datos en Vivo', 'dt.realtime': 'Tiempo Real', 'dt.delayed': 'Retrasado', 'dt.delay15': 'Retraso de 15 Minutos',
+  'dt.paper': 'Paper Trading', 'dt.sim': 'Simulado', 'dt.back': 'Backtest', 'dt.hist': 'Histórico',
+  'tc.title': 'Construido con la Confianza en el Centro',
+  'tc.sub': 'La transparencia no es una afirmación de marketing — es cómo construimos cada función.',
+  'tc.t1': 'Metodología de Datos', 'tc.d1': 'Cómo obtenemos, etiquetamos y verificamos cada dato de la plataforma. Transparencia total sobre proveedores, frecuencias de actualización y limitaciones.',
+  'tc.t2': 'Seguridad', 'tc.d2': 'Cifrado en reposo y en tránsito. Controles de acceso, auditorías de seguridad periódicas y políticas estrictas de datos.',
+  'tc.t3': 'Privacidad', 'tc.d3': 'No vendemos tus datos. Punto. Tu información personal y actividad de trading permanecen privadas. Solicita la eliminación en cualquier momento.',
+  'tc.t4': 'Alineación Regulatoria', 'tc.d4': 'Construido según los principios de la FCA. Tradvio AI es una plataforma de investigación — no una firma de servicios financieros regulada.',
+  'insights.title1': 'Opera de forma más inteligente con', 'insights.title2': 'Perspectivas de Mercado impulsadas por IA',
+  'insights.body': 'Explora una forma más inteligente de abordar los mercados con nuestra plataforma de trading con IA. Analiza datos de mercado, descubre oportunidades y obtén perspectivas más claras con herramientas inteligentes impulsadas por IA — todo desde una única plataforma.',
+  'insights.cta': 'Explora Nuestra Plataforma de Trading',
+  'test.title': 'Lo que dicen los traders', 'test.sub': 'Comentarios reales de usuarios de la plataforma. Experiencias individuales — los resultados varían.',
+  'test.q1': 'El analizador de gráficos me da una segunda opinión estructurada. Sigo tomando mis propias decisiones, pero que la IA marque niveles que podría haber pasado por alto me ha hecho un trader más minucioso.',
+  'test.q2': 'El paper trading antes de operar en vivo fue el mejor consejo. Pasé dos meses probando estrategias con fondos virtuales. Me ahorró errores costosos de principiante.',
+  'test.q3': 'Me gusta que cada número tenga una etiqueta. En vivo, retrasado, backtest — sé lo que estoy viendo. La mayoría de las plataformas difuminan estas líneas. La transparencia importa.',
+  'test.r1': 'Trader Minorista', 'test.r2': 'Trader a Tiempo Parcial', 'test.r3': 'Trader Independiente',
+  'test.e1': '3 años de experiencia', 'test.e2': '1 año de experiencia', 'test.e3': '5 años de experiencia',
+  'test.d1': 'hace 2 semanas', 'test.d2': 'hace 1 mes', 'test.d3': 'hace 3 semanas',
+  'ms.title': 'El Trading en Cifras',
+  'ms.sub': 'El contexto importa. Aquí están los datos clave que todo trader debería conocer — con fuentes citadas.',
+  'ms.note': 'Las estadísticas sirven solo como contexto. Describen el entorno de trading — no el rendimiento de Tradvio AI. Los datos pasados, backtests y estadísticas del sector no garantizan resultados futuros.',
+  'faq.title': 'Preguntas Frecuentes',
+  'footer.products': 'Productos', 'footer.company': 'Empresa', 'footer.legal': 'Legal',
+  'footer.tagline': 'Investigación de mercado asistida por IA y pruebas de estrategias para traders que toman sus propias decisiones.',
+};
+
+const dicts: Record<Language, Dict> = { en, it, de, fr, es };
+
+/* ─── Context ───────────────────────────────────────── */
+interface LanguageContextValue {
+  lang: Language;
+  setLang: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextValue>({
+  lang: 'en',
+  setLang: () => {},
+  t: (key) => en[key] ?? key,
+});
+
+const STORAGE_KEY = 'tradvio-lang';
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'en';
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return (saved === 'it' || saved === 'de' || saved === 'fr' || saved === 'es') ? saved : 'en';
+  });
+
+  const setLang = (next: Language) => {
+    setLangState(next);
+    try { window.localStorage.setItem(STORAGE_KEY, next); } catch { /* private mode */ }
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const t = (key: string) => dicts[lang][key] ?? en[key] ?? key;
+
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  return useContext(LanguageContext);
+}

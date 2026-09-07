@@ -1,4 +1,5 @@
 import type { PlatformTool } from '@/types';
+import { useLanguage } from '@/lib/i18n';
 
 const tools: PlatformTool[] = [
   {
@@ -46,23 +47,21 @@ const tools: PlatformTool[] = [
 ];
 
 export default function PlatformTools() {
+  const { t } = useLanguage();
   return (
     <section id="platform-tools" className="section bg-surface">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Platform Tools — Research, Test, Decide</h2>
-          <p>
-            Six interconnected tools built for traders who do their own research. Each comes
-            with transparent data labels and clear limitations.
-          </p>
+          <h2>{t('pt.title')}</h2>
+          <p>{t('pt.sub')}</p>
         </div>
 
         <div className="grid-3">
-          {tools.map((tool) => (
+          {tools.map((tool, i) => (
             <div key={tool.title} className="card flex flex-col">
               <div className="card-icon">{tool.icon}</div>
-              <h3 className="mb-2">{tool.title}</h3>
-              <p className="text-sm text-muted-dark flex-1">{tool.description}</p>
+              <h3 className="mb-2">{t(`pt.t${i + 1}`)}</h3>
+              <p className="text-sm text-muted-dark flex-1">{t(`pt.d${i + 1}`)}</p>
             </div>
           ))}
         </div>

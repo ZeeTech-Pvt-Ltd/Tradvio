@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 import { agents, type Agent } from '@/lib/agents';
 
 /* ─── Helpers ───────────────────────────────────────── */
@@ -39,6 +40,7 @@ function Sparkline({ series, w = 56, h = 22 }: { series: number[]; w?: number; h
 
 /* ─── Main Component ───────────────────────────────── */
 export default function Leaderboard() {
+  const { t } = useLanguage();
   const featured = agents.slice(0, 7);
 
   return (
@@ -48,13 +50,13 @@ export default function Leaderboard() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-2">
             <p className="text-xs uppercase tracking-[0.12em] text-ink-soft font-mono mb-3">
-              Live Rankings
+              {t('leaderboard.eyebrow')}
             </p>
             <h2 className="font-mono font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3">
-              AI Bot Leaderboard
+              {t('leaderboard.title')}
             </h2>
             <p className="text-ink-soft text-sm sm:text-base leading-relaxed tracking-[0.02em]">
-              Compare Tradvio AI agents by market, strategy, AI model, and risk across global markets.
+              {t('leaderboard.sub')}
             </p>
           </div>
         </div>
@@ -180,7 +182,7 @@ export default function Leaderboard() {
               href="/leaderboard/"
               className="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-semibold text-sm transition-colors"
             >
-              View Full Leaderboard
+              {t('leaderboard.viewAll')}
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />

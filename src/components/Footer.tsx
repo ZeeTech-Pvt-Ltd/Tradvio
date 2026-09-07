@@ -1,3 +1,5 @@
+import { useLanguage } from '@/lib/i18n';
+
 const LOGO_SRC = '/trdavio-logo.png';
 
 const PLATFORM_LINKS: { label: string; href: string }[] = [
@@ -28,6 +30,7 @@ const FOOTER_LINK_CLASSES =
   'text-sm text-ink-soft transition-colors hover:text-white';
 
 export default function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -40,15 +43,14 @@ export default function Footer() {
               <img src={LOGO_SRC} alt="Tradvio AI" width={140} height={28} loading="lazy" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
-              AI-assisted market research and strategy testing for traders who make their own
-              decisions.
+              {t('footer.tagline')}
             </p>
           </div>
 
           {/* Products column */}
           <div>
             <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
-              Products
+              {t('footer.products')}
             </h3>
             <ul className="space-y-2.5">
               {PLATFORM_LINKS.map((item) => (
@@ -64,7 +66,7 @@ export default function Footer() {
           {/* Company column */}
           <div>
             <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
-              Company
+              {t('footer.company')}
             </h3>
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map((item) => (
@@ -80,7 +82,7 @@ export default function Footer() {
           {/* Legal column */}
           <div>
             <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-ink-soft">
-              Legal
+              {t('footer.legal')}
             </h3>
             <ul className="space-y-2.5">
               {LEGAL_LINKS.map((item) => (

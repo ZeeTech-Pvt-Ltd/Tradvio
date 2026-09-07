@@ -1,31 +1,21 @@
-const trustItems = [
-  {
-    icon: '⚠',
-    iconBg: 'bg-warning-bg',
-    title: 'No Profit Guarantees',
-    description: 'We never promise returns. Markets are unpredictable.',
-  },
-  {
-    icon: '⚙',
-    iconBg: 'bg-[rgba(161,161,161,0.08)]',
-    title: 'Verified Data Labels',
-    description: 'Live, delayed, backtested or illustrative — always shown.',
-  },
-  {
-    icon: '✓',
-    iconBg: 'bg-success-bg',
-    title: 'Paper Trading First',
-    description: 'Practise with virtual funds before risking real capital.',
-  },
-  {
-    icon: '★',
-    iconBg: 'bg-accent-light',
-    title: 'Transparent Methodology',
-    description: 'See the assumptions behind every result and analysis.',
-  },
+import { useLanguage } from '@/lib/i18n';
+
+const trustIcons = [
+  { icon: '⚠', iconBg: 'bg-warning-bg' },
+  { icon: '⚙', iconBg: 'bg-[rgba(161,161,161,0.08)]' },
+  { icon: '✓', iconBg: 'bg-success-bg' },
+  { icon: '★', iconBg: 'bg-accent-light' },
 ];
 
 export default function TrustBar() {
+  const { t } = useLanguage();
+  const trustItems = [1, 2, 3, 4].map((n) => ({
+    icon: trustIcons[n - 1].icon,
+    iconBg: trustIcons[n - 1].iconBg,
+    title: t(`trust.t${n}`),
+    description: t(`trust.d${n}`),
+  }));
+
   return (
     <section className="bg-navy border-b border-border py-6">
       <div className="max-w-container mx-auto px-4 md:px-6">

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/lib/i18n';
 
 const LOGO_SRC = '/trdavio-logo.png';
 
@@ -20,11 +22,11 @@ const RESOURCE_ITEMS: { label: string; href: string }[] = [
   { label: 'Blog', href: '/blog/' },
 ];
 
-const NAV_LINKS: { label: string; href: string }[] = [
-  { label: 'Traders', href: '/trader/' },
-  { label: 'Leaderboard', href: '/leaderboard/' },
-  { label: 'AI Trading Platform', href: '/ai-trading-platform/' },
-  { label: 'Contact', href: '/contact-us/' },
+const NAV_LINKS: { key: 'nav.traders' | 'nav.leaderboard' | 'nav.platform' | 'nav.contact'; href: string }[] = [
+  { key: 'nav.traders', href: '/trader/' },
+  { key: 'nav.leaderboard', href: '/leaderboard/' },
+  { key: 'nav.platform', href: '/ai-trading-platform/' },
+  { key: 'nav.contact', href: '/contact-us/' },
 ];
 
 const NAV_LINK_CLASSES =
@@ -35,6 +37,7 @@ interface HeaderProps {
 }
 
 export default function Header({ onMenuToggle }: HeaderProps) {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const platformRef = useRef<HTMLDivElement | null>(null);
@@ -113,7 +116,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 platformOpen && 'text-white'
               )}
             >
-              Products
+              {t('nav.products')}
               <svg
                 className={cn(
                   'ml-1 h-4 w-4 transition-transform duration-fast',
@@ -159,7 +162,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                 resourcesOpen && 'text-white'
               )}
             >
-              Resources
+              {t('nav.resources')}
               <svg
                 className={cn(
                   'ml-1 h-4 w-4 transition-transform duration-fast',
@@ -196,15 +199,16 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           {/* Plain nav links */}
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href} className={NAV_LINK_CLASSES}>
-              {link.label}
+              {t(link.key)}
             </a>
           ))}
         </nav>
 
         {/* Right actions */}
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <a href="/get-started/" className="btn btn-primary btn-sm hidden sm:inline-flex">
-            Start Free Analysis
+            {t('nav.cta')}
           </a>
 
           {/* Mobile hamburger */}

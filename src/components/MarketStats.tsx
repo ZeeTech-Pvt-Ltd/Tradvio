@@ -1,11 +1,13 @@
 import { marketStats } from '@/lib/data';
+import { useLanguage } from '@/lib/i18n';
 
 export default function MarketStats() {
+  const { t } = useLanguage();
   return (
     <section id="market-stats" className="section">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Trading by the Numbers</h2>
+          <h2>{t('ms.title')}</h2>
           <p>
             Context matters. Here are key data points every trader should know — sourced and
             cited.

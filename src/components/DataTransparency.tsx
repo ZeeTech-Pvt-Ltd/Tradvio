@@ -33,12 +33,15 @@ const labels = [
   },
 ];
 
+import { useLanguage } from '../lib/i18n';
+
 export default function DataTransparency() {
+  const { t } = useLanguage();
   return (
     <section id="data-transparency" className="section">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Data Transparency — Every Number Tells You Its Source</h2>
+          <h2>{t('dt.title')}</h2>
           <p>
             We label every data point so you know exactly what you&apos;re looking at. If
             something isn&apos;t labelled, treat it as illustrative.

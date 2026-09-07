@@ -25,15 +25,16 @@ const trustCards = [
   },
 ];
 
+import { useLanguage } from '../lib/i18n';
+
 export default function TrustCentrePreview() {
+  const { t } = useLanguage();
   return (
     <section id="trust-centre" className="section bg-surface">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Built With Trust at the Centre</h2>
-          <p>
-            Transparency isn&apos;t a marketing claim — it&apos;s how we build every feature.
-          </p>
+          <h2>{t('tc.title')}</h2>
+          <p>{t('tc.sub')}</p>
         </div>
 
         <div className="grid-2">
@@ -43,8 +44,8 @@ export default function TrustCentrePreview() {
               className="bg-navy border border-border rounded-lg p-6"
             >
               <div className="card-icon">{card.icon}</div>
-              <h3 className="mb-2">{card.title}</h3>
-              <p className="text-sm text-muted-dark">{card.description}</p>
+              <h3 className="mb-2">{t('tc.t' + (trustCards.indexOf(card) + 1))}</h3>
+              <p className="text-sm text-muted-dark">{t('tc.d' + (trustCards.indexOf(card) + 1))}</p>
             </div>
           ))}
         </div>
