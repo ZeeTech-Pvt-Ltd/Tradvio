@@ -1,10 +1,13 @@
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/lib/i18n';
 
 export default function NotFound() {
+  const { t } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Page Not Found (404) | Tradvio AI</title>
+        <title>{t('nf.metaTitle')}</title>
         <meta name="robots" content="noindex" />
       </Helmet>
 
@@ -18,22 +21,21 @@ export default function NotFound() {
           </div>
 
           <h1 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-4">
-            This page went<br />
-            <span className="text-accent">out of the market.</span>
+            {t('nf.h1a')}<br />
+            <span className="text-accent">{t('nf.h1b')}</span>
           </h1>
 
           <p className="text-muted-dark leading-relaxed max-w-md mx-auto mb-8">
-            The page you&rsquo;re looking for doesn&rsquo;t exist, was moved, or never made it
-            past the backtest. Let&rsquo;s get you back to somewhere useful.
+            {t('nf.body')}
           </p>
 
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/" className="btn btn-primary btn-lg">Back to Homepage</a>
-            <a href="/leaderboard/" className="btn btn-secondary btn-lg">View Leaderboard</a>
+            <a href="/" className="btn btn-primary btn-lg">{t('nf.home')}</a>
+            <a href="/leaderboard/" className="btn btn-secondary btn-lg">{t('tr.viewLeaderboard')}</a>
           </div>
 
           <p className="text-xs text-ink-soft mt-8">
-            Need help? <a href="/contact-us/" className="text-accent hover:text-accent-hover">Contact us</a>
+            {t('nf.help')} <a href="/contact-us/" className="text-accent hover:text-accent-hover">{t('nf.contact')}</a>
           </p>
         </div>
       </div>

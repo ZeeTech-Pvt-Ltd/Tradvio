@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/lib/utils';
 import { agents, type Agent } from '@/lib/agents';
+import { useLanguage, marketLabel, strategyLabel } from '@/lib/i18n';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
@@ -16,6 +17,8 @@ function seeded(seed: number) {
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const RISK_KEYS: Record<string, string> = { Low: 'lb.low', Medium: 'lb.medium', High: 'lb.high' };
 
 interface DerivedData {
   daysActive: number;
@@ -79,17 +82,22 @@ function fmtPct(n: number): string {
 }
 
 export default function TraderDetail() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const slug = typeof window !== 'undefined' ? window.location.pathname.split('/')[2] ?? '' : '';
   const agent = agents.find((a) => a.slug === slug);
+
+  // Simple placeholder replacement for templated sentences.
+  const fmt = (template: string, values: Record<string, number | string>) =>
+    Object.entries(values).reduce((s, [k, v]) => s.replace(`{${k}}`, String(v)), template);
 
   if (!agent) {
     return (
       <div className="bg-deep pt-nav">
         <div className="mx-auto max-w-2xl px-4 py-24 text-center md:px-6">
-          <h1 className="mb-4 text-3xl font-bold text-ink">Trader Not Found</h1>
-          <p className="mb-8 text-muted-dark">This agent doesn&rsquo;t exist on the roster.</p>
-          <a href="/trader/" className="btn btn-primary btn-lg">Back to Traders</a>
+          <h1 className="mb-4 text-3xl font-bold text-ink">{t('tr.notFound')}</h1>
+          <p className="mb-8 text-muted-dark">{t('tr.notFoundSub')}</p>
+          <a href="/trader/" className="btn btn-primary btn-lg">{t('tr.backToTraders')}</a>
         </div>
       </div>
     );
@@ -123,7 +131,7 @@ export default function TraderDetail() {
           <div className="relative z-10 mx-auto max-w-container px-4 md:px-6">
             <a href="/trader/" className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-soft transition-colors hover:text-accent mb-8">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-              All Traders
+              {t('tr.allTraders')}
             </a>
 
             <div className="text-center max-w-3xl mx-auto">
@@ -137,31 +145,32 @@ export default function TraderDetail() {
               <h1 className="text-4xl md:text-5xl font-black tracking-tight text-ink mb-3">{agent.name}</h1>
 
               <p className="text-muted-dark leading-relaxed max-w-xl mx-auto mb-6">
-                A {agent.risk.toLowerCase()}-risk {agent.market.toLowerCase()} agent running{' '}
-                <span className="text-ink">{agent.shortStrategy}</span>, powered by{' '}
+                {fmt(t('tr.heroDesc1'), { risk: t(RISK_KEYS[agent.risk]), market: marketLabel(agent.market, t) })}{' '}
+                <span className="text-ink">{strategyLabel(agent.shortStrategy, t)}</span>{' '}
+                {t('tr.heroDesc2')}{' '}
                 <span className="text-accent font-medium">{agent.model}</span>.
               </p>
 
               {/* Inline meta row with dividers */}
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink-soft mb-8">
-                <span>Live for <span className="text-ink font-semibold">{d.daysActive} days</span></span>
+                <span>{fmt(t('tr.liveFor'), { days: d.daysActive })}</span>
                 <span className="w-px h-4 bg-border hidden sm:block" />
-                <span>Market: <span className="text-ink font-semibold">{agent.market}</span></span>
+                <span>{t('tr.market')} <span className="text-ink font-semibold">{marketLabel(agent.market, t)}</span></span>
                 <span className="w-px h-4 bg-border hidden sm:block" />
-                <span>Risk: <span className={cn('font-semibold', agent.risk === 'High' ? 'text-danger' : agent.risk === 'Medium' ? 'text-warning' : 'text-success')}>{agent.risk}</span></span>
+                <span>{t('tr.risk')} <span className={cn('font-semibold', agent.risk === 'High' ? 'text-danger' : agent.risk === 'Medium' ? 'text-warning' : 'text-success')}>{t(RISK_KEYS[agent.risk])}</span></span>
               </div>
 
               {/* Performance number */}
               <div className="inline-flex items-center gap-4 mb-8">
-                <span className="text-xs uppercase tracking-[0.14em] text-ink-soft font-semibold">Total Return</span>
+                <span className="text-xs uppercase tracking-[0.14em] text-ink-soft font-semibold">{t('tr.totalReturn')}</span>
                 <span className={cn('font-mono text-5xl md:text-6xl font-black', isPositive ? 'text-success' : 'text-danger')}>
                   {fmtPct(agent.actualReturn)}
                 </span>
               </div>
 
               <div className="flex gap-4 justify-center flex-wrap">
-                <a href="/get-started/" className="btn btn-primary btn-lg">Follow {agent.name}</a>
-                <a href="/leaderboard/" className="btn btn-secondary btn-lg">View Leaderboard</a>
+                <a href="/get-started/" className="btn btn-primary btn-lg">{fmt(t('tr.follow'), { name: agent.name })}</a>
+                <a href="/leaderboard/" className="btn btn-secondary btn-lg">{t('tr.viewLeaderboard')}</a>
               </div>
             </div>
           </div>
@@ -172,10 +181,10 @@ export default function TraderDetail() {
           <div className="mx-auto max-w-container px-4 md:px-6 py-8">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border text-center">
               {[
-                { label: 'Total Profit', value: `${d.totalProfit >= 0 ? '+' : ''}$${Math.abs(d.totalProfit).toLocaleString('en-US')}`, tone: d.totalProfit >= 0 ? 'text-success' : 'text-danger' },
-                { label: 'Max Drawdown', value: `${d.maxDrawdown.toFixed(2)}%`, tone: 'text-danger' },
-                { label: 'Win Rate', value: `${d.winRate.toFixed(2)}%`, tone: 'text-ink' },
-                { label: 'Profit Factor', value: profitFactor.toFixed(2), tone: 'text-ink' },
+                { label: t('tr.totalProfit'), value: `${d.totalProfit >= 0 ? '+' : ''}$${Math.abs(d.totalProfit).toLocaleString('en-US')}`, tone: d.totalProfit >= 0 ? 'text-success' : 'text-danger' },
+                { label: t('tr.maxDrawdown'), value: `${d.maxDrawdown.toFixed(2)}%`, tone: 'text-danger' },
+                { label: t('tr.winRate'), value: `${d.winRate.toFixed(2)}%`, tone: 'text-ink' },
+                { label: t('tr.profitFactor'), value: profitFactor.toFixed(2), tone: 'text-ink' },
               ].map((s) => (
                 <div key={s.label} className="px-4">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-ink-soft mb-2">{s.label}</p>
@@ -193,8 +202,8 @@ export default function TraderDetail() {
               {/* Equity */}
               <div>
                 <div className="flex items-baseline justify-between mb-5">
-                  <h2 className="text-xl font-bold text-ink">Equity Curve</h2>
-                  <span className="font-mono text-xs text-ink-soft">last {d.daysActive} days</span>
+                  <h2 className="text-xl font-bold text-ink">{t('tr.equityCurve')}</h2>
+                  <span className="font-mono text-xs text-ink-soft">{fmt(t('tr.lastDays'), { days: d.daysActive })}</span>
                 </div>
                 <div className="rounded-2xl border border-border bg-navy p-6">
                   <svg viewBox="0 0 440 180" className="w-full" aria-hidden="true">
@@ -228,7 +237,7 @@ export default function TraderDetail() {
 
               {/* Monthly tiles */}
               <div>
-                <h2 className="text-xl font-bold text-ink mb-5">Monthly Performance</h2>
+                <h2 className="text-xl font-bold text-ink mb-5">{t('tr.monthlyPerf')}</h2>
                 <div className="grid grid-cols-3 gap-2.5">
                   {d.monthly.map((m) => (
                     <div
@@ -246,7 +255,7 @@ export default function TraderDetail() {
                   ))}
                 </div>
                 <p className="text-xs text-ink-soft mt-4 text-center font-mono">
-                  Best: {d.monthly.reduce((b, m) => (m.value > b.value ? m : b), d.monthly[0]).month}
+                  {fmt(t('tr.best'), { month: d.monthly.reduce((b, m) => (m.value > b.value ? m : b), d.monthly[0]).month })}
                 </p>
               </div>
             </div>
@@ -257,32 +266,32 @@ export default function TraderDetail() {
         <section className="py-16 bg-navy border-y border-border">
           <div className="mx-auto max-w-container px-4 md:px-6">
             <div className="flex items-baseline justify-between mb-6">
-              <h2 className="text-xl font-bold text-ink">Recent Activity</h2>
-              <span className="font-mono text-xs text-ink-soft">{wins}W · {losses}L · {23} trades</span>
+              <h2 className="text-xl font-bold text-ink">{t('tr.recentActivity')}</h2>
+              <span className="font-mono text-xs text-ink-soft">{fmt(t('tr.record'), { wins, losses, trades: 23 })}</span>
             </div>
 
             <div className="space-y-2.5">
-              {d.trades.map((t) => (
+              {d.trades.map((trad) => (
                 <div
-                  key={t.date + t.symbol}
+                  key={trad.date + trad.symbol}
                   className={cn(
                     'flex items-center justify-between gap-4 rounded-xl border bg-deep px-5 py-3.5 border-l-4',
-                    t.pnl >= 0 ? 'border-border border-l-success' : 'border-border border-l-danger'
+                    trad.pnl >= 0 ? 'border-border border-l-success' : 'border-border border-l-danger'
                   )}
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <span className="font-mono text-xs text-ink-soft w-[84px] shrink-0">{t.date}</span>
-                    <span className="font-mono text-sm font-bold text-ink shrink-0">{t.symbol}</span>
-                    <span className={cn('text-[10px] font-bold px-2 py-0.5 rounded', t.action === 'BUY' ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger')}>
-                      {t.action}
+                    <span className="font-mono text-xs text-ink-soft w-[84px] shrink-0">{trad.date}</span>
+                    <span className="font-mono text-sm font-bold text-ink shrink-0">{trad.symbol}</span>
+                    <span className={cn('text-[10px] font-bold px-2 py-0.5 rounded', trad.action === 'BUY' ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger')}>
+                      {trad.action}
                     </span>
                   </div>
                   <div className="flex items-center gap-5 shrink-0">
                     <span className="font-mono text-xs text-ink-soft hidden sm:block">
-                      {t.entry.toFixed(4)} → {t.exit.toFixed(4)}
+                      {trad.entry.toFixed(4)} → {trad.exit.toFixed(4)}
                     </span>
-                    <span className={cn('font-mono text-sm font-bold', t.pnl >= 0 ? 'text-success' : 'text-danger')}>
-                      {t.pnl >= 0 ? '+' : ''}{t.pnl.toFixed(2)}
+                    <span className={cn('font-mono text-sm font-bold', trad.pnl >= 0 ? 'text-success' : 'text-danger')}>
+                      {trad.pnl >= 0 ? '+' : ''}{trad.pnl.toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -294,36 +303,34 @@ export default function TraderDetail() {
         {/* ── How it works — two-column explainer ────── */}
         <section className="py-16 bg-deep">
           <div className="mx-auto max-w-container px-4 md:px-6">
-            <h2 className="text-xl font-bold text-ink mb-8 text-center">How {agent.name} Works</h2>
+            <h2 className="text-xl font-bold text-ink mb-8 text-center">{fmt(t('tr.howWorks'), { name: agent.name })}</h2>
             <div className="grid gap-6 md:grid-cols-3">
               <div className="rounded-2xl border border-border bg-navy p-6">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-4">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
                 </div>
-                <h3 className="font-bold text-ink mb-2">Market Analysis</h3>
+                <h3 className="font-bold text-ink mb-2">{t('tr.maTitle')}</h3>
                 <p className="text-sm text-muted-dark leading-relaxed">
-                  Reads {agent.market.toLowerCase()} price action, volume and volatility together,
-                  scoring every potential setup with a confidence level.
+                  {fmt(t('tr.maDesc'), { market: marketLabel(agent.market, t) })}
                 </p>
               </div>
               <div className="rounded-2xl border border-border bg-navy p-6">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-4">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
-                <h3 className="font-bold text-ink mb-2">Signal Engine</h3>
+                <h3 className="font-bold text-ink mb-2">{t('tr.seTitle')}</h3>
                 <p className="text-sm text-muted-dark leading-relaxed">
-                  Runs <span className="text-ink">{agent.shortStrategy}</span> rules through{' '}
-                  {agent.model}, generating structured entries with stops and targets.
+                  {t('tr.seDesc1')} <span className="text-ink">{strategyLabel(agent.shortStrategy, t)}</span>{' '}
+                  {t('tr.seDesc2')} <span className="text-ink">{agent.model}</span>{t('tr.seDesc3')}
                 </p>
               </div>
               <div className="rounded-2xl border border-border bg-navy p-6">
                 <div className="w-10 h-10 rounded-lg bg-success/10 text-success flex items-center justify-center mb-4">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h3 className="font-bold text-ink mb-2">Risk Guard</h3>
+                <h3 className="font-bold text-ink mb-2">{t('tr.rgTitle')}</h3>
                 <p className="text-sm text-muted-dark leading-relaxed">
-                  {agent.risk} risk profile — every position is capped by exposure and drawdown
-                  limits ({d.maxDrawdown.toFixed(1)}% max drawdown) before it is accepted.
+                  {fmt(t('tr.rgDesc'), { risk: t(RISK_KEYS[agent.risk]), dd: d.maxDrawdown.toFixed(1) })}
                 </p>
               </div>
             </div>
@@ -333,10 +340,10 @@ export default function TraderDetail() {
         {/* ── CTA ────────────────────────────────────── */}
         <section className="py-16 bg-deep text-center">
           <h2 className="text-2xl font-bold text-ink mb-4">
-            Watch <span className="text-accent">{agent.name}</span> in real time.
+            {fmt(t('tr.cta1'), { name: agent.name })}
           </h2>
-          <p className="text-muted-dark mb-8">Every trade is published the moment it happens.</p>
-          <a href="/get-started/" className="btn btn-primary btn-lg">Start Free →</a>
+          <p className="text-muted-dark mb-8">{t('tr.cta2')}</p>
+          <a href="/get-started/" className="btn btn-primary btn-lg">{t('tr.startFree')}</a>
         </section>
       </main>
 

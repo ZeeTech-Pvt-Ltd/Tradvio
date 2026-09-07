@@ -56,7 +56,13 @@
       "Bash(node scripts/wire-pv.cjs)",
       "Bash(node scripts/fix-pv-arrays.cjs)",
       "Bash(node scripts/add-pv-defres.cjs)",
-      "Bash(rm scripts/add-pv-defres.cjs)"
+      "Bash(rm scripts/add-pv-defres.cjs)",
+      "Bash(tasklist)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 6000 //F)",
+      "Bash(echo \"tsc exit: $?\")",
+      "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:5173/ --max-time 10)",
+      "Bash(curl -s -o /dev/null -w \"assistant module: %{http_code}\\\\n\" http://localhost:5173/src/pages/AITradingAssistant.tsx --max-time 10)"
     ]
   }
 }
