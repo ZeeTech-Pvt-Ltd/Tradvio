@@ -37,7 +37,7 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
-  const { lang } = useLanguage();
+  const { t, lang } = useLanguage();
   const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   // Close on Escape.
@@ -104,7 +104,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </div>
 
         {/* Products links */}
-        <p className="mt-8 mb-2 text-xs uppercase tracking-wider text-ink-soft">Products</p>
+        <p className="mt-8 mb-2 text-xs uppercase tracking-wider text-ink-soft">{t('nav.products')}</p>
         <nav aria-label="Products links">
           {PLATFORM_LINKS.map((item, index) => (
             <a
@@ -114,44 +114,41 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
-              {item.label}
-            </a>
+              {t('fl.t' + (index + 1))}</a>
           ))}
         </nav>
 
         {/* Resources links */}
-        <p className="mt-6 mb-2 text-xs uppercase tracking-wider text-ink-soft">Resources</p>
+        <p className="mt-6 mb-2 text-xs uppercase tracking-wider text-ink-soft">{t('nav.resources')}</p>
         <nav aria-label="Resources links">
-          {RESOURCE_LINKS.map((item) => (
+          {RESOURCE_LINKS.map((item, ri) => (
             <a
               key={item.href}
               href={localizePath(item.href, lang)}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
-              {item.label}
-            </a>
+              {t('fl.r' + (ri + 1))}</a>
           ))}
         </nav>
 
         {/* Site links */}
-        <p className="mt-6 mb-2 text-xs uppercase tracking-wider text-ink-soft">Site</p>
+        <p className="mt-6 mb-2 text-xs uppercase tracking-wider text-ink-soft">{t('nav.site')}</p>
         <nav aria-label="Site links">
-          {SITE_LINKS.map((item) => (
+          {SITE_LINKS.map((item, si) => (
             <a
               key={item.href}
               href={localizePath(item.href, lang)}
               onClick={onClose}
               className={MOBILE_LINK_CLASSES}
             >
-              {item.label}
-            </a>
+              {t(['nav.traders', 'nav.leaderboard', 'nav.platform', 'nav.contact'][si])}</a>
           ))}
         </nav>
 
         {/* CTA */}
         <a href={localizePath("/get-started/", lang)} onClick={onClose} className="btn btn-primary mt-8 w-full">
-          Start Free Analysis
+          {t('nav.cta')}
         </a>
       </aside>
     </>

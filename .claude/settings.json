@@ -47,7 +47,16 @@
       "Bash(node scripts/add-platform-defres.cjs)",
       "Bash(rm scripts/add-platform-defres.cjs)",
       "Bash(node scripts/add-lb-i18n.cjs)",
-      "Bash(node scripts/add-mk-st-i18n.cjs)"
+      "Bash(node scripts/add-mk-st-i18n.cjs)",
+      "Bash(node scripts/add-traders-i18n.cjs)",
+      "Bash(grep -n -A2 \"AI \\\\|AI<\\\\/span>\\\\|Traders</span>\\\\|Browse and discover\\\\|Live Return\\\\|>Strategy<\" src/pages/TradersPage.tsx)",
+      "Bash(curl -s \"http://localhost:5173/src/pages/TradersPage.tsx\")",
+      "Bash(node scripts/add-academy-i18n.cjs)",
+      "Bash(node scripts/add-pv-i18n.cjs)",
+      "Bash(node scripts/wire-pv.cjs)",
+      "Bash(node scripts/fix-pv-arrays.cjs)",
+      "Bash(node scripts/add-pv-defres.cjs)",
+      "Bash(rm scripts/add-pv-defres.cjs)"
     ]
   }
 }

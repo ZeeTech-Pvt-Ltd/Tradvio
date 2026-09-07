@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n';
@@ -109,6 +109,14 @@ export default function LeaderboardPage() {
   const [strategy, setStrategy] = useState(t('lb.allStrategies'));
   const [risk, setRisk] = useState(t('lb.allRisk'));
   const [model, setModel] = useState(t('lb.allModels'));
+  // Reset filter states when the language changes so stale translated
+  // labels never silently filter out every agent.
+  useEffect(() => {
+    setMarket(t('lb.allMarkets'));
+    setStrategy(t('lb.allStrategies'));
+    setRisk(t('lb.allRisk'));
+    setModel(t('lb.allModels'));
+  }, [lang]);
 
   const markets = useMemo(() => [t('lb.allMarkets'), ...new Set(agents.map((a) => marketLabel(a.market, t)))], [t, lang]);
   const strategies = useMemo(() => [t('lb.allStrategies'), ...new Set(agents.map((a) => strategyLabel(a.shortStrategy, t)))], [t, lang]);

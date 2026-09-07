@@ -1,11 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/lib/utils';
 import { agents, type Agent } from '@/lib/agents';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
 import Footer from '@/components/Footer';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, marketLabel, strategyLabel } from '@/lib/i18n';
 
 /* ─── Helpers ───────────────────────────────────────── */
 function fmtPct(n: number): string {
@@ -86,35 +86,47 @@ function InlineSelect({ value, onChange, options }: { value: string; onChange: (
 }
 
 /* ─── Page ──────────────────────────────────────────── */
-const TABS = ['All Agents', 'Low Risk', 'Medium Risk', 'High Risk'];
+const TAB_KEYS = ['td.tabAll', 'td.tabLow', 'td.tabMedium', 'td.tabHigh'];
+const RISK_BY_TAB: Record<string, string> = {
+  'td.tabLow': 'Low', 'td.tabMedium': 'Medium', 'td.tabHigh': 'High',
+};
+
+
 
 export default function TradersPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [tab, setTab] = useState('All Agents');
-  const [market, setMarket] = useState('All Markets');
-  const [strategy, setStrategy] = useState('All Strategies');
-  const [model, setModel] = useState('All Models');
+  const [tabKey, setTabKey] = useState('td.tabAll');
+  const [market, setMarket] = useState(t('lb.allMarkets'));
+  const [strategy, setStrategy] = useState(t('lb.allStrategies'));
+  const [model, setModel] = useState(t('lb.allModels'));
+  // Reset filter states when the language changes so stale translated
+  // labels never silently filter out every agent.
+  useEffect(() => {
+    setMarket(t('lb.allMarkets'));
+    setStrategy(t('lb.allStrategies'));
+    setModel(t('lb.allModels'));
+  }, [lang]);
 
-  const markets = useMemo(() => ['All Markets', ...new Set(agents.map((a) => a.market))], []);
-  const strategies = useMemo(() => ['All Strategies', ...new Set(agents.map((a) => a.strategy))], []);
-  const models = useMemo(() => ['All Models', ...new Set(agents.map((a) => a.model))], []);
+  const markets = useMemo(() => [t('lb.allMarkets'), ...new Set(agents.map((a) => marketLabel(a.market, t)))], [t, lang]);
+  const strategies = useMemo(() => [t('lb.allStrategies'), ...new Set(agents.map((a) => strategyLabel(a.shortStrategy, t)))], [t, lang]);
+  const models = useMemo(() => [t('lb.allModels'), ...new Set(agents.map((a) => a.model))], []);
 
   const filtered = useMemo(() => {
     return agents.filter((a) => {
-      if (market !== 'All Markets' && a.market !== market) return false;
-      if (strategy !== 'All Strategies' && a.strategy !== strategy) return false;
-      if (model !== 'All Models' && a.model !== model) return false;
-      if (tab !== 'All Agents' && a.risk !== tab.replace(' Risk', '')) return false;
+      if (market !== t('lb.allMarkets') && marketLabel(a.market, t) !== market) return false;
+      if (strategy !== t('lb.allStrategies') && strategyLabel(a.shortStrategy, t) !== strategy) return false;
+      if (model !== t('lb.allModels') && a.model !== model) return false;
+      if (tabKey !== 'td.tabAll' && a.risk !== RISK_BY_TAB[tabKey]) return false;
       return true;
     });
-  }, [tab, market, strategy, model]);
+  }, [tabKey, market, strategy, model]);
 
   return (
     <>
       <Helmet>
         <title>{t('meta.traders')}</title>
-        <meta name="description" content="Browse and discover Tradvio AI trading agents. Compare live returns across markets, strategies, and AI models." />
+        <meta name="description" content={t('td.sub')} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/trader/" />
       </Helmet>
@@ -127,35 +139,38 @@ export default function TradersPage() {
           {/* ── Hero ───────────────────────────────── */}
           <div className="mb-6">
             <h1 className="font-mono font-black text-[clamp(38px,5vw,58px)] leading-none -tracking-[2px] m-0">
-              AI <span className="text-accent">Traders</span>
+              {t('td.title')}
             </h1>
             <p className="text-ink-soft text-sm mt-2 font-mono">
-              Browse and discover Tradvio AI trading agents. Compare live returns across markets, strategies, and AI models.
+              {t('td.sub')}
             </p>
           </div>
 
           {/* ── Tab buttons ────────────────────────── */}
           <div className="inline-flex flex-wrap border border-border mb-[18px] bg-navy">
-            {TABS.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={cn(
-                  'flex-1 min-w-[100px] sm:min-w-[110px] border-0 px-4 py-[10px] cursor-pointer font-mono text-xs transition-colors border-r border-border last:border-r-0',
-                  tab === t
-                    ? 'bg-accent text-white'
-                    : 'bg-deep text-ink-soft'
-                )}
-              >
-                {t}
-              </button>
-            ))}
+            {TAB_KEYS.map((tk) => {
+              const tabLabel = t(tk);
+              return (
+                <button
+                  key={tk}
+                  onClick={() => setTabKey(tk)}
+                  className={cn(
+                    'flex-1 min-w-[100px] sm:min-w-[110px] border-0 px-4 py-[10px] cursor-pointer font-mono text-xs transition-colors border-r border-border last:border-r-0',
+                    tabKey === tk
+                      ? 'bg-accent text-white'
+                      : 'bg-deep text-ink-soft'
+                  )}
+                >
+                  {tabLabel}
+                </button>
+              );
+            })}
           </div>
 
           {/* ── Filter bar ──────────────────────────── */}
           <div className="sticky top-16 lg:top-20 z-20 grid grid-cols-[130px_repeat(3,1fr)] border border-border bg-navy mb-5 max-sm:grid-cols-1">
             <div className="flex items-center px-[14px] text-ink-soft font-mono text-xs font-bold border-r border-border max-sm:border-r-0 max-sm:border-b max-sm:min-h-[48px]">
-              ▾ Filters:
+              ▾ {t('lb.filters')}
             </div>
             {[
               { val: market, set: setMarket, opts: markets },
@@ -174,7 +189,7 @@ export default function TradersPage() {
           {/* ── Empty state ─────────────────────────── */}
           {filtered.length === 0 && (
             <div className="border border-border p-[34px] text-center text-ink-soft">
-              No AI traders match these filters.
+              {t('td.noMatch')}
             </div>
           )}
 
@@ -203,21 +218,18 @@ export default function TradersPage() {
                           {a.name}
                         </h2>
                         <p className="text-ink-soft text-[9px] m-0 whitespace-nowrap overflow-hidden text-ellipsis">
-                          {a.model} &nbsp;•&nbsp; {a.market}
+                          {a.model} &nbsp;•&nbsp; {marketLabel(a.market, t)}
                         </p>
                       </div>
                     </div>
                     <span className={cn('flex-shrink-0 px-2 py-[6px] font-mono text-[9px] rounded uppercase tracking-[0.1em] border', riskBadge[a.risk])}>
-                      {a.risk}
-                    </span>
+                      {t('lb.' + a.risk.toLowerCase())}</span>
                   </div>
 
                   {/* Return + Sparkline */}
                   <div className="flex justify-between items-center gap-[14px] mb-[15px]">
                     <div>
-                      <span className="block text-ink-soft uppercase font-mono text-[8px] tracking-[.03em]">
-                        Live Return
-                      </span>
+                      <span className="block text-ink-soft uppercase font-mono text-[8px] tracking-[.03em]">{t('td.liveReturn')}</span>
                       <strong className={cn('block mt-[7px] font-mono text-[23px]', isPositive ? 'text-success' : 'text-danger')}>
                         {fmtPct(a.actualReturn)}
                       </strong>
@@ -229,11 +241,9 @@ export default function TradersPage() {
 
                   {/* Strategy */}
                   <div className="border border-border mb-[13px] rounded-md px-3 py-2.5">
-                    <span className="block text-ink-soft uppercase font-mono text-[8px] tracking-[.03em] mb-1">
-                      Strategy
-                    </span>
+                    <span className="block text-ink-soft uppercase font-mono text-[8px] tracking-[.03em] mb-1">{t('td.strategy')}</span>
                     <span className="block font-mono text-[11px] text-ink leading-relaxed">
-                      {a.strategy}
+                      {strategyLabel(a.shortStrategy, t)}
                     </span>
                   </div>
 
@@ -242,7 +252,7 @@ export default function TradersPage() {
                     onClick={(e) => { e.stopPropagation(); window.location.href = '/get-started/'; }}
                     className="w-full border-0 text-white py-[10px] cursor-pointer font-mono font-bold text-[10px] tracking-[.05em] transition-all hover:opacity-90 bg-accent hover:bg-accent-hover rounded-lg"
                   >
-                    + FOLLOW
+                    {t('td.follow')}
                   </button>
                 </article>
               );
@@ -251,7 +261,7 @@ export default function TradersPage() {
 
           {/* Legend */}
           <p className="mt-6 text-center font-mono text-[10px] text-ink-soft tracking-[.02em]">
-            {agents.length} agents across {new Set(agents.map((a) => a.market)).size} asset classes • Data updates in real time
+            {agents.length} {t('lb.tradersWord')} {t('lb.of')} {new Set(agents.map((a) => a.market)).size} {t('td.assetClasses')} • {t('lb.realtime')}
           </p>
         </div>
       </main>

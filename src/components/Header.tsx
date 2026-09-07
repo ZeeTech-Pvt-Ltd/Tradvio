@@ -136,15 +136,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
             {platformOpen && (
               <div className="absolute left-0 top-full mt-2 min-w-[220px] rounded-md border border-border bg-navy p-2 shadow-card-lg">
-                {PLATFORM_ITEMS.map((item) => (
+                {PLATFORM_ITEMS.map((item, pi) => (
                   <a
                     key={item.href}
                     href={localizePath(item.href, lang)}
                     onClick={() => setOpenDropdown(null)}
                     className="block rounded-md px-3 py-2 text-sm text-white/75 transition-colors hover:bg-medium-navy hover:text-white"
                   >
-                    {item.label}
-                  </a>
+                    {t('fl.t' + (pi + 1))}</a>
                 ))}
               </div>
             )}
@@ -182,15 +181,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
             {resourcesOpen && (
               <div className="absolute left-0 top-full mt-2 min-w-[220px] rounded-md border border-border bg-navy p-2 shadow-card-lg">
-                {RESOURCE_ITEMS.map((item) => (
+                {RESOURCE_ITEMS.map((item, ri) => (
                   <a
                     key={item.href}
                     href={localizePath(item.href, lang)}
                     onClick={() => setOpenDropdown(null)}
                     className="block rounded-md px-3 py-2 text-sm text-white/75 transition-colors hover:bg-medium-navy hover:text-white"
                   >
-                    {item.label}
-                  </a>
+                    {t('fl.r' + (ri + 1))}</a>
                 ))}
               </div>
             )}
