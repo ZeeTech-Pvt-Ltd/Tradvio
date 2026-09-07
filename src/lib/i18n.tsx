@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 export type Language = 'en' | 'it' | 'de' | 'fr' | 'es';
 
 export const LANGUAGES: { code: Language; flag: string; label: string }[] = [
-  { code: 'en', flag: '🇬🇧', label: 'EN' },
-  { code: 'it', flag: '🇮🇹', label: 'IT' },
-  { code: 'de', flag: '🇩🇪', label: 'DE' },
-  { code: 'fr', flag: '🇫🇷', label: 'FR' },
-  { code: 'es', flag: '🇪🇸', label: 'ES' },
+  { code: 'en', flag: 'https://flagcdn.com/w40/gb.png', label: 'EN' },
+  { code: 'it', flag: 'https://flagcdn.com/w40/it.png', label: 'IT' },
+  { code: 'de', flag: 'https://flagcdn.com/w40/de.png', label: 'DE' },
+  { code: 'fr', flag: 'https://flagcdn.com/w40/fr.png', label: 'FR' },
+  { code: 'es', flag: 'https://flagcdn.com/w40/es.png', label: 'ES' },
 ];
 
 type Dict = Record<string, string>;

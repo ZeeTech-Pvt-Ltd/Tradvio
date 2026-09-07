@@ -3,8 +3,10 @@ import { cn } from '@/lib/utils';
 import { LANGUAGES, useLanguage, type Language } from '@/lib/i18n';
 
 /**
- * LanguageSwitcher — flag + short-code dropdown in the header.
+ * LanguageSwitcher — flag image + short-code dropdown in the header.
  * Stores the selection in localStorage and updates the whole site instantly.
+ * Flag images come from flagcdn.com so they render on all platforms,
+ * including Windows where flag emoji are not supported.
  */
 export default function LanguageSwitcher() {
   const { lang, setLang } = useLanguage();
@@ -38,7 +40,14 @@ export default function LanguageSwitcher() {
         aria-label={`Language: ${current.label}`}
         className="flex items-center gap-1.5 rounded-md border border-border px-2 py-1.5 text-xs font-semibold text-ink-soft transition-colors hover:border-accent/40 hover:text-ink"
       >
-        <span className="text-sm leading-none">{current.flag}</span>
+        <img
+          src={current.flag}
+          alt={`${current.label} flag`}
+          width={20}
+          height={14}
+          loading="lazy"
+          className="rounded-[3px] border border-border object-cover"
+        />
         <span>{current.label}</span>
         <svg
           className={cn('h-3 w-3 transition-transform duration-fast', open && 'rotate-180')}
@@ -55,7 +64,7 @@ export default function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 min-w-[110px] rounded-md border border-border bg-navy p-1.5 shadow-card-lg z-50">
+        <div className="absolute right-0 top-full mt-2 min-w-[120px] rounded-md border border-border bg-navy p-1.5 shadow-card-lg z-50">
           {LANGUAGES.map((l) => (
             <button
               key={l.code}
@@ -65,11 +74,18 @@ export default function LanguageSwitcher() {
                 setOpen(false);
               }}
               className={cn(
-                'flex w-full items-center gap-2 rounded-md px-3 py-2 text-xs font-semibold transition-colors',
+                'flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-xs font-semibold transition-colors',
                 l.code === lang ? 'bg-accent/10 text-accent' : 'text-ink-soft hover:bg-medium-navy hover:text-ink'
               )}
             >
-              <span className="text-sm leading-none">{l.flag}</span>
+              <img
+                src={l.flag}
+                alt={`${l.label} flag`}
+                width={20}
+                height={14}
+                loading="lazy"
+                className="rounded-[3px] border border-border object-cover"
+              />
               <span>{l.label}</span>
             </button>
           ))}
