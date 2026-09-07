@@ -43,15 +43,14 @@ export default function DataTransparency() {
         <div className="section-header">
           <h2>{t('dt.title')}</h2>
           <p>
-            We label every data point so you know exactly what you&apos;re looking at. If
-            something isn&apos;t labelled, treat it as illustrative.
+            {t('dt.sub')}
           </p>
         </div>
 
         <div className="grid-2">
-          {labels.map((label) => (
+          {labels.map((label, li) => (
             <div
-              key={label.title}
+              key={t('dt.t' + (li + 1))}
               className="bg-navy border border-border rounded-lg p-6 flex gap-4"
             >
               <span className={`text-2xl flex-shrink-0 ${label.dotColor}`}>{label.dot}</span>
@@ -60,10 +59,10 @@ export default function DataTransparency() {
                   <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${label.dotColor} bg-opacity-10`}
                     style={{ backgroundColor: label.dotColor === 'text-success' ? 'rgba(34,197,94,0.12)' : label.dotColor === 'text-warning' ? 'rgba(250,204,21,0.12)' : label.dotColor === 'text-accent' ? 'rgba(220,38,38,0.12)' : 'rgba(124,58,237,0.12)' }}
                   >
-                    {label.title}
+                    {t('dt.t' + (li + 1))}
                   </span>
                 </div>
-                <h4 className="text-ink font-semibold mb-1">{label.subtitle}</h4>
+                <h4 className="text-ink font-semibold mb-1">{t('dt.s' + (li + 1))}</h4>
                 <p className="text-sm text-muted-dark">{label.description}</p>
               </div>
             </div>

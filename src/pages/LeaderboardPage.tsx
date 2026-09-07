@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 import { agents, type Agent } from '@/lib/agents';
 import Header from '@/components/Header';
 import MobileNav from '@/components/MobileNav';
@@ -82,6 +83,7 @@ function InlineSelect({ value, onChange, options }: { value: string; onChange: (
 
 /* ─── Page ──────────────────────────────────────────── */
 export default function LeaderboardPage() {
+  const { t } = useLanguage();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [market, setMarket] = useState('All Markets');
   const [strategy, setStrategy] = useState('All Strategies');
@@ -168,15 +170,15 @@ export default function LeaderboardPage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="flex items-center gap-2 bg-navy border border-border rounded-lg px-5 py-3">
-                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">Market</label>
+                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">{t('lb.market')}</label>
                 <InlineSelect value={market} onChange={setMarket} options={markets} />
               </div>
               <div className="flex items-center gap-2 bg-navy border border-border rounded-lg px-5 py-3">
-                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">Strategy</label>
+                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">{t('lb.strategy')}</label>
                 <InlineSelect value={strategy} onChange={setStrategy} options={strategies} />
               </div>
               <div className="flex items-center gap-2 bg-navy border border-border rounded-lg px-5 py-3">
-                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">Risk</label>
+                <label className="font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft font-bold shrink-0">{t('lb.risk')}</label>
                 <InlineSelect value={risk} onChange={setRisk} options={risks} />
               </div>
               <div className="flex items-center gap-2 bg-navy border border-border rounded-lg px-5 py-3">
@@ -199,7 +201,7 @@ export default function LeaderboardPage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-success" />
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-success">Live</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-success">{t('lb.live')}</span>
             </div>
           </div>
         </div>
@@ -210,15 +212,15 @@ export default function LeaderboardPage() {
             <div className="hidden lg:block bg-navy border border-border rounded-xl overflow-hidden shadow-sm">
               {/* Header */}
               <div className="grid grid-cols-[44px_1.3fr_70px_110px_2fr_80px_120px_90px_100px] gap-1 items-center px-5 py-3.5 bg-medium-navy/50 border-b border-border font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft">
-                <span>Rank</span>
-                <span>Agent</span>
-                <span className="text-center">Trend</span>
-                <span className="text-center">Market</span>
-                <span className="text-center">Strategy</span>
-                <span className="text-center">Risk</span>
-                <span className="text-center">AI Model</span>
-                <span className="text-right">Return</span>
-                <span className="text-center">Action</span>
+                <span>{t('lb.rank')}</span>
+                <span>{t('lb.agent')}</span>
+                <span className="text-center">{t('lb.trend')}</span>
+                <span className="text-center">{t('lb.market')}</span>
+                <span className="text-center">{t('lb.strategy')}</span>
+                <span className="text-center">{t('lb.risk')}</span>
+                <span className="text-center">{t('lb.model')}</span>
+                <span className="text-right">{t('lb.return')}</span>
+                <span className="text-center">{t('lb.action')}</span>
               </div>
 
               {filtered.length === 0 ? (
@@ -267,9 +269,7 @@ export default function LeaderboardPage() {
                       </span>
 
                       <div className="flex justify-center">
-                        <a href="/get-started/" className="inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">
-                          Follow
-                        </a>
+                        <a href="/get-started/" className="inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">{t('lb.follow')}</a>
                       </div>
                     </div>
                   );
@@ -319,9 +319,7 @@ export default function LeaderboardPage() {
                       <p className="font-mono text-[11px] text-ink-soft mt-2 leading-relaxed">{a.strategy}</p>
 
                       <div className="mt-3 pt-3 border-t border-border">
-                        <a href="/get-started/" className="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">
-                          Follow
-                        </a>
+                        <a href="/get-started/" className="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">{t('lb.follow')}</a>
                       </div>
                     </div>
                   );

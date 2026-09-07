@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '@/lib/i18n';
 
 const periods = ['1D', '1W', '1M', '3M', '1Y', '5Y'];
 
@@ -19,6 +20,7 @@ const movers = [
 ];
 
 export default function TradingPerformance() {
+  const { t } = useLanguage();
   const [activePeriod, setActivePeriod] = useState('1D');
 
   return (
@@ -33,12 +35,12 @@ export default function TradingPerformance() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-success" />
               </span>
               <span className="text-xs font-semibold text-ink-soft uppercase tracking-widest">
-                Market Summary
+                {t('tp.live')}
               </span>
               <span className="text-[10px] text-success/60 ml-2">● Live</span>
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-ink">
-              Real-Time Trading <span className="text-accent">Performance</span>
+              {t('tp.title')}
             </h2>
           </div>
 
@@ -63,7 +65,7 @@ export default function TradingPerformance() {
         {/* ── Indices row ────────────────────────── */}
         <div className="mb-6">
           <h3 className="text-[11px] font-semibold text-ink-soft uppercase tracking-widest mb-3">
-            Indices
+            {t('tp.indices')}
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {indices.map((idx) => (
@@ -140,19 +142,17 @@ export default function TradingPerformance() {
             {/* Legend */}
             <div className="flex items-center gap-4 mt-2 text-[10px] text-ink-soft">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-sm bg-success" /> Buy
-              </span>
+                <span className="w-2 h-2 rounded-sm bg-success" />{t('tp.legend1')}</span>
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-sm bg-danger" /> Sell
-              </span>
-              <span>Last updated: {new Date().toLocaleTimeString()}</span>
+                <span className="w-2 h-2 rounded-sm bg-danger" />{t('tp.legend2')}</span>
+              <span>{t('tp.updated')}: {new Date().toLocaleTimeString()}</span>
             </div>
           </div>
 
           {/* Market Movers */}
           <div className="bg-medium-navy/50 border border-border rounded-xl p-5">
             <h3 className="text-xs font-semibold text-ink-soft uppercase tracking-wider mb-4">
-              Market Movers
+              {t('tp.movers')}
             </h3>
             <div className="space-y-3">
               {movers.map((m) => (

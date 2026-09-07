@@ -68,15 +68,15 @@ export default function Leaderboard() {
           <div className="hidden lg:block bg-navy border border-border rounded-xl overflow-hidden shadow-sm">
             {/* Header */}
             <div className="grid grid-cols-[44px_1.3fr_70px_110px_2fr_80px_120px_90px_100px] gap-1 items-center px-5 py-3.5 bg-medium-navy/50 border-b border-border font-mono text-[10px] uppercase tracking-[0.1em] text-ink-soft">
-              <span>Rank</span>
-              <span>Agent</span>
-              <span className="text-center">Trend</span>
-              <span className="text-center">Market</span>
-              <span className="text-center">Strategy</span>
-              <span className="text-center">Risk</span>
-              <span className="text-center">AI Model</span>
-              <span className="text-right">Return</span>
-              <span className="text-center">Action</span>
+              <span>{t('lb.rank')}</span>
+              <span>{t('lb.agent')}</span>
+              <span className="text-center">{t('lb.trend')}</span>
+              <span className="text-center">{t('lb.market')}</span>
+              <span className="text-center">{t('lb.strategy')}</span>
+              <span className="text-center">{t('lb.risk')}</span>
+              <span className="text-center">{t('lb.model')}</span>
+              <span className="text-right">{t('lb.return')}</span>
+              <span className="text-center">{t('lb.action')}</span>
             </div>
 
             {featured.map((a, i) => {
@@ -117,9 +117,7 @@ export default function Leaderboard() {
                   </span>
 
                   <div className="flex justify-center">
-                    <a href="/get-started/" className="inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">
-                      Follow
-                    </a>
+                    <a href="/get-started/" className="inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">{t('lb.follow')}</a>
                   </div>
                 </div>
               );
@@ -167,9 +165,7 @@ export default function Leaderboard() {
                   <p className="font-mono text-[11px] text-ink-soft mt-2 leading-relaxed">{a.strategy}</p>
 
                   <div className="mt-3 pt-3 border-t border-border">
-                    <a href="/get-started/" className="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">
-                      Follow
-                    </a>
+                    <a href="/get-started/" className="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-semibold rounded-md text-white bg-accent hover:bg-accent-hover transition-colors no-underline">{t('lb.follow')}</a>
                   </div>
                 </div>
               );

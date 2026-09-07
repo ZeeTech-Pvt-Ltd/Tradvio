@@ -4,6 +4,7 @@
  * Pure CSS/SVG animation, no external dependencies.
  */
 export default function PlatformDemo() {
+  const { t } = useLanguage();
   return (
     <div className="relative w-full max-w-container mx-auto">
       {/* Outer glow */}
@@ -99,18 +100,18 @@ export default function PlatformDemo() {
         <div className="flex items-center justify-between px-4 py-2 bg-[#111111] border-t border-[#222] text-[9px] font-mono text-[#444]">
           <div className="flex items-center gap-3">
             <span>Data: <span className="text-success">● LIVE</span></span>
-            <span>Latency: 12ms</span>
+            <span>{t('hero.latency')}</span>
           </div>
           <div className="flex items-center gap-3">
-            <span>AI Model: Active</span>
-            <span className="text-ink-soft">Paper Trading</span>
+            <span>{t('pd.active')}</span>
+            <span className="text-ink-soft">{t('hero.paper')}</span>
           </div>
         </div>
       </div>
 
       {/* Caption */}
       <p className="text-center text-xs text-ink-soft mt-4 max-w-md mx-auto">
-        <span className="text-accent font-semibold">Demo walkthrough.</span> Real platform
+        <span className="text-accent font-semibold">{t('pd.walkthrough')}</span> Real platform
         shows live data, confidence labels, and risk warnings at every step.
       </p>
     </div>
@@ -302,7 +303,7 @@ function ChartAnalysisPanel() {
         <span className="text-[9px] px-2 py-0.5 rounded-full bg-success/10 border border-success/20 text-success font-mono">
           Bullish Divergence
         </span>
-        <span className="text-[9px] text-ink-soft ml-auto">Confidence: 82%</span>
+        <span className="text-[9px] text-ink-soft ml-auto">{t('pd.confidence')}</span>
       </div>
     </div>
   );
@@ -371,7 +372,7 @@ function AIScanningPanel() {
             <circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" />
           </svg>
           <span className="text-[9px] text-ink-soft font-mono">
-            <span className="typing-text">Analysing 26 indicators across 4 timeframes...</span>
+            <span className="typing-text">{t('pd.analysing')}</span>
             <span
               className="inline-block w-[1px] h-2.5 bg-accent align-middle ml-0.5"
               style={{ animation: 'cursorBlink 0.8s step-end infinite' }}
@@ -431,7 +432,7 @@ function SignalPanel() {
         style={{ animation: 'fadeSlideIn 0.3s ease-out 0.6s both', opacity: 0 }}
       >
         <span>⚠</span>
-        <span>Signal is an observation — not financial advice. Verify before acting.</span>
+        <span>{t('pd.disclaimer')}</span>
       </div>
     </div>
   );
@@ -451,13 +452,13 @@ function ExecutionPanel() {
             <span className="text-success text-xs font-bold">✓</span>
           </span>
           <div>
-            <span className="text-[10px] font-bold text-white font-mono">Trade Placed</span>
-            <span className="text-[9px] text-ink-soft block">Via Your Broker · Order #2847</span>
+            <span className="text-[10px] font-bold text-white font-mono">{t('pd.tradePlaced')}</span>
+            <span className="text-[9px] text-ink-soft block">{t('pd.viaBroker')}</span>
           </div>
         </div>
         <div className="text-right">
           <span className="text-[9px] text-success font-mono font-bold block">LIVE</span>
-          <span className="text-[7px] text-ink-soft">Paper Trading</span>
+          <span className="text-[7px] text-ink-soft">{t('hero.paper')}</span>
         </div>
       </div>
 
@@ -468,12 +469,12 @@ function ExecutionPanel() {
       >
         <div className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-success" />
-          <span>Connected to Broker API</span>
+          <span>{t('pd.connected')}</span>
         </div>
         <span>·</span>
-        <span>Execution: Manual (Your Control)</span>
+        <span>{t('pd.execution')}</span>
         <span>·</span>
-        <span className="text-accent font-semibold">You Decide ✓</span>
+        <span className="text-accent font-semibold">{t('pd.you')}</span>
       </div>
     </div>
   );

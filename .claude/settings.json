@@ -15,7 +15,13 @@
       "Bash(sed -i \"s/^import { faqs } from '@\\\\/lib\\\\/data';/import { faqs } from '@\\\\/lib\\\\/data';\\\\nimport { useLanguage } from '@\\\\/lib\\\\/i18n';/; s/^export default function FAQ\\(\\) {/export default function FAQ\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/; s|^          <h2>Frequently Asked Questions</h2>|          <h2>{t\\('faq.title'\\)}</h2>|\" src/components/FAQ.tsx)",
       "Bash(sed -i \"s/^const LOGO_SRC = '\\\\/trdavio-logo.png';/import { useLanguage } from '@\\\\/lib\\\\/i18n';\\\\n\\\\nconst LOGO_SRC = '\\\\/trdavio-logo.png';/\" src/components/Footer.tsx)",
       "Bash(sed -i \"s/^export default function Footer\\(\\) {/export default function Footer\\(\\) {\\\\n  const { t } = useLanguage\\(\\);/\" src/components/Footer.tsx)",
-      "Bash(sed -i \"s/^              Products$/              {t\\('footer.products'\\)}/; s/^              Company$/              {t\\('footer.company'\\)}/; s/^              Legal$/              {t\\('footer.legal'\\)}/\" src/components/Footer.tsx)"
+      "Bash(sed -i \"s/^              Products$/              {t\\('footer.products'\\)}/; s/^              Company$/              {t\\('footer.company'\\)}/; s/^              Legal$/              {t\\('footer.legal'\\)}/\" src/components/Footer.tsx)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Add flag images to language switcher *)",
+      "Bash(git push *)",
+      "Bash(curl -sI --max-time 10 https://github.com -o /dev/null -w \"%{http_code}\")",
+      "Bash(node -e ' *)",
+      "Bash(git commit -m 'Fix blank page on scroll — undefined translation refs in Testimonials *)"
     ]
   }
 }

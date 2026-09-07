@@ -32,13 +32,13 @@ export default function CanCannot() {
           {/* Helps With */}
           <div className="bg-navy border border-border rounded-lg p-6">
             <h3 className="flex items-center gap-2 text-success mb-6">
-              <span>✓</span> Tradvio AI Helps With
+              <span>✓</span> {t('cc.h1')}
             </h3>
             <ul className="space-y-3">
-              {helpsWith.map((item) => (
+              {helpsWith.map((item, ci) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-muted-dark">
                   <span className="text-success flex-shrink-0 mt-0.5">✓</span>
-                  {item}
+                  {t('cc.can' + (ci + 1))}
                 </li>
               ))}
             </ul>
@@ -47,13 +47,13 @@ export default function CanCannot() {
           {/* Does NOT */}
           <div className="bg-navy border border-border rounded-lg p-6">
             <h3 className="flex items-center gap-2 text-danger mb-6">
-              <span>—</span> Tradvio AI Does NOT
+              <span>—</span> {t('cc.h2')}
             </h3>
             <ul className="space-y-3">
-              {doesNot.map((item) => (
+              {doesNot.map((item, ci) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-muted-dark">
                   <span className="text-danger flex-shrink-0 mt-0.5">✕</span>
-                  {item}
+                  {t('cc.cannot' + (ci + 1))}
                 </li>
               ))}
             </ul>

@@ -86,13 +86,13 @@ export default function Hero() {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28CA41]" />
                 </div>
-                <span className="text-[9px] text-[#555] uppercase tracking-[0.15em] font-medium">Tradvio AI · Research Terminal</span>
+                <span className="text-[9px] text-[#555] uppercase tracking-[0.15em] font-medium">{t('hero.terminal')}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
               </div>
               {/* Content */}
               <div className="flex">
                 <div className="w-[100px] flex-shrink-0 border-r border-[#222] bg-[#0A0A0A] p-2">
-                  <p className="text-[7px] text-[#555] uppercase tracking-[0.15em] font-bold mb-1 px-1">Watchlist</p>
+                  <p className="text-[7px] text-[#555] uppercase tracking-[0.15em] font-bold mb-1 px-1">{t('hero.watchlist')}</p>
                   {[
                     { pair: 'EUR/USD', price: '1.0925', change: '+0.18%', up: true },
                     { pair: 'GBP/USD', price: '1.2680', change: '+0.32%', up: true },
@@ -149,15 +149,15 @@ export default function Hero() {
                   {/* Metric cards */}
                   <div className="grid grid-cols-3 gap-1.5">
                     <div className="bg-[#0A0A0A] border border-[#1A1A1A] rounded p-1.5 text-center">
-                      <p className="text-[7px] text-[#555] uppercase">Signal</p>
+                      <p className="text-[7px] text-[#555] uppercase">{t('hero.signal')}</p>
                       <span className="text-[10px] font-mono font-bold text-success">BUY 87%</span>
                     </div>
                     <div className="bg-[#0A0A0A] border border-[#1A1A1A] rounded p-1.5 text-center">
-                      <p className="text-[7px] text-[#555] uppercase">S/R</p>
+                      <p className="text-[7px] text-[#555] uppercase">{t('hero.sr')}</p>
                       <span className="text-[10px] font-mono font-bold text-white">1.0840</span>
                     </div>
                     <div className="bg-[#0A0A0A] border border-[#1A1A1A] rounded p-1.5 text-center">
-                      <p className="text-[7px] text-[#555] uppercase">Risk</p>
+                      <p className="text-[7px] text-[#555] uppercase">{t('hero.risk')}</p>
                       <span className="text-[10px] font-mono font-bold text-warning">1:2.8</span>
                     </div>
                   </div>
@@ -165,8 +165,8 @@ export default function Hero() {
               </div>
               <div className="flex items-center justify-between px-3 py-1 bg-[#111111] border-t border-[#222] text-[7px] font-mono text-[#444]">
                 <span>Data: <span className="text-success">● LIVE</span></span>
-                <span>Latency: 12ms</span>
-                <span className="text-ink-soft">Paper Trading</span>
+                <span>{t('hero.latency')}</span>
+                <span className="text-ink-soft">{t('hero.paper')}</span>
               </div>
             </div>
           </div>
