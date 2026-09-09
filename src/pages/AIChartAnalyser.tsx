@@ -66,7 +66,7 @@ export default function AIChartAnalyser() {
     <>
       <Helmet>
         <title>{t('meta.analyser')}</title>
-        <meta name="description" content="Upload any trading chart and get instant AI analysis — trend direction, support & resistance levels, trade scenarios, and confidence ratings. Free to start." />
+        <meta name="description" content="Upload any trading chart and get instant AI analysis - trend direction, support & resistance levels, trade scenarios, and confidence ratings. Free to start." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-chart-analyser/" />
       </Helmet>
@@ -214,7 +214,7 @@ export default function AIChartAnalyser() {
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-lg bg-accent/15 text-accent flex items-center justify-center font-mono text-xs font-bold">EU</div>
                       <div>
-                        <div className="font-semibold text-ink">EUR/USD — {t('ca.tf.Daily')}</div>
+                        <div className="font-semibold text-ink">EUR/USD - {t('ca.tf.Daily')}</div>
                         <div className="text-xs text-ink-soft">{t('ca.soType')}</div>
                       </div>
                     </div>
@@ -260,7 +260,7 @@ export default function AIChartAnalyser() {
                 </div>
 
                 <p className="text-xs text-ink-soft mt-4 text-center">
-                  ⚠ <span className="font-semibold text-warning">{t('ca.sampleNote1')}</span> — {t('ca.sampleNote2')}
+                  ⚠ <span className="font-semibold text-warning">{t('ca.sampleNote1')}</span> - {t('ca.sampleNote2')}
                 </p>
               </div>
             </div>

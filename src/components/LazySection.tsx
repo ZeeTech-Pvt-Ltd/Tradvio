@@ -7,7 +7,7 @@ interface LazySectionProps {
 }
 
 /**
- * LazySection — defers rendering (and therefore JS execution) of a section
+ * LazySection - defers rendering (and therefore JS execution) of a section
  * until it scrolls close to the viewport. Cuts initial main-thread work,
  * long tasks, and unused-JS execution on content-heavy pages.
  */

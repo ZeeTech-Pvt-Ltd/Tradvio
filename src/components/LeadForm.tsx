@@ -126,11 +126,11 @@ async function loadIntlTelInput(): Promise<void> {
 export default function LeadForm({
   formName = 'homepage_lead',
   sourcePage = '/',
-  ctaText = 'Get Started — Free',
-  title = 'Start Analysing — Free',
+  ctaText = 'Get Started - Free',
+  title = 'Start Analysing - Free',
   subtitle = 'No credit card. No deposit required.',
   successTitle = 'Check Your Inbox',
-  successMessage = "We've sent your access details. Start with paper trading — no real money needed.",
+  successMessage = "We've sent your access details. Start with paper trading - no real money needed.",
 }: LeadFormOptions) {
   const { t } = useLanguage();
   const formId = uid('lead');
@@ -149,7 +149,7 @@ export default function LeadForm({
   const itiRef = useRef<IntlTelInputInstance | null>(null);
   const [itiReady, setItiReady] = useState(false);
 
-  // Detect visitor country from IP — defaults to UK ('gb') when detection fails.
+  // Detect visitor country from IP - defaults to UK ('gb') when detection fails.
   const detectCountry = async (): Promise<string> => {
     try {
       const controller = new AbortController();
@@ -219,7 +219,7 @@ export default function LeadForm({
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       errs.email = t('lf.errEmail');
     }
-    // Validate phone — required field, using intl-tel-input's isValidNumber when available
+    // Validate phone - required field, using intl-tel-input's isValidNumber when available
     if (!phone.trim()) {
       errs.phone = t('lf.errPhoneShort');
     } else if (itiRef.current) {

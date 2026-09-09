@@ -8,7 +8,7 @@ const helpsWith = [
 ];
 
 const doesNot = [
-  'Guarantee trading profits — no technology can',
+  'Guarantee trading profits - no technology can',
   'Eliminate risk from trading',
   'Execute trades or hold client funds',
   'Provide financial or investment advice',
@@ -47,7 +47,7 @@ export default function CanCannot() {
           {/* Does NOT */}
           <div className="bg-navy border border-border rounded-lg p-6">
             <h3 className="flex items-center gap-2 text-danger mb-6">
-              <span>—</span> {t('cc.h2')}
+              <span>-</span> {t('cc.h2')}
             </h3>
             <ul className="space-y-3">
               {doesNot.map((item, ci) => (

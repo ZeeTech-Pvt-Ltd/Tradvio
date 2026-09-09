@@ -62,7 +62,12 @@
       "Bash(taskkill //PID 6000 //F)",
       "Bash(echo \"tsc exit: $?\")",
       "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:5173/ --max-time 10)",
-      "Bash(curl -s -o /dev/null -w \"assistant module: %{http_code}\\\\n\" http://localhost:5173/src/pages/AITradingAssistant.tsx --max-time 10)"
+      "Bash(curl -s -o /dev/null -w \"assistant module: %{http_code}\\\\n\" http://localhost:5173/src/pages/AITradingAssistant.tsx --max-time 10)",
+      "Bash(grep -n \"—\" index.html; echo \"---\"; sed -i 's/—/-/g' index.html src/lib/i18n.tsx && echo \"index + i18n done\")",
+      "Bash(xargs sed -i 's/—/-/g')"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\samee\\Desktop\\tradevio"
     ]
   }
 }

@@ -65,7 +65,7 @@ export default function TradeJournal() {
     <>
       <Helmet>
         <title>{t('meta.journal')}</title>
-        <meta name="description" content="Track every trade with Tradvio AI's journal. Automatic imports, AI insights, tag filters, and emotion tracking. Free to start — no credit card required." />
+        <meta name="description" content="Track every trade with Tradvio AI's journal. Automatic imports, AI insights, tag filters, and emotion tracking. Free to start - no credit card required." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/trade-journal/" />
       </Helmet>

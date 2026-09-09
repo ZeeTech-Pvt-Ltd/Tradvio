@@ -17,7 +17,7 @@ export default function WhyTradvioAI() {
   const videoWrapRef = useRef<HTMLDivElement | null>(null);
   const [videoVisible, setVideoVisible] = useState(false);
 
-  // Only load the external video once it scrolls near the viewport —
+  // Only load the external video once it scrolls near the viewport -
   // keeps several MB off the initial page load.
   useEffect(() => {
     const el = videoWrapRef.current;
@@ -43,7 +43,7 @@ export default function WhyTradvioAI() {
     <section className="section bg-deep">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left — Text + Checklist */}
+          {/* Left - Text + Checklist */}
           <div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ink leading-[1.15] mb-6">
               {t('why.title1')} <span className="text-accent">{t('why.title2')}</span>
@@ -78,7 +78,7 @@ export default function WhyTradvioAI() {
             </div>
           </div>
 
-          {/* Right — Video (lazy-loaded on scroll) */}
+          {/* Right - Video (lazy-loaded on scroll) */}
           <div
             ref={videoWrapRef}
             className="w-full max-w-sm mx-auto lg:max-w-none rounded-2xl min-h-[320px] md:min-h-[400px] bg-navy border border-border flex items-center justify-center"

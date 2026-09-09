@@ -8,7 +8,7 @@ interface HowToStep {
   text: string;
 }
 
-/* ─── Organization — Full E-E-A-T Signals ───────────────── */
+/* ─── Organization - Full E-E-A-T Signals ───────────────── */
 export function generateOrganizationSchema(): object {
   return {
     '@type': 'Organization',
@@ -41,7 +41,7 @@ export function generateOrganizationSchema(): object {
   };
 }
 
-/* ─── Person — Founder / Author E-E-A-T ─────────────────── */
+/* ─── Person - Founder / Author E-E-A-T ─────────────────── */
 export function generatePersonSchema(): object {
   return {
     '@type': 'Person',
@@ -74,7 +74,7 @@ export function generateWebsiteSchema(): object {
   };
 }
 
-/* ─── WebPage — Full Rich Signals ────────────────────────── */
+/* ─── WebPage - Full Rich Signals ────────────────────────── */
 export function generateWebPageSchema(): object {
   return {
     '@type': 'WebPage',
@@ -132,7 +132,7 @@ export function generateSoftwareAppSchema(): object {
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Web, iOS, Android',
     description:
-      'AI-assisted market research and strategy testing platform. Chart analysis, strategy builder, backtesting, paper trading and risk management. Research only — does not execute trades or provide financial advice.',
+      'AI-assisted market research and strategy testing platform. Chart analysis, strategy builder, backtesting, paper trading and risk management. Research only - does not execute trades or provide financial advice.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -143,7 +143,7 @@ export function generateSoftwareAppSchema(): object {
   };
 }
 
-/* ─── FAQPage — 12 Questions for Depth ───────────────────── */
+/* ─── FAQPage - 12 Questions for Depth ───────────────────── */
 export function generateFAQSchema(faqs: FAQ[]): object {
   return {
     '@type': 'FAQPage',
@@ -159,7 +159,7 @@ export function generateFAQSchema(faqs: FAQ[]): object {
   };
 }
 
-/* ─── HowTo — How It Works Section ───────────────────────── */
+/* ─── HowTo - How It Works Section ───────────────────────── */
 export function generateHowToSchema(steps: HowToStep[]): object {
   return {
     '@type': 'HowTo',
@@ -187,7 +187,7 @@ export function generateAboutPageSchema(): object {
   };
 }
 
-/* ─── ItemList — Platform Tools ──────────────────────────── */
+/* ─── ItemList - Platform Tools ──────────────────────────── */
 export function generateItemListSchema(tools: { name: string; description: string; url: string }[]): object {
   return {
     '@type': 'ItemList',
@@ -213,7 +213,7 @@ export function generateItemListSchema(tools: { name: string; description: strin
   };
 }
 
-/* ─── Review — Expert Review Section ────────────────────── */
+/* ─── Review - Expert Review Section ────────────────────── */
 export function generateReviewSchema(): object {
   return {
     '@type': 'Review',

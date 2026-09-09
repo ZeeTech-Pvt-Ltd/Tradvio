@@ -7,7 +7,7 @@ export default function Glossary() {
         <div className="section-header">
           <h2>Trading &amp; AI Glossary</h2>
           <p>
-            Clear definitions of key terms. Helps you understand the platform — and helps
+            Clear definitions of key terms. Helps you understand the platform - and helps
             search engines surface accurate answers.
           </p>
         </div>

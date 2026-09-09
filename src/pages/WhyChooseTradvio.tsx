@@ -53,7 +53,7 @@ export default function WhyChooseTradvio() {
     <>
       <Helmet>
         <title>{t('meta.why')}</title>
-        <meta name="description" content="Tradvio vs general trading platforms — AI-assisted analysis, integrated trade planning, and a connected workflow. See why traders choose Tradvio." />
+        <meta name="description" content="Tradvio vs general trading platforms - AI-assisted analysis, integrated trade planning, and a connected workflow. See why traders choose Tradvio." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/why-choose-tradvio-ai/" />
       </Helmet>

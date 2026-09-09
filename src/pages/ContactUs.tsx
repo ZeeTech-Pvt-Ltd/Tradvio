@@ -14,7 +14,7 @@ export default function ContactUs() {
     <>
       <Helmet>
         <title>{t('meta.contact')}</title>
-        <meta name="description" content="Questions about the platform, technical assistance, or collaboration opportunities? Get in touch with Tradvio AI — we promise a quick response." />
+        <meta name="description" content="Questions about the platform, technical assistance, or collaboration opportunities? Get in touch with Tradvio AI - we promise a quick response." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/contact-us/" />
       </Helmet>
@@ -40,7 +40,7 @@ export default function ContactUs() {
         <section className="py-16 md:py-20 bg-deep">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* Left — copy */}
+              {/* Left - copy */}
               <div>
                 <div className="text-xs font-semibold uppercase tracking-[0.14em] text-accent mb-3">{t('cu.getInTouch')}</div>
                 <h2 className="text-[clamp(1.8rem,3.5vw,2.6rem)] font-bold leading-[1.1] -tracking-[0.02em] mb-5">
@@ -71,7 +71,7 @@ export default function ContactUs() {
                 </div>
               </div>
 
-              {/* Right — form */}
+              {/* Right - form */}
               <div>
                 <LeadForm
                   formName="contact_us"

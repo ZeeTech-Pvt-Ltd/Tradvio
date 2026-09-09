@@ -74,7 +74,7 @@ export default function AITradingAssistant() {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-14 items-center">
-              {/* Left — copy */}
+              {/* Left - copy */}
               <div>
                 <h1 className="text-[clamp(2rem,4vw,3.6rem)] font-bold leading-[1.05] -tracking-[0.02em] mb-5">
                   {t('at.h1a')}<br />
@@ -99,7 +99,7 @@ export default function AITradingAssistant() {
                 </div>
               </div>
 
-              {/* Right — AI status card */}
+              {/* Right - AI status card */}
               <div className="bg-navy border border-border rounded-2xl p-6 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.5)]">
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-sm font-semibold text-ink">{t('at.cardTitle')}</span>
@@ -130,7 +130,7 @@ export default function AITradingAssistant() {
                     <span className="text-[0.65rem] text-ink-soft">{t('at.recTime')}</span>
                   </div>
                   <p className="text-sm text-ink">
-                    <span className="font-mono font-bold">BTC/USD</span> — {t('at.recText')} <span className="text-accent font-bold">{t('at.recConf')}</span>
+                    <span className="font-mono font-bold">BTC/USD</span> - {t('at.recText')} <span className="text-accent font-bold">{t('at.recConf')}</span>
                   </p>
                 </div>
               </div>

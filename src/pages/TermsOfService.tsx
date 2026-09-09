@@ -68,7 +68,7 @@ export default function TermsOfService() {
     <>
       <Helmet>
         <title>{t('meta.terms')}</title>
-        <meta name="description" content="Read the Tradvio AI terms and conditions — acceptance of terms, risk disclaimer, limitation of liability, and more." />
+        <meta name="description" content="Read the Tradvio AI terms and conditions - acceptance of terms, risk disclaimer, limitation of liability, and more." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/terms-of-service/" />
       </Helmet>

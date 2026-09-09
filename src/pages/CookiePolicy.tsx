@@ -61,7 +61,7 @@ export default function CookiePolicy() {
     <>
       <Helmet>
         <title>{t('meta.cookies')}</title>
-        <meta name="description" content="Read the Tradvio AI cookie policy — what cookies are, how we use them, and how to manage your preferences." />
+        <meta name="description" content="Read the Tradvio AI cookie policy - what cookies are, how we use them, and how to manage your preferences." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/cookie-policy/" />
       </Helmet>

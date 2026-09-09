@@ -146,7 +146,7 @@ export default function AITradingIdeas() {
     <>
       <Helmet>
         <title>{t('meta.ideas')}</title>
-        <meta name="description" content="Get fresh AI trading ideas across crypto, forex & stocks — with entry, stop-loss, take-profit and a confidence score. Start free, no card needed." />
+        <meta name="description" content="Get fresh AI trading ideas across crypto, forex & stocks - with entry, stop-loss, take-profit and a confidence score. Start free, no card needed." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/ai-trading-ideas/" />
       </Helmet>

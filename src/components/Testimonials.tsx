@@ -25,7 +25,7 @@ const testimonials = [
   },
   {
     quote:
-      'I like that every number has a label. Live, delayed, backtested — I know what I\'m looking at. Most platforms blur these lines. Transparency matters.',
+      'I like that every number has a label. Live, delayed, backtested - I know what I\'m looking at. Most platforms blur these lines. Transparency matters.',
     name: 'Alex K.',
     initials: 'AK',
     role: 'Independent Trader',

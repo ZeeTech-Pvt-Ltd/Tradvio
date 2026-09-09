@@ -1,5 +1,5 @@
 /**
- * PlatformDemo — Animated walkthrough of the Tradvio AI workflow:
+ * PlatformDemo - Animated walkthrough of the Tradvio AI workflow:
  * Chart Analysis → AI Scanning → Signal Generation → Trade Execution
  * Pure CSS/SVG animation, no external dependencies.
  */
@@ -216,7 +216,7 @@ function ChartAnalysisPanel() {
           <line key={`g-${i}`} x1="0" y1={i * 26} x2="400" y2={i * 26} stroke="#151515" strokeWidth="0.5" />
         ))}
 
-        {/* Animated candlesticks — draw one by one */}
+        {/* Animated candlesticks - draw one by one */}
         {[
           { x: 6, o: 60, c: 52, h: 64, l: 48 },
           { x: 24, o: 52, c: 45, h: 56, l: 40 },
@@ -282,7 +282,7 @@ function ChartAnalysisPanel() {
           style={{ animation: 'maDraw 0.8s ease-out 1.4s both', opacity: 0 }}
         />
 
-        {/* Support line — fades in after chart */}
+        {/* Support line - fades in after chart */}
         <g className="support-line" style={{ animation: 'fadeSlideIn 0.5s ease-out 2s both', opacity: 0 }}>
           <line x1="0" y1="48" x2="400" y2="48" stroke="#DC2626" strokeWidth="0.6" strokeDasharray="4 2" strokeOpacity="0.6" />
           <text x="403" y="51" fill="#DC2626" fontSize="7" fontFamily="monospace">S1</text>
@@ -295,7 +295,7 @@ function ChartAnalysisPanel() {
         </g>
       </svg>
 
-      {/* Pattern label — appears after analysis */}
+      {/* Pattern label - appears after analysis */}
       <div
         className="mt-2 flex items-center gap-2"
         style={{ animation: 'fadeSlideIn 0.4s ease-out 2.4s both', opacity: 0 }}
@@ -366,7 +366,7 @@ function AIScanningPanel() {
         </div>
       ))}
 
-      {/* AI thought — typing effect */}
+      {/* AI thought - typing effect */}
       <div
         className="mt-2 bg-accent/5 border border-accent/10 rounded px-2 py-1.5"
         style={{ animation: 'fadeSlideIn 0.4s ease-out 0.8s both', opacity: 0 }}

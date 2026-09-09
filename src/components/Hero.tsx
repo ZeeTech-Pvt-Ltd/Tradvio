@@ -24,7 +24,7 @@ export default function Hero() {
 
       <div className="max-w-container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left — Text Content */}
+          {/* Left - Text Content */}
           <div className="py-8 md:py-12">
             <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-accent uppercase mb-4 bg-accent-light px-3 py-1.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
@@ -72,7 +72,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — Compact Platform Preview */}
+          {/* Right - Compact Platform Preview */}
           <div className="relative mx-auto lg:mx-0 w-full pb-8 md:pb-0" aria-hidden="true">
             <div
               className="absolute -inset-4 rounded-2xl opacity-40 blur-2xl -z-10"

@@ -63,7 +63,7 @@ export function retrieve<T>(key: string): T | null {
 
 /** Formatting */
 export function formatNumber(n: number | null | undefined, decimals: number = 2): string {
-  if (n == null) return '—';
+  if (n == null) return '-';
   return n.toLocaleString('en-GB', {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
@@ -71,12 +71,12 @@ export function formatNumber(n: number | null | undefined, decimals: number = 2)
 }
 
 export function formatCurrency(n: number | null | undefined, currency: string = 'GBP'): string {
-  if (n == null) return '—';
+  if (n == null) return '-';
   return n.toLocaleString('en-GB', { style: 'currency', currency, minimumFractionDigits: 2 });
 }
 
 export function formatPercent(n: number | null | undefined, decimals: number = 2): string {
-  if (n == null) return '—';
+  if (n == null) return '-';
   const val = n.toFixed(decimals);
   return n >= 0 ? `+${val}%` : `${val}%`;
 }

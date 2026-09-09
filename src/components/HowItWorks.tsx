@@ -13,7 +13,7 @@ export default function HowItWorks() {
           <p>{t('hiw.sub')}</p>
         </div>
 
-        {/* Animated Platform Demo — 2 screens side by side */}
+        {/* Animated Platform Demo - 2 screens side by side */}
         <div className="mb-16">
           <PlatformDemo />
         </div>

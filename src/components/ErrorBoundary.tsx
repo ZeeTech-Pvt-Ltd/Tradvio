@@ -9,7 +9,7 @@ interface State {
 }
 
 /**
- * ErrorBoundary — catches render errors so the site never goes blank.
+ * ErrorBoundary - catches render errors so the site never goes blank.
  * Shows the failing component and message for easy debugging.
  */
 export default class ErrorBoundary extends Component<Props, State> {

@@ -4,7 +4,7 @@ const features = [
   {
     icon: '📊',
     title: 'AI Chart Analysis',
-    desc: 'Upload charts and get AI-powered technical insights — no guesswork.',
+    desc: 'Upload charts and get AI-powered technical insights - no guesswork.',
   },
   {
     icon: '🧪',
@@ -28,15 +28,15 @@ export default function CTALeadForm() {
     <section id="lead-form" className="section">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="grid-2 items-center gap-10 lg:gap-16">
-          {/* Left — pitch */}
+          {/* Left - pitch */}
           <div>
-            <h2 className="mb-4">Start Analysing — Not Trading</h2>
+            <h2 className="mb-4">Start Analysing - Not Trading</h2>
             <p className="text-muted-dark leading-relaxed mb-6 text-lg">
               Create free access to Tradvio AI. Explore the tools, understand the risks, and
-              decide for yourself. AI helps you analyse — you stay in control.
+              decide for yourself. AI helps you analyse - you stay in control.
             </p>
 
-            {/* Feature list — fills the empty space */}
+            {/* Feature list - fills the empty space */}
             <ul className="space-y-4 mb-8">
               {features.map((f) => (
                 <li key={f.title} className="flex gap-3">
@@ -59,11 +59,11 @@ export default function CTALeadForm() {
             </div>
           </div>
 
-          {/* Right — form */}
+          {/* Right - form */}
           <div>
             <LeadForm
               formName="homepage_lead"
-              title="Start Analysing — Free"
+              title="Start Analysing - Free"
               subtitle="No credit card. No deposit required."
               ctaText="Start Free Access"
               sourcePage="/"

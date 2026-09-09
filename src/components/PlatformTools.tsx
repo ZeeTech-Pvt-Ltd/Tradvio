@@ -7,7 +7,7 @@ const tools: PlatformTool[] = [
     title: 'AI Chart Analyser',
     description:
       'Upload a chart and get structured observations: trend direction, key support and resistance levels, and pattern recognition with confidence scoring.',
-    warning: 'Visible data only — may miss broader context.',
+    warning: 'Visible data only - may miss broader context.',
   },
   {
     icon: '🧠',
@@ -20,7 +20,7 @@ const tools: PlatformTool[] = [
     icon: '⏳',
     title: 'Strategy Backtesting',
     description:
-      'Run your strategies against historical market data. See how they would have performed — with clear cost and slippage assumptions.',
+      'Run your strategies against historical market data. See how they would have performed - with clear cost and slippage assumptions.',
     warning: 'Past results do not guarantee future performance.',
   },
   {
@@ -42,7 +42,7 @@ const tools: PlatformTool[] = [
     title: 'Risk Management',
     description:
       'Set position size limits, daily loss caps, exposure tracking, and drawdown alerts. Controls built into every workflow.',
-    warning: 'Controls reduce risk — they do not remove it.',
+    warning: 'Controls reduce risk - they do not remove it.',
   },
 ];
 

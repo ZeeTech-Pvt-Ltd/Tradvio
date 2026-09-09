@@ -37,7 +37,7 @@ export default function RiskCalculator() {
   const fmt = (template: string, values: Record<string, number | string>) =>
     Object.entries(values).reduce((s, [k, v]) => s.replace(`{${k}}`, String(v)), template);
 
-  // Consecutive losses until blown account — banker's rounding (round half to even)
+  // Consecutive losses until blown account - banker's rounding (round half to even)
   const rawLosses = riskPct > 0 ? 100 / riskPct : 0;
   const lossesUntilBlown =
     rawLosses > 0
@@ -160,7 +160,7 @@ export default function RiskCalculator() {
                   />
                   <div className="flex justify-between text-xs text-ink-soft mt-1.5">
                     <span>0.5%</span>
-                    <span className="font-bold" style={{ color: level.hex }}>{riskPct}% — {t(level.label)}</span>
+                    <span className="font-bold" style={{ color: level.hex }}>{riskPct}% - {t(level.label)}</span>
                     <span>20%</span>
                   </div>
                 </div>

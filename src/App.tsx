@@ -23,7 +23,7 @@ import Footer from '@/components/Footer';
 import { generateAllStructuredData } from '@/lib/structured-data';
 import { useLanguage, resolvePath } from '@/lib/i18n';
 
-// Lazy-loaded standalone pages — keeps the initial bundle small.
+// Lazy-loaded standalone pages - keeps the initial bundle small.
 const ThankYou = lazy(() => import('@/components/ThankYou'));
 const GetStarted = lazy(() => import('@/pages/GetStarted'));
 const LeaderboardPage = lazy(() => import('@/pages/LeaderboardPage'));
@@ -115,7 +115,7 @@ export default function App() {
       <Helmet>
         {/* Primary Meta */}
         <title>{t('meta.home')}</title>
-        <meta name="description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
+        <meta name="description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds - Tradvio turns raw price action into clear entry signals." />
         <meta name="keywords" content="tradvio, tradvio ai, ai trading, ai market analysis, ai chart analysis, ai trading signals, ai strategy builder, backtesting, trading journal, risk calculator" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href="https://tradvioai.com/" />
@@ -125,7 +125,7 @@ export default function App() {
         <meta property="og:site_name" content="Tradvio AI" />
         <meta property="og:locale" content="en_GB" />
         <meta property="og:title" content="Tradvio AI | AI Analyzes the Market So You Trade Better" />
-        <meta property="og:description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds — Tradvio turns raw price action into clear entry signals." />
+        <meta property="og:description" content="Stop guessing your next trade. Tradvio AI analyzes charts, trends and momentum in seconds - Tradvio turns raw price action into clear entry signals." />
         <meta property="og:url" content="https://tradvioai.com/" />
         <meta property="og:image" content="https://tradvioai.com/wp-content/uploads/static-home/og-home.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -152,7 +152,7 @@ export default function App() {
         {/* Verification */}
         <meta name="google-site-verification" content="rX163GsGmt7DjLaEoPlX_DPHJ_fIbSOXlYLvvuzGbAA" />
 
-        {/* Google Analytics + Clarity are loaded via the deferred loader in index.html —
+        {/* Google Analytics + Clarity are loaded via the deferred loader in index.html -
             they start after the page load event so they never compete with first paint. */}
 
         {/* JSON-LD Structured Data */}
@@ -176,7 +176,7 @@ export default function App() {
         <Hero />
         <Leaderboard />
         <TrustBar />
-        {/* Below-fold sections render lazily — keeps first paint and LCP fast */}
+        {/* Below-fold sections render lazily - keeps first paint and LCP fast */}
         <ErrorBoundary><LazySection minHeight="700px"><TradingPerformance /></LazySection></ErrorBoundary>
         <ErrorBoundary><LazySection minHeight="600px"><PlatformTools /></LazySection></ErrorBoundary>
         <ErrorBoundary><LazySection minHeight="900px"><HowItWorks /></LazySection></ErrorBoundary>

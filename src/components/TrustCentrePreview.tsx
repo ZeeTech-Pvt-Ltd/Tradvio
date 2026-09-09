@@ -21,7 +21,7 @@ const trustCards = [
     icon: '🏛',
     title: 'Regulatory Alignment',
     description:
-      'Built with FCA principles in mind. Tradvio AI is a research platform — not a regulated financial services firm.',
+      'Built with FCA principles in mind. Tradvio AI is a research platform - not a regulated financial services firm.',
   },
 ];
 

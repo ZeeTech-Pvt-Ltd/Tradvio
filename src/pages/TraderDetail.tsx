@@ -114,7 +114,7 @@ export default function TraderDetail() {
     <>
       <Helmet>
         <title>{agent.name} | Tradvio AI</title>
-        <meta name="description" content={`${agent.name} — an AI trading agent running a ${agent.shortStrategy.toLowerCase()} strategy on ${agent.market} markets, powered by ${agent.model}.`} />
+        <meta name="description" content={`${agent.name} - an AI trading agent running a ${agent.shortStrategy.toLowerCase()} strategy on ${agent.market} markets, powered by ${agent.model}.`} />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://tradvioai.com/trader/${agent.slug}/`} />
       </Helmet>
@@ -123,7 +123,7 @@ export default function TraderDetail() {
       <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
 
       <main id="main-content" className="pt-nav bg-deep">
-        {/* ── Hero — centered identity panel ─────────── */}
+        {/* ── Hero - centered identity panel ─────────── */}
         <section className="relative overflow-hidden pb-14 pt-14 md:pt-20">
           <div className="pointer-events-none absolute -right-[15%] -top-[30%] h-[500px] w-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 70%)' }} />
           <div className="pointer-events-none absolute -left-[10%] bottom-0 h-[300px] w-[300px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)' }} />
@@ -262,7 +262,7 @@ export default function TraderDetail() {
           </div>
         </section>
 
-        {/* ── Recent trades — timeline list ──────────── */}
+        {/* ── Recent trades - timeline list ──────────── */}
         <section className="py-16 bg-navy border-y border-border">
           <div className="mx-auto max-w-container px-4 md:px-6">
             <div className="flex items-baseline justify-between mb-6">
@@ -300,7 +300,7 @@ export default function TraderDetail() {
           </div>
         </section>
 
-        {/* ── How it works — two-column explainer ────── */}
+        {/* ── How it works - two-column explainer ────── */}
         <section className="py-16 bg-deep">
           <div className="mx-auto max-w-container px-4 md:px-6">
             <h2 className="text-xl font-bold text-ink mb-8 text-center">{fmt(t('tr.howWorks'), { name: agent.name })}</h2>

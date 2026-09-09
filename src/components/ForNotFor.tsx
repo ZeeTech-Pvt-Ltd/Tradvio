@@ -20,7 +20,7 @@ const notForCards = [
   {
     title: 'People seeking "get rich quick" shortcuts',
     description:
-      'There are no shortcuts in trading. If a platform promises easy money, that\'s a red flag — not how we operate.',
+      'There are no shortcuts in trading. If a platform promises easy money, that\'s a red flag - not how we operate.',
   },
   {
     title: 'Those unwilling to learn risk management',
@@ -39,7 +39,7 @@ export default function ForNotFor() {
     <section id="for-not-for" className="section bg-surface">
       <div className="max-w-container mx-auto px-4 md:px-6">
         <div className="section-header">
-          <h2>Who This Is For — And Who It Is Not</h2>
+          <h2>Who This Is For - And Who It Is Not</h2>
           <p>
             Tradvio AI works best for certain types of traders. Here&apos;s how to know if
             it&apos;s right for you.

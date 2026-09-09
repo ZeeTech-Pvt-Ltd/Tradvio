@@ -113,7 +113,7 @@ export default function StrategyBacktesting() {
                 </div>
               </div>
 
-              {/* Right — Dashboard mockup */}
+              {/* Right - Dashboard mockup */}
               <div className="bg-navy border border-border rounded-2xl overflow-hidden shadow-[0_30px_70px_-20px_rgba(0,0,0,0.5)]">
                 <div className="bg-medium-navy border-b border-border px-4 py-3 flex items-center justify-between">
                   <div className="flex gap-1.5">

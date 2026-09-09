@@ -43,7 +43,7 @@ export default function Academy() {
     <>
       <Helmet>
         <title>{t('meta.academy')}</title>
-        <meta name="description" content="Learn to read a chart the way our AI reads it. Short lessons, live charts, zero fluff. Free to start — Foundations is open, no card." />
+        <meta name="description" content="Learn to read a chart the way our AI reads it. Short lessons, live charts, zero fluff. Free to start - Foundations is open, no card." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/academy/" />
       </Helmet>

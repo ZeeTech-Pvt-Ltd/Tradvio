@@ -73,7 +73,7 @@ export default function PrivacyPolicy() {
     <>
       <Helmet>
         <title>{t('meta.privacy')}</title>
-        <meta name="description" content="Read the Tradvio AI privacy policy — how we collect, use, disclose, and protect your personal information." />
+        <meta name="description" content="Read the Tradvio AI privacy policy - how we collect, use, disclose, and protect your personal information." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tradvioai.com/privacy-policy/" />
       </Helmet>

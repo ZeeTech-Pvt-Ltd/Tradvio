@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { LANGUAGES, useLanguage, type Language } from '@/lib/i18n';
 
 /**
- * LanguageSwitcher — flag image + short-code dropdown in the header.
+ * LanguageSwitcher - flag image + short-code dropdown in the header.
  * Stores the selection in localStorage and updates the whole site instantly.
  * Flag images come from flagcdn.com so they render on all platforms,
  * including Windows where flag emoji are not supported.

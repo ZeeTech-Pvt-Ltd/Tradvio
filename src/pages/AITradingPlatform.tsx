@@ -37,15 +37,15 @@ const stepData = [
 const faqItems = [
   {
     q: 'plat.fq1',
-    a: 'Registration is free and there is no ongoing platform subscription fee. A minimum initial capital of £250 is required to begin live trading. This is your trading capital placed with your connected broker or exchange — it is not a fee paid to Tradvio AI.',
+    a: 'Registration is free and there is no ongoing platform subscription fee. A minimum initial capital of £250 is required to begin live trading. This is your trading capital placed with your connected broker or exchange - it is not a fee paid to Tradvio AI.',
   },
   {
     q: 'plat.fq2',
-    a: 'No. Your funds remain at all times in your own broker or exchange account. Tradvio AI connects via API to execute trades on your behalf — it does not take custody or hold any of your capital. You retain full ownership and control.',
+    a: 'No. Your funds remain at all times in your own broker or exchange account. Tradvio AI connects via API to execute trades on your behalf - it does not take custody or hold any of your capital. You retain full ownership and control.',
   },
   {
     q: 'plat.fq3',
-    a: 'No. Profits are never guaranteed. All trading — whether manual or automated — carries risk, including the risk of losing your invested capital. Tradvio AI is a tool to help you execute your strategy more efficiently, not a guarantee of returns. Please only trade with capital you can afford to lose.',
+    a: 'No. Profits are never guaranteed. All trading - whether manual or automated - carries risk, including the risk of losing your invested capital. Tradvio AI is a tool to help you execute your strategy more efficiently, not a guarantee of returns. Please only trade with capital you can afford to lose.',
   },
   {
     q: 'plat.fq4',
@@ -123,7 +123,7 @@ export default function AITradingPlatform() {
 
                 <div className="flex gap-3 flex-wrap mb-11">
                   <a href="/get-started/" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-semibold px-9 py-4 rounded-lg transition-all shadow-[0_0_40px_rgba(220,38,38,0.28)] hover:-translate-y-0.5">
-                    Start free — no fees
+                    Start free - no fees
                     <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
                   </a>
                   <a href="#how-it-works" className="inline-flex items-center gap-2 border border-border hover:border-accent text-ink hover:text-accent font-semibold px-9 py-4 rounded-lg transition-all bg-transparent">
@@ -165,7 +165,7 @@ export default function AITradingPlatform() {
                       <div className="w-2.5 h-2.5 rounded-full bg-warning" />
                       <div className="w-2.5 h-2.5 rounded-full bg-success" />
                     </div>
-                    <span className="text-[0.72rem] font-semibold text-ink-soft tracking-wider uppercase">Tradvio AI — Command Center</span>
+                    <span className="text-[0.72rem] font-semibold text-ink-soft tracking-wider uppercase">Tradvio AI - Command Center</span>
                     <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-accent/30 text-accent text-[0.6rem] font-bold bg-accent/10">
                       <span className="w-[5px] h-[5px] rounded-full bg-accent" /> LIVE
                     </span>
@@ -222,7 +222,7 @@ export default function AITradingPlatform() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <div className="text-[0.85rem] font-bold text-ink">BTC / USD</div>
-                            <div className="text-[0.65rem] text-ink-soft mt-0.5">Bitcoin — 1H chart</div>
+                            <div className="text-[0.65rem] text-ink-soft mt-0.5">Bitcoin - 1H chart</div>
                           </div>
                           <div className="text-right">
                             <div className="text-[1.1rem] font-bold text-accent">$67,420</div>
@@ -251,7 +251,7 @@ export default function AITradingPlatform() {
                         <div className="w-[30px] h-[30px] rounded-md bg-accent/15 flex items-center justify-center flex-shrink-0 text-accent font-bold text-sm">⚡</div>
                         <div className="flex-1">
                           <div className="text-[0.72rem] font-bold text-accent">AI SIGNAL: BUY</div>
-                          <div className="text-[0.62rem] text-ink-soft mt-0.5">Momentum breakout detected — RSI + volume confirmation</div>
+                          <div className="text-[0.62rem] text-ink-soft mt-0.5">Momentum breakout detected - RSI + volume confirmation</div>
                         </div>
                         <div className="text-[0.68rem] font-bold text-accent bg-accent/15 px-2 py-1 rounded">82% conf.</div>
                       </div>
@@ -311,17 +311,17 @@ export default function AITradingPlatform() {
                 {
                   num: '01', icon: '⏱', iconColor: 'text-accent', iconBg: 'bg-accent/10',
                   title: 'plat.ft1',
-                  body: 'Tradvio AI scans live price feeds across all your connected markets simultaneously — identifying patterns, momentum shifts and entry signals the moment they emerge. No delay, no guesswork.',
+                  body: 'Tradvio AI scans live price feeds across all your connected markets simultaneously - identifying patterns, momentum shifts and entry signals the moment they emerge. No delay, no guesswork.',
                 },
                 {
                   num: '02', icon: '◆', iconColor: 'text-accent', iconBg: 'bg-accent/10',
                   title: 'plat.ft2',
-                  body: 'Set your strategy parameters once. Tradvio AI executes trades automatically, around the clock across every market you trade. You define the rules — the platform works the hours.',
+                  body: 'Set your strategy parameters once. Tradvio AI executes trades automatically, around the clock across every market you trade. You define the rules - the platform works the hours.',
                 },
                 {
                   num: '03', icon: '🛡', iconColor: 'text-accent', iconBg: 'bg-accent/10',
                   title: 'plat.ft3',
-                  body: 'Configurable stop-loss limits, per-trade risk caps and drawdown protections are native to every position. Your funds always remain in your own broker or exchange account — Tradvio AI never holds your capital.',
+                  body: 'Configurable stop-loss limits, per-trade risk caps and drawdown protections are native to every position. Your funds always remain in your own broker or exchange account - Tradvio AI never holds your capital.',
                 },
                 {
                   num: '04', icon: '📈', iconColor: 'text-accent', iconBg: 'bg-accent/10',

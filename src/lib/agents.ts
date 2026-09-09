@@ -1,5 +1,5 @@
 /**
- * Tradvio AI trading agents — sourced from SnapTraderAI-Agents-Risk-Return.xlsx.
+ * Tradvio AI trading agents - sourced from SnapTraderAI-Agents-Risk-Return.xlsx.
  * Return values and sparkline series are live-trade-log figures published on the
  * leaderboard. Target returns / max drawdowns from the spreadsheet are planning
  * assumptions and are deliberately NOT published.
@@ -58,7 +58,7 @@ const raw: [string, string, string, string, string, Agent['risk'], number][] = [
   ['lens-11', 'Crypto', 'Funding rate + Open Interest divergence', 'Funding & OI', 'DeepSeek V4-Pro', 'High', 9.2],
   ['beam-12', 'Crypto', 'Wyckoff accumulation phase detection (Spring / Phase C)', 'Wyckoff', 'Claude Opus 5', 'Medium', 3.7],
   ['glint-13', 'Indices', 'Double Top / Double Bottom confirmation', 'Double Tops/Bottoms', 'Gemini 3.7 Flash', 'Medium', 5.9],
-  ['halo-14', 'Indices', 'Volume Spread Analysis — climax & no-demand bars', 'Volume Spread', 'Grok 4.6', 'Medium', -2.3],
+  ['halo-14', 'Indices', 'Volume Spread Analysis - climax & no-demand bars', 'Volume Spread', 'Grok 4.6', 'Medium', -2.3],
   ['mirage-15', 'Indices', 'Ascending / Descending Triangle apex break', 'Triangle Break', 'MiniMax M3', 'Medium', 7.1],
   ['scope-16', 'Indices', 'Multi-timeframe confluence score (1H / 4H / D agreement)', 'MTF Confluence', 'Gemini 3.1 Pro', 'Low', 1.4],
   ['optic-17', 'Commodities', 'Seasonality overlay + price confirmation', 'Seasonality', 'GLM-5.3', 'Low', -0.8],
